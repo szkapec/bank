@@ -1,7 +1,18 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from "@reduxjs/toolkit";
 
-const selectSelf = (state) => state
+const selectSelf = (state) => state;
 
-export const selectorLoginUser = createSelector(selectSelf, (state) => state.user)
+export const selectorLoginUser = createSelector(
+  selectSelf,
+  (state) => state.auth
+);
 
-export const selectorLoginUserError = createSelector(selectSelf, (state) => state.user.error)
+export const selectorLoginTransferUser = createSelector(
+  selectSelf,
+  (state) => state.auth.user
+);
+
+export const selectorLoginUserError = createSelector(
+  selectSelf,
+  (state) => state.auth.error
+);
