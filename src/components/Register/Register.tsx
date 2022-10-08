@@ -3,15 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectorLoginUser,
   selectorLoginUserError,
-} from "../../store/Login/loginSelector.ts";
-import styled from "styled-components";
+} from "../../store/Login/loginSelector";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { register } from "../../store/Login/loginThunk.tsx";
+import { register } from "../../store/Login/loginThunk";
+import { createAction, createSlice, Action, AnyAction } from '@reduxjs/toolkit'
+import { useAppDispatch } from "../../store/hooks";
 
-// interface IText {
-//   email: string;
-//   password: string;
-// }
+
+
+interface IRegister {
+  name: string,
+  lastName: string,
+  userName: string,
+  email: string,
+  password: string,
+}
 
 const initialFormData = {
   name: "",
@@ -22,17 +28,17 @@ const initialFormData = {
 };
 
 const Register = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
   const loginUserSelector = useSelector(selectorLoginUser);
   const loginErrorSelector = useSelector(selectorLoginUserError);
 
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState<IRegister>(initialFormData);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: any) => {
     console.log(`e`, e);
     e.preventDefault();
     dispatch(register(formData));
@@ -105,12 +111,3 @@ const Register = () => {
 };
 
 export default Register;
-
-const StyledError = styled.form`
-  color: ${(props) =>
-    props.errorsy ? console.log(`errorsss`, props) : "black"};
-`;
-
-const StyledErrorInput = styled.input`
-  border: ${(error) => (error ? "1px solid red" : "1px solid black")};
-`;

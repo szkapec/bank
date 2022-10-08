@@ -1,22 +1,19 @@
 import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Test from "./components/Test";
-import { AuthRoute, AuthRouteLogin } from "./util/AuthRoute.tsx";
-import Navbar from "./components/Navbar/Navbar.tsx";
-import Register from "./components/Register/Register.tsx";
+import { AuthRoute, AuthRouteLogin } from "./util/AuthRoute";
+import Navbar from "./components/Navbar/Navbar";
+import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
-import History from "./components/pages/History/History.tsx";
-import Transfer from "./components/pages/Transfer/Transfer.tsx";
-import { userLoaded } from "./store/Login/loginThunk.tsx";
-import { useDispatch, useSelector } from "react-redux";
-import { selectorLoginTransferUser } from "./store/Login/loginSelector.ts";
+import History from "./components/pages/History/History";
+import Transfer from "./components/pages/Transfer/Transfer";
+import { userLoaded } from "./store/Login/loginThunk"
+import { useAppDispatch } from "./store/hooks";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const selectIdUser = useSelector(selectorLoginTransferUser);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log("testttt :>> ", selectIdUser);
     dispatch(userLoaded());
   }, []);
 

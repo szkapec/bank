@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { selectorLoginTransferUser } from '../../../store/Login/loginSelector.ts';
+import { selectorLoginTransferUser } from '../../../store/Login/loginSelector';
 
 const Transfer = () => {
 
@@ -12,11 +12,11 @@ const Transfer = () => {
   }
   const [formData, setFormData] = useState(initialFormData)
   
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value});
   }
 
-  const submit = (event) => {
+  const submit = (event: any) => {
     event.preventDefault()
     console.log(`event`, event)
   }

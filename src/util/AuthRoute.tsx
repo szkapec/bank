@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { selectorLoginUser } from "../store/Login/loginSelector.ts";
+import { selectorLoginUser } from "../store/Login/loginSelector";
 
-export const AuthRoute = (props) => {
-  const { user } = useSelector(selectorLoginUser) || {};
+export const AuthRoute = (props: any) => {
+  const auth = useSelector(selectorLoginUser);
   const { component: Component, path, ...rest } = props;
 
   return (
@@ -13,14 +13,14 @@ export const AuthRoute = (props) => {
         {...rest}
         path={path}
         exact
-        element={user?.email ? <Navigate to="/" /> : <Component />}
+        element={auth?.user?.email ? <Navigate to="/" /> : <Component />}
       />
     </Routes>
   );
 };
-export const AuthRouteLogin = (props) => {
+export const AuthRouteLogin = (props: any) => {
   const { component: Component, path, ...rest } = props;
-  const { user } = useSelector(selectorLoginUser) || {};
+  const auth = useSelector(selectorLoginUser);
 
   return (
     <Routes>
@@ -28,7 +28,7 @@ export const AuthRouteLogin = (props) => {
         {...rest}
         path={path}
         exact
-        element={user?.email ? <Component /> : <Navigate to="/login" />}
+        element={auth?.user?.email ? <Component /> : <Navigate to="/login" />}
       />
     </Routes>
   );

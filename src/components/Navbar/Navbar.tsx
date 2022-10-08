@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { selectorLoginUser } from "../../store/Login/loginSelector.ts";
-import { logOut } from "../../store/Login/loginSlice.tsx";
+import { selectorLoginUser } from "../../store/Login/loginSelector";
+import { logOut } from "../../store/Login/loginSlice";
 import "./Navbar.scss";
 
 const Navbar = () => {

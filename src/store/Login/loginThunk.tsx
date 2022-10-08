@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import setAuthenticationToken from "../../util/setAuthenticationToken.ts";
+import setAuthenticationToken from "../../util/setAuthenticationToken";
 
 const host = process.env.REACT_APP_HOST;
 
@@ -27,11 +27,7 @@ export const login = createAsyncThunk("LOGIN", async (text: ILogin) => {
 
   try {
     const res = await axios.post(`${host}/api/users/login`, body, config);
-    console.log(`res`, res);
-    console.log(`res`, res.data);
     if (res.status === 200) {
-      console.log("res.data.user :>> ", res.data);
-      localStorage.setItem("jwtToken", res.data.token);
       return res.data;
     }
     return;

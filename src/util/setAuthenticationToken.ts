@@ -1,9 +1,17 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
+interface IDecodedToken {
+  id: string;
+  name: string;
+  email: string;
+  exp: number;
+}
+
 const setAuthenticationToken = () => {
-  if (localStorage.getItem("jwtToken")) {
-    const decodedToken = jwtDecode(localStorage.getItem("jwtToken"));
+  const token = localStorage.getItem("jwtToken");
+  if (token) {
+    let decodedToken: IDecodedToken = jwtDecode(token);
     const now = new Date().getTime() / 1000;
 
     if (now > decodedToken.exp) {
@@ -11,13 +19,7 @@ const setAuthenticationToken = () => {
       return false;
     } else {
       console.log(`JESZCZE PRAWIDLOWY!!!`);
-      return decodedToken.id;
-    }
-
-    if (decodedToken.exp * 1000 < Date.now()) {
-      localStorage.removeItem("jwtToken");
-    } else {
-      // initialState.user = decodedToken
+      return decodedToken?.id;
     }
   }
 

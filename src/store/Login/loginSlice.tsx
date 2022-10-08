@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, register } from "./loginThunk.tsx";
+import { login, register } from "./loginThunk";
 
 const initialState = {
   user: {},
@@ -21,32 +21,24 @@ export const loginSlice = createSlice({
   },
   // https://dev.to/chinwike/separating-logic-in-your-redux-toolkit-application-h7i
   extraReducers: {
-    [login.pending]: (state) => {
-      console.log(`state1`, state);
+    [login.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [login.fulfilled]: (state, { payload }) => {
-      console.log(`payload`, payload);
-      console.log(`state2`, state);
+    [login.fulfilled.toString()]: (state, { payload }) => {
       state.user = payload;
       state.loading = false;
     },
-    [login.rejected]: (state) => {
-      console.log(`state3`, state);
+    [login.rejected.toString()]: (state) => {
       state.loading = false;
     },
-    [register.pending]: (state) => {
-      console.log(`state1`, state);
+    [register.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [register.fulfilled]: (state, { payload }) => {
-      console.log(`state2`, state);
-      console.log("payload :>> ", payload);
+    [register.fulfilled.toString()]: (state, { payload }) => {
       state.user = payload;
       state.loading = false;
     },
-    [register.rejected]: (state) => {
-      console.log(`state3`, state);
+    [register.rejected.toString()]: (state) => {
       state.loading = false;
     },
   },
