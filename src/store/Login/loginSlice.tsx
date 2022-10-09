@@ -15,6 +15,7 @@ export const loginSlice = createSlice({
       state.loading = false;
     },
     logOut: (state) => {
+      localStorage.removeItem('jwtToken');
       state.user = [];
       state.loading = false;
     },

@@ -16,6 +16,17 @@ interface IRegister {
   password: string;
 }
 
+const useToken = (token: string) => {
+  if(token){
+     localStorage.removeItem('jwtToken');
+     localStorage.setItem('jwtToken', token)
+  } else {
+    console.log('Brak tokena :>> ', );
+    localStorage.removeItem('jwtToken');
+  }
+}
+
+
 export const login = createAsyncThunk("LOGIN", async (text: ILogin) => {
   const config = {
     headers: {
@@ -28,6 +39,8 @@ export const login = createAsyncThunk("LOGIN", async (text: ILogin) => {
   try {
     const res = await axios.post(`${host}/api/users/login`, body, config);
     if (res.status === 200) {
+      console.log('res.data :>> ', res.data);
+      useToken(res.data.token)
       return res.data;
     }
     return;
@@ -53,6 +66,7 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post(`${host}/api/users/register`, body, config);
       if (res.status === 200) {
+        useToken(res.data.token)
         return res.data;
       }
       return;
@@ -75,6 +89,7 @@ export const userLoaded = createAsyncThunk("LOGIN", async (id) => {
     userId = null;
     return;
   }
+  console.log(`tokenxxxd`, token)
   try {
     const config = {
       headers: {

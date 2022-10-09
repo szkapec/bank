@@ -54,6 +54,10 @@ const Transfer = () => {
           email: { email } 
         </div>
       </div>
+      <div>
+        <div>Dane uzytkownika nr 2: 92124043146785950000</div>
+        <div>ID: 63414e50e65103fdd357f3b9</div>
+      </div>
     </div>
   )
 }

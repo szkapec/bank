@@ -18,9 +18,11 @@ const setAuthenticationToken = () => {
       console.log(`WYGASL!!!`);
       return false;
     } else {
-      console.log(`JESZCZE PRAWIDLOWY!!!`);
+      console.log(`JESZCZE PRAWIDLOWY!!!`, decodedToken);
       return decodedToken?.id;
     }
+  } else {
+    console.log(`Coś poszło nie tak`, )
   }
 
   console.log(`axios.defaults.headers.common`, axios.defaults.headers.common);
