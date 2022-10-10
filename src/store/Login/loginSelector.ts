@@ -6,11 +6,12 @@ export interface IUser {
   refreshToken: string;
   email: string;
   error: boolean;
-  bankAccountNumber: boolean;
+  bankAccountNumber: string;
   savedRecipients: any;
   transfers: any;
   premium: boolean;
   message: string;
+  money: number
 }
 export interface IAuth {
   auth: {
@@ -27,12 +28,12 @@ export const selectorLoginUser = createSelector(
   (state) => state.auth
 );
 
-export const selectorLoginTransferUser = createSelector(
+export const selectorAuthLoginUser = createSelector(
   selectSelf,
   (state) => state.auth.user
 );
 
 export const selectorLoginUserError = createSelector(
   selectSelf,
-  (state) => state.auth.error
+  (state) => state.auth.user?.error
 );

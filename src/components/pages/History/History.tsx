@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useAppDispatch } from '../../../store/hooks'
 
 const History = () => {
+  const dispatch = useAppDispatch()
+  
   return (
     <div>
       History

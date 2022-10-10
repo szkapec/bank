@@ -4,7 +4,7 @@ import Test from "./components/Test";
 import { AuthRoute, AuthRouteLogin } from "./util/AuthRoute";
 import Navbar from "./components/Navbar/Navbar";
 import Register from "./components/Register/Register";
-import Login from "./components/Login/Login";
+import Login from "./components/pages/Login/Login";
 import History from "./components/pages/History/History";
 import Transfer from "./components/pages/Transfer/Transfer";
 import { userLoaded } from "./store/Login/loginThunk"
