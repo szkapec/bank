@@ -1,0 +1,40 @@
+
+
+
+.container-register {
+  margin-top: 120px;
+
+  &__form {
+    width: 400px;
+    margin: 0 auto 0;
+    border: 3px solid var(--global-color);
+    border-radius: 10%;
+    padding: 10px;
+    h2 {
+      text-align: center;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin: 5px 10px;
+    }
+
+    input, select {
+      border-radius: 5px;
+      border: 1px solid gray;
+      padding: 7px 12px;
+      margin: 5px 10px;
+    }
+  }
+}
+
+.error {
+  color: red;
+}
+
+.input-error {
+  border: 1px solid red !important;
+}

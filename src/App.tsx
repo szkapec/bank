@@ -3,12 +3,13 @@ import { BrowserRouter } from "react-router-dom";
 import Test from "./components/Test";
 import { AuthRoute, AuthRouteLogin } from "./util/AuthRoute";
 import Navbar from "./components/Navbar/Navbar";
-import Register from "./components/Register/Register";
+import Register from "./components/pages/Register/Register";
 import Login from "./components/pages/Login/Login";
 import History from "./components/pages/History/History";
 import Transfer from "./components/pages/Transfer/Transfer";
 import { userLoaded } from "./store/Login/loginThunk"
 import { useAppDispatch } from "./store/hooks";
+import './App.scss';
 
 const App = () => {
   const dispatch = useAppDispatch();

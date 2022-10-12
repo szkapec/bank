@@ -1,0 +1,17 @@
+:root {
+  --global-color: #1c8da3;
+}
+
+
+.btn-login {
+  display: block;
+  color: white;
+  background-color: var(--global-color);
+  border: 1px solid var(--global-color);
+  border-radius: 20px;
+  padding: 8px 30px;
+  margin: 20px auto;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+  font-size: 16px;
+}

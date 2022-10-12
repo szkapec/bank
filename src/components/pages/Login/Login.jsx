@@ -7,6 +7,7 @@ import {
 import { login } from "../../../store/Login/loginThunk.tsx";
 import { Link } from "react-router-dom";
 import "./Login.scss";
+import Logo from "../../../assets/Logo";
 
 const initialFormData = {
   email: "",
@@ -26,10 +27,10 @@ const Login = () => {
 
   const validate = () => {
     const { email, password } = formData;
-    if (password.length <= 4) {
+    if (password.length <= 3) {
       return false;
     }
-    if (email.length <= 4) {
+    if (email.length <= 3) {
       return false;
     }
     return true;
@@ -44,7 +45,8 @@ const Login = () => {
 
   return (
     <div className="container-login">
-      <h2>Logowanie do Bank24</h2>
+      <Logo/>
+      <h2>Logowanie do CD-Bank</h2>
       <form
         className={loginErrorSelector ? "login-error" : "login"}
         onSubmit={onSubmit}

@@ -1,9 +1,16 @@
 .container-login {
   width: 400px;
   margin: 120px auto;
-  border: 4px solid red;
+  border: 4px solid var(--global-color);
   border-radius: 10%;
   padding: 10px;
+
+  &__logo {
+    width: 200px;
+    display: block;
+    margin: 10px auto;
+    
+  }
   h2 {
     text-align: center;
     font-weight: 400;
@@ -23,19 +30,6 @@
     margin: 5px auto;
   }
 
-  .btn-login {
-    display: block;
-   
-    color: white;
-    background-color: red;
-    border: 1px solid red;
-    border-radius: 20px;
-    padding: 8px 30px;
-    margin: 20px auto;
-    cursor: pointer;
-    transition: .2s ease-in-out;
-    font-size: 16px;
-  }
 }
 
 .label-wrapper-register {
@@ -43,7 +37,7 @@
   padding: 10px 0 30px;
 
   a {
-    color: red;
+    color: var(--global-color);
     text-decoration: none;
     :hover {
       text-decoration: underline;
@@ -54,13 +48,12 @@
 
 .login-error {
   input {
-    border: 1px solid red;
+    border: 1px solid var(--global-color);
   }
 }
 
 .login-error-text {
-  // font-size: 18px;
-  color: red; 
+  color: var(--global-color); 
   font-weight: bold;
   text-align: center;
 }

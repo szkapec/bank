@@ -30,10 +30,10 @@ export const selectorLoginUser = createSelector(
 
 export const selectorAuthLoginUser = createSelector(
   selectSelf,
-  (state) => state.auth.user
+  (state) => state.auth?.user
 );
 
 export const selectorLoginUserError = createSelector(
   selectSelf,
-  (state) => state.auth.user?.error
+  (state) => state.auth?.user?.error
 );
