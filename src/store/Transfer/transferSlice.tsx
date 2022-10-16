@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { sendTransfer } from "./transferThunk";
+import { sendTransfer, getTransfers } from "./transferThunk";
 
 const initialState = {
   transfer: {
     message: '',
     error: false
   },
+  data: [],
   loading: false,
 };
 
@@ -30,6 +31,16 @@ export const transferSlice = createSlice({
       state.loading = false;
     },
     [sendTransfer.rejected.toString()]: (state) => {
+      state.loading = false;
+    },
+    [getTransfers.pending.toString()]: (state) => {
+      state.loading = true;
+    },
+    [getTransfers.fulfilled.toString()]: (state, { payload }) => {
+      state.data = payload;
+      state.loading = false;
+    },
+    [getTransfers.rejected.toString()]: (state) => {
       state.loading = false;
     },
   }

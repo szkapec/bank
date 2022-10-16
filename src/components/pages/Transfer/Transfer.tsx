@@ -71,7 +71,7 @@ const Transfer = () => {
         howMuchMoney: formData.howMuchMoney,
         numberReceived: formData.numberReceived,
         myIdUser: id,
-        username: email,
+        email: email,
         numberSend: bankAccountNumber,
       };
       dispatch(sendTransfer(submit));

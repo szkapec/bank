@@ -17,7 +17,6 @@ export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
   try {
     const res = await axios.post(`${host}/api/transfer`, body, config);
     if (res.status === 200) {
-      console.log('res.data :>> ', res.data);
       return res.data;
     }
     return;
@@ -31,7 +30,7 @@ export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
 });
 
 
-export const getTransfers = createAsyncThunk('GET_TRANSFER', async(text: any) => {
+export const getTransfers = createAsyncThunk('GET_TRANSFER', async(bankAccountNumber: string) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -41,10 +40,9 @@ export const getTransfers = createAsyncThunk('GET_TRANSFER', async(text: any) =>
   };
 
   try {
-    const res = await axios.get(`${host}/api/transfers`, config);
+    const res = await axios.get(`${host}/api/transfers/${bankAccountNumber}`, config);
     if (res.status === 200) {
-      console.log('res.data :>> ', res.data);
-      return res.data;
+      return res.data.fromClient;
     }
     return;
   } catch (error) {

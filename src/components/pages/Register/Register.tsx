@@ -1,13 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Form, Field } from "react-final-form";
-import {
-  selectorLoginUser,
-  selectorLoginUserError,
-} from "../../../store/Login/loginSelector";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { register } from "../../../store/Login/loginThunk";
-import { createAction, createSlice, Action, AnyAction } from "@reduxjs/toolkit";
 import { useAppDispatch } from "../../../store/hooks";
 import "./Register.scss";
 import Logo from "../../../assets/Logo";
@@ -30,13 +23,6 @@ const initialError = {
   email: false,
   password: false,
 };
-const initialFormData = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  sex: [],
-};
 
 const initialValue = {
   firstName: "",
@@ -49,8 +35,6 @@ const initialValue = {
 
 const Register = () => {
   const dispatch = useAppDispatch();
-  const loginUserSelector = useSelector(selectorLoginUser);
-  const loginErrorSelector = useSelector(selectorLoginUserError);
 
   const [ErrorForm, setErrorForm] = useState<IErrorForm>(initialError);
 
@@ -71,7 +55,6 @@ const Register = () => {
       errorPassword = true;
 
     if (!errorFirst && !errorLast && !errorEmail && !errorPassword) {
-      console.log("values :>> ", values);
       dispatch(register(values));
       setErrorForm(initialError);
     } else {
@@ -82,19 +65,16 @@ const Register = () => {
         password: !!errorPassword,
       });
     }
-
-    console.log("ErrorForm :>> ", ErrorForm);
   };
 
   return (
     <div className="container-register">
-     
       <Form
         onSubmit={onSubmit}
         initialValues={initialValue}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className="container-register__form">
-            <Logo/>
+            <Logo />
             <h2>Zarejestruj się do CD-Bank</h2>
             <div>
               <label>Podaj Imię</label>
@@ -197,7 +177,7 @@ const Register = () => {
       />
       )
     </div>
-  );
+  )
 };
 
 export default Register;

@@ -6,6 +6,27 @@ export interface IUser {
       error: boolean,
       message: string,
     }
+    data: [
+      {
+        _id: string,
+        body: string,
+        fromNumber: string,
+        toNumber: string,
+        error: boolean,
+        message: string,
+        createdAt: string
+        toUser: {
+          bankAccountNumber: String,
+          email: string,
+          id: string
+        },
+        fromUser: {
+          bankAccountNumber: String,
+          email: string,
+          id: string
+        }
+      }
+    ]
   }
   loading: boolean
 }
@@ -26,4 +47,9 @@ export const selectorTransferError = createSelector(
 export const selectorTransferMessage = createSelector(
   selectSelf,
   (state) => state.transfers.transfer.message
+);
+
+export const selectorTransfers = createSelector(
+  selectSelf,
+  (state) => state.transfers.data
 );

@@ -22,10 +22,10 @@ const setAuthenticationToken = () => {
       return decodedToken?.id;
     }
   } else {
-    console.log(`Coś poszło nie tak`, )
+    // console.log(`Coś poszło nie tak`, )
   }
 
-  console.log(`axios.defaults.headers.common`, axios.defaults.headers.common);
+
   // console.log(`token`, token)
   //   if(token) {
   //       axios.defaults.headers.common['authentication-token'] = token;

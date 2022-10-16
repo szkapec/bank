@@ -33,7 +33,17 @@ export const selectorAuthLoginUser = createSelector(
   (state) => state.auth?.user
 );
 
+export const selectorAuthLoginUserNumberAccount = createSelector(
+  selectSelf,
+  (state) => state.auth?.user?.bankAccountNumber
+);
+
 export const selectorLoginUserError = createSelector(
   selectSelf,
   (state) => state.auth?.user?.error
+);
+
+export const selectorUser = createSelector(
+  selectSelf,
+  (state) => state.auth?.user
 );

@@ -30,13 +30,10 @@ const Test = () => {
   }
 
   const token = () => {
-    console.log(`localStorage.getItem('jwtToken')`, localStorage.getItem('jwtToken'))
-
     const token = localStorage.getItem('jwtToken');
     if (token) {
       let decodedToken: IDecodedToken = jwtDecode(token);
       const now = new Date().getTime() / 1000;
-  
       if (now > decodedToken.exp) {
         console.log(`WYGASL!!!`);
         return false;
@@ -45,8 +42,6 @@ const Test = () => {
         return decodedToken?.id;
       }
     }
-     
-
   }
 
   const [name, setName] = useState('')

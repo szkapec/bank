@@ -39,7 +39,6 @@ export const login = createAsyncThunk("LOGIN", async (text: ILogin) => {
   try {
     const res = await axios.post(`${host}/api/users/login`, body, config);
     if (res.status === 200) {
-      console.log('res.data :>> ', res.data);
       useToken(res.data.token)
       return res.data;
     }
@@ -89,7 +88,7 @@ export const userLoaded = createAsyncThunk("LOGIN", async (id) => {
     userId = null;
     return;
   }
-  console.log(`tokenxxxd`, token)
+
   try {
     const config = {
       headers: {
