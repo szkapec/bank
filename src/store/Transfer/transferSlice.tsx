@@ -11,7 +11,7 @@ const initialState = {
 };
 
 export const transferSlice = createSlice({
-  name: "loginSlice",
+  name: "TRANSFER",
   initialState,
   reducers: {
     logOut: (state) => {

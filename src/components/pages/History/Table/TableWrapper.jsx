@@ -1,14 +1,9 @@
 import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { TableData } from "./helper/helper";
 import Table from "./Table";
-import { selectorUser } from "../../../../store/Login/loginSelector";
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ForkLeftIcon from '@mui/icons-material/ForkLeft';
-import ForkRightIcon from '@mui/icons-material/ForkRight';
-
 import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
@@ -52,7 +47,7 @@ const columns = [
 
 const ContainerTable = ({ transfersSelector, accountNumberSelector }) => {
   const data = TableData(transfersSelector, accountNumberSelector) || [];
-  const userSelector = useSelector(selectorUser);
+  // const userSelector = useSelector(selectorUser);
 
   const recExp = useMemo(() => {
     const data = transfersSelector?.map((transfer) => {

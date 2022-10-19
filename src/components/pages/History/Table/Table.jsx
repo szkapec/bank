@@ -7,7 +7,7 @@ const TableSearch = ({ columns, data }) => {
     headerGroups,
     rows,
     prepareRow,
-    state: { expanded },
+    // state: { expanded },
   } = useTable(
     {
       columns: columns || [],
@@ -30,6 +30,7 @@ const TableSearch = ({ columns, data }) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
+          {data.length === 0 && <div className="no-data">Brak danych</div>}
           {rows.map((row) => {
             prepareRow(row);
             return (

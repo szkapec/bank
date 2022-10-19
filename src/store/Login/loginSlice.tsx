@@ -7,7 +7,7 @@ const initialState = {
 };
 
 export const loginSlice = createSlice({
-  name: "loginSlice",
+  name: "LOGIN",
   initialState,
   reducers: {
     clearAllUsers: (state) => {

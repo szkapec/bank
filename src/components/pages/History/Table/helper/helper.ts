@@ -1,25 +1,48 @@
+import { useSelector } from "react-redux";
 import { IColumn } from "./helper.interface";
-
-const today = new Date();
-const yesterday = new Date(today);
-yesterday.setDate(yesterday.getDate() - 1);
-
-const CountDay = (day: string) => {
-  const newData = new Date(day).getDate();
-  if (newData === today.getDate()) {
-    return "Dzisiaj";
-  } else if (newData === yesterday.getDate()) {
-    return "Wczoraj";
-  }
-  return day?.substr(0, 10);
-};
+import {
+  selectorSearchName,
+  selectorSearchRecExp,
+  selectorSearchAbove,
+  selectorSearchUpTo,
+} from "../../../../../store/Search/searchSelector";
+import {
+  CountDay,
+  filterMoneyRecExp,
+  filterName,
+  filterRecExp,
+} from "./helperTransfer";
 
 export const TableData = (
-  transfersSelector: any,
+  transfersSelector: IColumn[],
   accountNumberSelector: string
 ) => {
+  const searchNameSelector: string = useSelector(selectorSearchName);
+  const searchAboveSelector: string = useSelector(selectorSearchAbove);
+  const searchUpToSelector: string = useSelector(selectorSearchUpTo);
+  const searchRecExpSelector: string = useSelector(selectorSearchRecExp);
+
+  let newTransfers = filterRecExp(
+    transfersSelector,
+    searchRecExpSelector,
+    accountNumberSelector
+  );
+
+  if (searchNameSelector.length > 3) {
+    newTransfers = filterName(newTransfers, searchNameSelector);
+  }
+
+  if (Number(searchAboveSelector) || Number(searchUpToSelector)) {
+    newTransfers = filterMoneyRecExp(
+      newTransfers,
+      searchAboveSelector,
+      searchUpToSelector,
+      accountNumberSelector
+    );
+  }
+
   try {
-    return transfersSelector?.map(
+    return newTransfers?.map(
       ({ fromUser, toUser, body, howMuchMoney, createdAt }: IColumn) => ({
         firstName:
           accountNumberSelector === toUser.bankAccountNumber
