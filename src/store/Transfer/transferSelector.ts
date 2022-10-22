@@ -26,9 +26,9 @@ export interface IUser {
           id: string
         }
       }
-    ]
+    ],
+    loading: boolean
   }
-  loading: boolean
 }
 
 
@@ -52,4 +52,9 @@ export const selectorTransferMessage = createSelector(
 export const selectorTransfers = createSelector(
   selectSelf,
   (state) => state.transfers.data
+);
+
+export const selectorLoaderTransfer = createSelector(
+  selectSelf,
+  (state) => state.transfers.loading
 );

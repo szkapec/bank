@@ -13,7 +13,7 @@ export const AuthRoute = (props: any) => {
         {...rest}
         path={path}
         exact
-        element={auth?.user?.email ? <Navigate to="/" /> : <Component />}
+        element={auth?.user?.email ? <Navigate to="/history" /> : <Component />}
       />
     </Routes>
   );

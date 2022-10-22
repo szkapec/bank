@@ -1,8 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, register } from "./loginThunk";
+import { logOutTransfer } from '../Transfer/transferSlice'
 
-const initialState = {
-  user: {},
+interface IInitialState {
+  user: {
+    id?: string,
+    email?: string,
+    error?: boolean,
+    bankAccountNumber?: string,
+    premium?: boolean,
+    money?: string,
+    message?: string,
+  },
+  loading: boolean
+}
+
+const initialState: IInitialState = {
+  user: {
+    id: undefined,
+    email: undefined,
+    error: false,
+    bankAccountNumber: undefined,
+    premium: false,
+    money: undefined,
+    message: undefined,
+  },
   loading: false,
 };
 
@@ -11,12 +33,12 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {
     clearAllUsers: (state) => {
-      state.user = [];
+      state.user = initialState.user;
       state.loading = false;
     },
     logOut: (state) => {
       localStorage.removeItem('jwtToken');
-      state.user = [];
+      state.user = initialState.user;
       state.loading = false;
     },
   },

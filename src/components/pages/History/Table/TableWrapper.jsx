@@ -184,7 +184,7 @@ const StyledRecExp = styled.div`
       display: inline-block;
       color: white;
       padding: 10px 0;
-      
+    
       b {
         display: flex;
         align-items: center;
@@ -196,10 +196,12 @@ const StyledRecExp = styled.div`
     .expenses {
       background-color: green;
       width: ${(props) => props.exp};
+      min-width: 120px;
     }
     .receipts {
       background-color: red;
       width: ${(props) => props.rec};
+      min-width: 120px;
     }
   }
   .price {

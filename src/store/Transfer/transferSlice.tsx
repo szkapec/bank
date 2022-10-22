@@ -14,8 +14,9 @@ export const transferSlice = createSlice({
   name: "TRANSFER",
   initialState,
   reducers: {
-    logOut: (state) => {
-      localStorage.removeItem('jwtToken');
+    logOutTransfer: (state) => {
+      state.transfer = initialState.transfer;
+      state.data = [];
     },
     messageClear: (state) => {
       state.transfer.message = ''
@@ -46,5 +47,5 @@ export const transferSlice = createSlice({
   }
 })
 
-export const { logOut, messageClear } = transferSlice.actions;
+export const { logOutTransfer, messageClear } = transferSlice.actions;
 export default transferSlice.reducer;

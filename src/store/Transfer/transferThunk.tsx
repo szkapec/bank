@@ -1,10 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const host = process.env.REACT_APP_HOST;
-const token = localStorage.getItem("jwtToken");
 
 export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
+  const host = process.env.REACT_APP_HOST;
+const token = localStorage.getItem("jwtToken");
+console.log(`token`, token)
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -31,6 +32,9 @@ export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
 
 
 export const getTransfers = createAsyncThunk('GET_TRANSFER', async(bankAccountNumber: string) => {
+  const host = process.env.REACT_APP_HOST;
+  const token = localStorage.getItem("jwtToken");
+  console.log(`token`, token)
   const config = {
     headers: {
       "Content-Type": "application/json",
