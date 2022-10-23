@@ -1,5 +1,5 @@
 import { IColumn } from "./helper.interface";
-import { RecExp } from "../../../../../store/Search/searchSelector";
+import { RecExp } from "../../../../../store/Search/searchInterface";
 
 export const CountDay = (day: string) => {
   const today = new Date();

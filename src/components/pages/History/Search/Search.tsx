@@ -8,7 +8,7 @@ import {
   filterSumUpTo,
 } from "../../../../store/Search/searchSlice";
 import "./Search.scss";
-import { RecExp } from '../../../../store/Search/searchSelector';
+import { RecExp } from '../../../../store/Search/searchInterface';
 
 const initialSum = {
   above: '0',

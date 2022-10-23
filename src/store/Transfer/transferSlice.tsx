@@ -10,10 +10,12 @@ const initialState = {
   loading: false,
 };
 
+
 export const transferSlice = createSlice({
   name: "TRANSFER",
   initialState,
   reducers: {
+
     logOutTransfer: (state) => {
       state.transfer = initialState.transfer;
       state.data = [];

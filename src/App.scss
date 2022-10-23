@@ -9,6 +9,11 @@ body {
   font-family: 'Bitter', serif;
 }
 
+#root {
+  background-color: var(--global-color-container);
+  min-height: 100vh;
+}
+
 
 .btn-login {
   display: block;

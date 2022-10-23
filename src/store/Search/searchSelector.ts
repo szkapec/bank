@@ -1,23 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { ISearch } from "./searchInterface";
 
-export enum RecExp {
-  All, 
-  Receipts,
-  Expenses,
-}
 
-export interface IUser {
-  search: {
-    firstname: string;
-    lastname: string;
-    searchName: string;
-    recExp: string;
-    above: string;
-    upTo: string;
-  };
-}
-
-const selectSelf = (state: IUser) => state;
+const selectSelf = (state: ISearch) => state;
 
 export const selectorSearch = createSelector(
   selectSelf,

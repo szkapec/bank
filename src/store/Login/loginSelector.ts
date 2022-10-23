@@ -1,25 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-
-export interface IUser {
-  id: string;
-  token: string;
-  refreshToken: string;
-  email: string;
-  error: boolean;
-  bankAccountNumber: string;
-  savedRecipients: any;
-  transfers: any;
-  premium: boolean;
-  message: string;
-  money: number
-}
-export interface IAuth {
-  auth: {
-    user: IUser;
-    error: boolean;
-    loading: boolean;
-  };
-}
+import { IAuth, ILoginUser } from './loginInterface';
 
 const selectSelf = (state: IAuth) => state;
 

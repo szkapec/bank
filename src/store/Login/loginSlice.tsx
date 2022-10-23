@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, nanoid  } from "@reduxjs/toolkit";
 import { login, register } from "./loginThunk";
 import { logOutTransfer } from '../Transfer/transferSlice'
 
@@ -27,6 +27,13 @@ const initialState: IInitialState = {
   },
   loading: false,
 };
+
+
+interface Item {
+  id: string
+  text: string
+}
+
 
 export const loginSlice = createSlice({
   name: "LOGIN",
