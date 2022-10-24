@@ -1,20 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import setAuthenticationToken from "../../util/setAuthenticationToken";
-
+import { IAuth, ILoginUser } from './loginInterface';
 const host = process.env.REACT_APP_HOST;
-
-interface ILogin {
-  email: string;
-  password: string;
-}
-interface IRegister {
-  name: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  password: string;
-}
 
 const useToken = (token: string) => {
   if(token){
@@ -26,8 +14,7 @@ const useToken = (token: string) => {
   }
 }
 
-
-export const login = createAsyncThunk("LOGIN", async (text: ILogin) => {
+export const login = createAsyncThunk("LOGIN", async (text: ILoginUser) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -54,7 +41,7 @@ export const login = createAsyncThunk("LOGIN", async (text: ILogin) => {
 
 export const register = createAsyncThunk(
   "REGISTER",
-  async (text: IRegister) => {
+  async (text: IAuth) => {
     const config = {
       headers: {
         "Content-Type": "application/json",

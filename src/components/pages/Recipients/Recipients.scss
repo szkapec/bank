@@ -16,6 +16,38 @@
     margin: 40px 14px 0;
     border: 1px solid rgb(209, 209, 209);
   } 
+
+  .recipient {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 20px 0;
+    border-top: 1px solid rgb(209, 209, 209);
+    .adress, .title {
+      display: flex;
+      flex-direction: column;
+      .recipients-adress {
+        margin-bottom: 5px;
+      }
+    }
+    .adress {
+      width: 60%;
+      margin-left: 15px;
+    }
+    .title {
+      align-items: flex-end;
+      widtH: 30%;
+      margin-right: 15px;
+      .sum {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+    }
+    .menu {
+      width: 10%;
+      margin-right: 15px;
+    }
+  }
 }
 
 

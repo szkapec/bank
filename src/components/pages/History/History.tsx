@@ -22,7 +22,6 @@ const History = () => {
     accountNumberSelector && dispatch(getTransfers(accountNumberSelector));
   }, [accountNumberSelector]);
 
-  console.log("loaderSelector :>> ", loaderSelector);
   return (
     <div className="history">
       <Search />

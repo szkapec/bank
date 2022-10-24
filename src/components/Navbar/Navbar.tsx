@@ -33,8 +33,8 @@ const Navbar = () => {
       </NavLink>
       {/* dodajesz odbiorce zdefiniowanego i miesieczne przelwy robisz */}
       <NavLink
-        to="/pay"
-        className="pay"
+        to="/recipients"
+        className="recipients"
       >
         Płatności
       </NavLink>

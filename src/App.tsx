@@ -11,7 +11,9 @@ import { userLoaded } from "./store/Login/loginThunk";
 import { useAppDispatch } from "./store/hooks";
 import "./App.scss";
 import GlobalLoader from "./components/Loader/GlobalLoader";
-import Payments from "./components/pages/Payments/Payments";
+import Recipients from "./components/pages/Recipients/Recipients";
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -27,18 +29,22 @@ const App = () => {
     setLoad(false);
     clearInterval(interval);
   };
-
+  
+  const queryClient = new QueryClient()
   return (
     <>
       <BrowserRouter>
-        {load ? <GlobalLoader /> : null}
-        <Navbar />
-        <AuthRouteLogin exact path="/" component={Test} />
-        <AuthRoute exact path="/Login" component={Login} />
-        <AuthRoute exact path="/register" component={Register} />
-        <AuthRouteLogin exact path="/history" component={History} />
-        <AuthRouteLogin exact path="/transfer" component={Transfer} />
-        <AuthRouteLogin exact path="/pay" component={Payments} />
+      <QueryClientProvider client={queryClient}>
+          {load ? <GlobalLoader /> : null}
+          <Navbar />
+          <AuthRouteLogin exact path="/" component={Test} />
+          <AuthRoute exact path="/Login" component={Login} />
+          <AuthRoute exact path="/register" component={Register} />
+          <AuthRouteLogin exact path="/history" component={History} />
+          <AuthRouteLogin exact path="/transfer" component={Transfer} />
+          <AuthRouteLogin exact path="/recipients" component={Recipients} />
+      </QueryClientProvider>
+        
       </BrowserRouter>
     </>
   );

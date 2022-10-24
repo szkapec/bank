@@ -1,15 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { FormControlLabel, Switch, Modal, Button } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PaymentModal from "./Modal/PaymentModal";
-import './Payments.scss';
+import "./Recipients.scss";
+import { userRecipients } from "../../../store/Recipient/recipientThunk";
+import { useAppDispatch } from "../../../store/hooks";
+import { useQuery } from "react-query";
+import Loader from "../../Loader/Loader";
+import Error from "../../Error/Error";
+import CustomPaginationActionsTable from "./Table/Table";
 
+const Recipients = () => {
+  const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
-const Payments = () => {
-  const [open, setOpen] = React.useState(false);
+  const { isLoading, error, data } = useQuery("recipients", () =>
+    dispatch(userRecipients())
+  );
+
+  if (isLoading) return <Loader />;
+
+  if (error) return <Error error="An error has occurred: " />;
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -43,15 +58,16 @@ const Payments = () => {
           />
           <LockIcon />
         </div>
-        <div>
-          <div></div>
-        </div>
+        <Box>
+        <CustomPaginationActionsTable recipients={data?.payload}/>
+      </Box>
       </Box>
       <Box className="box__saved">
         <h3>Wykonaj przelew</h3>
       </Box>
+      
     </div>
   );
 };
 
-export default Payments;
+export default Recipients;
