@@ -17,7 +17,7 @@ const ButtonGroupCompomnent = ({ buttons }: IModalButton) => {
         variant="outlined"
         aria-label="outlined button group"
       >
-        {buttons.map(({disabled, variant, name}) => (
+        {buttons.map(({ disabled, variant, name }) => (
           <Button disabled={disabled} variant={variant}>
             {t(name)}
           </Button>

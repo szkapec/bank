@@ -82,7 +82,6 @@ export const addUserRecipients = createAsyncThunk(
   }
 );
 
-
 export const editUserRecipients = createAsyncThunk(
   "RECIPIENTS",
   async (data: IAddRecipient) => {
@@ -139,7 +138,10 @@ export const deleteUserRecipients = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       };
-      const res = await axios.delete(`${host}/api/recipient/${recipientId}`, config);
+      const res = await axios.delete(
+        `${host}/api/recipient/${recipientId}`,
+        config
+      );
       if (res.status === 200) {
         return res.data;
       }

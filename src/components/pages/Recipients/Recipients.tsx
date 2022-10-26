@@ -38,7 +38,7 @@ const Recipients = () => {
       <Box className="box__recipients">
         <h3>Odbiorcy zdefiniowani</h3>
         <div>
-          <Button  onClick={handleOpen}>
+          <Button onClick={handleOpen}>
             <AddCircleOutlineIcon />
             <span>Dodaj odbiorce</span>
           </Button>
@@ -48,27 +48,31 @@ const Recipients = () => {
             aria-labelledby="parent-modal-title"
             aria-describedby="parent-modal-description"
           >
-            <RecipientModal/>
+            <RecipientModal />
           </Modal>
         </div>
         <div className="box-search">
-          <TextField size="small" id="outlined-basic" label="Wyszukaj" variant="outlined" />
+          <TextField
+            size="small"
+            id="outlined-basic"
+            label="Wyszukaj"
+            variant="outlined"
+          />
           <Box className="saved">
             <FormControlLabel
               control={<Switch defaultChecked />}
               label="Tylko zaufani odbiorcy"
             />
-            <LockIcon color="primary"/>
+            <LockIcon color="primary" />
           </Box>
         </div>
         <Box>
-        <CustomPaginationActionsTable recipients={data?.payload}/>
-      </Box>
+          <CustomPaginationActionsTable recipients={data?.payload} />
+        </Box>
       </Box>
       <Box className="box__saved">
         <h3>Wykonaj przelew</h3>
       </Box>
-      
     </div>
   );
 };

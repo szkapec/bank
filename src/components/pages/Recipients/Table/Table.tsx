@@ -21,10 +21,10 @@ const Table = ({ recipient }: any) => {
   };
 
   const deleteRecipient = () => {
-    dispatch(deleteUserRecipients(recipient._id))
+    dispatch(deleteUserRecipients(recipient._id));
     setAnchorEl(null);
     setIsOpenModal(false);
-  }
+  };
   const openModal = (data: any) => {
     setIsOpenModal(true);
     // console.log('newData :>> ', newData);
