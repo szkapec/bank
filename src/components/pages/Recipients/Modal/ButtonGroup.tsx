@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IModalButton } from "./helper";
+import { IModalButton } from "../../../../store/Recipient/recipientInterface";
 
 const ButtonGroupCompomnent = ({ buttons }: IModalButton) => {
   const { t } = useTranslation();

@@ -7,9 +7,9 @@
     "transferOffice": "Przelew do urzędu",
     "exchange": "Walutowy / Zagraniczny"
   },
-  "recipientsName": "Nazwa odbiorcy",
+  "recipientsName": "Moja nazwa odbiorcy",
   "toRecipient": "Do odbiorcy",
-  "recipientsAdress": "Adres odbiorcy",
+  "recipientsAdress": "Adres odbiorcy (opcjonalnie)",
   "recipientsAccount": "Rachunek odbiorcy",
   "trustedRecipient": "Zaufany odbiorca",
   "sum": "Kwota",

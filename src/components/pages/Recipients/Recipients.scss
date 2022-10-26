@@ -5,11 +5,26 @@
   &__recipients {
     background-color: #fff;
     width: 50%;
+
+    .box-search {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      
+      .saved {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 10px 10px 0;
+      }
+    }
   }
 
   &__saved {
     background-color: #fff;
     width: 30%;
+    max-height: 400px;
   }
 
   &__recipients, &__saved {

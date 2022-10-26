@@ -4,14 +4,15 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { FormControlLabel, Switch, Modal, Button } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
-import PaymentModal from "./Modal/PaymentModal";
+import RecipientModal from "./Modal/RecipientModal";
 import "./Recipients.scss";
 import { userRecipients } from "../../../store/Recipient/recipientThunk";
 import { useAppDispatch } from "../../../store/hooks";
 import { useQuery } from "react-query";
 import Loader from "../../Loader/Loader";
 import Error from "../../Error/Error";
-import CustomPaginationActionsTable from "./Table/Table";
+import CustomPaginationActionsTable from "./Table/TableWrapper";
+import { IAddRecipient } from "../../../store/Recipient/recipientInterface";
 
 const Recipients = () => {
   const [open, setOpen] = useState(false);
@@ -37,7 +38,7 @@ const Recipients = () => {
       <Box className="box__recipients">
         <h3>Odbiorcy zdefiniowani</h3>
         <div>
-          <Button onClick={handleOpen}>
+          <Button  onClick={handleOpen}>
             <AddCircleOutlineIcon />
             <span>Dodaj odbiorce</span>
           </Button>
@@ -47,16 +48,18 @@ const Recipients = () => {
             aria-labelledby="parent-modal-title"
             aria-describedby="parent-modal-description"
           >
-            <PaymentModal />
+            <RecipientModal/>
           </Modal>
         </div>
-        <div>
-          <TextField id="outlined-basic" label="Wyszukaj" variant="outlined" />
-          <FormControlLabel
-            control={<Switch defaultChecked />}
-            label="Tylko zaufani odbiorcy"
-          />
-          <LockIcon />
+        <div className="box-search">
+          <TextField size="small" id="outlined-basic" label="Wyszukaj" variant="outlined" />
+          <Box className="saved">
+            <FormControlLabel
+              control={<Switch defaultChecked />}
+              label="Tylko zaufani odbiorcy"
+            />
+            <LockIcon color="primary"/>
+          </Box>
         </div>
         <Box>
         <CustomPaginationActionsTable recipients={data?.payload}/>

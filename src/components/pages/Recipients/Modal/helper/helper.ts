@@ -12,14 +12,6 @@ export const style = {
   pb: 3,
 };
 
-export interface IModalButton {
-  buttons: {
-    name: string;
-    variant: any;
-    disabled: boolean,
-  }[],
-}
-
 export const buttons = [
   { name: "modal.buttons.domesticTransfer", variant: "contained", disabled: false },
   { name: "modal.buttons.topUpPhone", variant: "outlined", disabled: true },
@@ -33,5 +25,6 @@ export const initialFormValue = () => ({
   recipientsName: '',
   sum: '',
   title: '',
-  toRecipient: ''
+  toRecipient: '',
+  trustedRecipient: false,
 })
