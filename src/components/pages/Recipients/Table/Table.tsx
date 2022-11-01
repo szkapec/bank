@@ -1,24 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Box, Button, IconButton, Menu, MenuItem, Modal } from "@mui/material";
-import RecipientModal from "../Modal/RecipientModal";
-import { IAddRecipient } from "../../../../store/Recipient/recipientInterface";
-import { deleteUserRecipients } from "../../../../store/Recipient/recipientThunk";
-import { useAppDispatch } from "../../../../store/hooks";
+import { Box, Button, Menu, MenuItem, Modal } from "@mui/material";
+import RecipientModal from "components/Modal/Form/RecipientModal";
+import { deleteUserRecipients } from "store/Recipient/recipientThunk";
+import { useAppDispatch } from "store/hooks";
+import { selectorLoaderRecipient } from "store/Recipient/recipientSelector";
+import { useSelector } from "react-redux";
 
 const Table = ({ recipient }: any) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const open = Boolean(anchorEl);
   const dispatch = useAppDispatch();
+  const loginErrorSelector = useSelector(selectorLoaderRecipient);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
+    console.log("Dziala :>> ");
     setAnchorEl(null);
     setIsOpenModal(false);
   };
+
+  useEffect(() => {
+    console.log("loginErrorSelectorxxdsa :>> ", loginErrorSelector);
+    handleClose();
+  }, [loginErrorSelector]);
 
   const deleteRecipient = () => {
     dispatch(deleteUserRecipients(recipient._id));
@@ -47,7 +56,9 @@ const Table = ({ recipient }: any) => {
         onClick={() => console.log(`recipient22`, recipient)}
       >
         <div className="sum">{recipient.sum} PLN</div>
-        <Box sx={{ fontWeight: "300" }}>{recipient.title}</Box>
+        <Box sx={{ fontWeight: "300", textAlign: "right" }}>
+          {recipient.title}
+        </Box>
       </Box>
       <Box className="menu">
         <div onClick={() => console.log(`recipient2`, recipient)}>

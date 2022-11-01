@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../../store/hooks";
-import { selectorAuthLoginUser } from "../../../store/Login/loginSelector";
-import {
-  selectorTransferError,
-  selectorTransferMessage,
-} from "../../../store/Transfer/transferSelector";
-import { sendTransfer } from "../../../store/Transfer/transferThunk";
-import { messageClear } from "../../../store/Transfer/transferSlice";
+import { useAppDispatch } from "store/hooks";
+import { selectorAuthLoginUser } from "store/Login/loginSelector";
+import { sendTransfer } from "store/Transfer/transferThunk";
+import { subtractMoney } from "store/Login/loginSlice";
+import FormTransfer from "./Form/FormTransfer";
 import "./Transfer.scss";
+
+export const initialFormData = {
+  body: "Przelew środków",
+  howMuchMoney: "0",
+  numberReceived: "",
+  nameReceived: "",
+};
 
 const Transfer = () => {
   const userDataSelector = useSelector(selectorAuthLoginUser);
-  const messageSelector = useSelector(selectorTransferMessage);
 
   const dispatch = useAppDispatch();
   const { bankAccountNumber, id, email, money } = userDataSelector || {};
-  const initialFormData = {
-    body: "Przelew środków",
-    howMuchMoney: "0",
-    numberReceived: "",
-  };
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -29,21 +27,10 @@ const Transfer = () => {
     errorMoney: false,
     errorBody: false,
   };
+
   const [error, setError] = useState(initialError);
 
-  const useMessage = () => {
-    dispatch(messageClear());
-  };
-
-  useEffect(() => {
-    messageSelector && setTimeout(useMessage, 6000);
-  }, [messageSelector]);
-
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const submit = (event: any) => {
+  const submit = async (event: React.SyntheticEvent) => {
     const { body, howMuchMoney, numberReceived } = formData;
     event.preventDefault();
     let errorAccount,
@@ -66,7 +53,7 @@ const Transfer = () => {
     });
 
     if (!errorBody && !errorMoney && !errorAccount) {
-      const submit = {
+      const form = {
         body: formData.body,
         howMuchMoney: formData.howMuchMoney,
         numberReceived: formData.numberReceived,
@@ -74,9 +61,13 @@ const Transfer = () => {
         email: email,
         numberSend: bankAccountNumber,
       };
-      dispatch(sendTransfer(submit));
+      const sendTransferData = await dispatch(sendTransfer(form));
+      if (!sendTransferData.payload.error) {
+        dispatch(subtractMoney(formData.howMuchMoney));
+      }
     }
   };
+
   return (
     <section>
       <header className="my-account">
@@ -92,72 +83,12 @@ const Transfer = () => {
       </header>
 
       <form onSubmit={submit} className="form-transfer">
-        <div className="container-transfer">
-          {messageSelector && (
-            <div className="error-transfer-global">{messageSelector}</div>
-          )}
-          <div className="container-transfer__transfer">
-            <label htmlFor="text">Do odbiorcy</label>
-            <input
-              type="text"
-              name="text"
-              placeholder="Wpisz nazwę odbiorcy"
-              onChange={handleChange}
-            />
-            <div className="container-transfer__address">+ Adres odbiorcy</div>
-          </div>
-          <div className="container-transfer__transfer">
-            <label htmlFor="numberReceived">Numer konta bankowego</label>
-            <input
-              className={error.errorAccount ? "error-input" : ""}
-              type="number"
-              value={formData.numberReceived}
-              name="numberReceived"
-              placeholder="Wpisz numer rachunku odbiorcy"
-              onChange={handleChange}
-            />
-            {error.errorAccount && (
-              <div className="error-transfer">Numer konta nie prawidłowy!</div>
-            )}
-          </div>
-          <div className="container-transfer__transfer">
-            <label htmlFor="body">Tytył przelewu</label>
-
-            <input
-              className={error.errorBody ? "error-input" : ""}
-              type="text"
-              value={formData.body}
-              name="body"
-              placeholder="Treść przelewu"
-              onChange={handleChange}
-            />
-            {error.errorBody && (
-              <div className="error-transfer">
-                Treść przelewu nie prawidłowa!
-              </div>
-            )}
-          </div>
-          <div className="container-transfer__transfer">
-            <label htmlFor="howMuchMoney">Kwota</label>
-            <input
-              className={error.errorMoney ? "error-input" : ""}
-              type="number"
-              value={formData.howMuchMoney}
-              name="howMuchMoney"
-              placeholder="Kwota przelewu"
-              onChange={handleChange}
-            />
-            {error.errorMoney && (
-              <div className="error-transfer">Nieprawidłowa wartość!</div>
-            )}
-            {Number(formData.howMuchMoney) > money && (
-              <div className="error-transfer">
-                Nie masz wystarczającej ilości pieniędzy!
-              </div>
-            )}
-          </div>
-          <button type="submit">Wyślij</button>
-        </div>
+        <FormTransfer
+          error={error}
+          formData={formData}
+          setFormData={setFormData}
+          money={money}
+        />
       </form>
     </section>
   );

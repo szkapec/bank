@@ -1,36 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { FormControlLabel, Switch, Modal, Button } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
-import RecipientModal from "./Modal/RecipientModal";
+import RecipientModal from "components/Modal/Form/RecipientModal";
 import "./Recipients.scss";
-import { userRecipients } from "../../../store/Recipient/recipientThunk";
-import { useAppDispatch } from "../../../store/hooks";
+import { userRecipients } from "store/Recipient/recipientThunk";
+import { useAppDispatch } from "store/hooks";
 import { useQuery } from "react-query";
-import Loader from "../../Loader/Loader";
-import Error from "../../Error/Error";
-import CustomPaginationActionsTable from "./Table/TableWrapper";
-import { IAddRecipient } from "../../../store/Recipient/recipientInterface";
+import Loader from "components/Loader/Loader";
+import Error from "components/Error/Error";
+import TableWrapper from "./Table/TableWrapper";
+import { useSelector } from "react-redux";
+import { selectorLoaderRecipient, selectorDataRecipient } from "store/Recipient/recipientSelector";
+import 'react-notifications/lib/notifications.css';
 
 const Recipients = () => {
+  const loginErrorSelector = useSelector(selectorLoaderRecipient);
+  const dataSelector = useSelector(selectorDataRecipient);
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-
-  const { isLoading, error, data } = useQuery("recipients", () =>
+  const { isLoading, error } = useQuery("recipients", () =>
     dispatch(userRecipients())
   );
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    console.log('loginErrorSelectorxxdsa :>> ', loginErrorSelector);
+    handleClose();
+  }, [loginErrorSelector])
 
   if (isLoading) return <Loader />;
 
   if (error) return <Error error="An error has occurred: " />;
-
+  console.log('dataSelector221 :>> ', dataSelector);
   const handleOpen = () => {
     setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -67,7 +76,7 @@ const Recipients = () => {
           </Box>
         </div>
         <Box>
-          <CustomPaginationActionsTable recipients={data?.payload} />
+          <TableWrapper recipients={dataSelector} />
         </Box>
       </Box>
       <Box className="box__saved">

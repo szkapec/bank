@@ -12,8 +12,10 @@ import { useAppDispatch } from "./store/hooks";
 import "./App.scss";
 import GlobalLoader from "./components/Loader/GlobalLoader";
 import Recipients from "./components/pages/Recipients/Recipients";
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
-
+import { QueryClient, QueryClientProvider } from 'react-query'
+import Notification from './components/Notification/Notification';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -44,6 +46,8 @@ const App = () => {
           <AuthRouteLogin exact path="/transfer" component={Transfer} />
           <AuthRouteLogin exact path="/recipients" component={Recipients} />
       </QueryClientProvider>
+      <Notification/>
+      <ToastContainer autoClose={2000} />
         
       </BrowserRouter>
     </>

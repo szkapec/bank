@@ -1,5 +1,5 @@
 import React from "react";
-import { IAddRecipient } from "../../../../store/Recipient/recipientInterface";
+import { IAddRecipient } from "store/Recipient/recipientInterface";
 import Table from "./Table";
 
 const TableWrapper = ({ recipients }: any) => {

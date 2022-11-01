@@ -28,3 +28,19 @@ export interface ITransfer {
     loading: boolean
   }
 }
+
+export interface IPropsTransfer {
+  error: {
+    errorAccount: boolean,
+    errorMoney: boolean,
+    errorBody: boolean,
+  },
+  formData: {
+    body: string,
+    howMuchMoney: string,
+    numberReceived:string,
+    nameReceived: string,
+  }
+  setFormData: Function,
+  money: number,
+}

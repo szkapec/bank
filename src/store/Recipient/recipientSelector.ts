@@ -1,29 +1,15 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { IAuth, ILoginUser } from './recipientInterface';
+import { IRecipients } from "./recipientInterface";
+import { IInitialState } from "./recipientSlice";
 
-const selectSelf = (state: IAuth) => state;
+const selectSelf = (state: IRecipients) => state;
 
-export const selectorLoginUser = createSelector(
+export const selectorLoaderRecipient = createSelector(
   selectSelf,
-  (state) => state.auth
+  (state) => state.recipients.loading
 );
 
-export const selectorAuthLoginUser = createSelector(
+export const selectorDataRecipient = createSelector(
   selectSelf,
-  (state) => state.auth?.user
-);
-
-export const selectorAuthLoginUserNumberAccount = createSelector(
-  selectSelf,
-  (state) => state.auth?.user?.bankAccountNumber
-);
-
-export const selectorLoginUserError = createSelector(
-  selectSelf,
-  (state) => state.auth?.user?.error
-);
-
-export const selectorUser = createSelector(
-  selectSelf,
-  (state) => state.auth?.user
+  (state) => state.recipients.saved
 );

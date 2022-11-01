@@ -1,25 +1,9 @@
-export interface ILoginUser {
-  id: string;
-  token: string;
-  refreshToken: string;
-  email: string;
-  error: boolean;
-  bankAccountNumber: string;
-  savedRecipients: any;
-  transfers: any;
-  premium: boolean;
-  message: string;
-  money: number
-}
-
-export interface IAuth {
-  auth: {
-    user: ILoginUser;
-    error: boolean;
+export interface IRecipients {
+  recipients: {
+    saved: IAddRecipient[];
     loading: boolean;
-  };
+  }
 }
-
 export interface IAddRecipient {
   _id: string;
   recipientsAccount: string;
@@ -31,6 +15,7 @@ export interface IAddRecipient {
   trustedRecipient?: boolean;
   createdAt: string
 }
+
 
 export interface IModalButton {
   buttons: {

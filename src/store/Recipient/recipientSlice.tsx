@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction, nanoid  } from "@reduxjs/toolkit";
 import { userRecipients } from "./recipientThunk";
 import { logOutTransfer } from '../Transfer/transferSlice'
+import { createNotification } from "../../util/notification";
+import { toast } from "react-toastify";
 
-interface IInitialState {
+export interface IInitialState {
   saved: {
     id: string,
     recipientsAccount: string,
@@ -32,7 +34,7 @@ export const recipientSlice = createSlice({
   extraReducers: {
     [userRecipients.pending.toString()]: (state) => {
       state.loading = true;
-      state.saved = [];
+      // state.saved = [];
     },
     [userRecipients.fulfilled.toString()]: (state, { payload }) => {
       state.saved = payload;

@@ -48,6 +48,10 @@ export const loginSlice = createSlice({
       state.user = initialState.user;
       state.loading = false;
     },
+    subtractMoney: (state, { payload }) => {
+      console.log(`payload`, payload)
+      state.user.money = (Number(state.user.money) - Number(payload)).toString()
+    }
   },
   // https://dev.to/chinwike/separating-logic-in-your-redux-toolkit-application-h7i
   extraReducers: {
@@ -74,5 +78,5 @@ export const loginSlice = createSlice({
   },
 });
 
-export const { clearAllUsers, logOut } = loginSlice.actions;
+export const { clearAllUsers, logOut, subtractMoney } = loginSlice.actions;
 export default loginSlice.reducer;

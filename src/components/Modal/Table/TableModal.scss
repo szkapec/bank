@@ -1,0 +1,23 @@
+.modal {
+
+  &--recipient {
+    // background-color: red;
+    margin: 15px;
+    border: 1px solid grey;
+    padding: 5px 15px;
+    border-radius: 5px;
+    .name {
+      margin: 8px 0;
+    }
+    .title {
+      margin-bottom: 8px;
+    }
+    span {
+      font-weight: bold;
+      margin: 0 5px;
+    }
+  }
+  .active {
+    border: 3px solid rgb(77, 77, 77);
+  }
+}
