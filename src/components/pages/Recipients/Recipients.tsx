@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -13,13 +13,19 @@ import Loader from "components/Loader/Loader";
 import Error from "components/Error/Error";
 import TableWrapper from "./Table/TableWrapper";
 import { useSelector } from "react-redux";
-import { selectorLoaderRecipient, selectorDataRecipient } from "store/Recipient/recipientSelector";
-import 'react-notifications/lib/notifications.css';
+import {
+  selectorLoaderRecipient,
+  selectorDataRecipient,
+} from "store/Recipient/recipientSelector";
+import "react-notifications/lib/notifications.css";
+import debounce from "lodash.debounce";
+import { IAddRecipient } from "store/Recipient/recipientInterface";
 
 const Recipients = () => {
   const loginErrorSelector = useSelector(selectorLoaderRecipient);
   const dataSelector = useSelector(selectorDataRecipient);
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState<IAddRecipient[]>([]);
   const dispatch = useAppDispatch();
   const { isLoading, error } = useQuery("recipients", () =>
     dispatch(userRecipients())
@@ -30,17 +36,27 @@ const Recipients = () => {
   };
 
   useEffect(() => {
-    console.log('loginErrorSelectorxxdsa :>> ', loginErrorSelector);
     handleClose();
-  }, [loginErrorSelector])
+  }, [loginErrorSelector]);
+
+  const changeHandler = (e: any) => {
+    const newTargetValue = dataSelector?.filter(
+      (data) => data.recipientsName.search(e.target.value) === 0
+    );
+    if (e.target.value.length >= 2) {
+      setSearch(newTargetValue);
+    } else setSearch([]);
+  };
+
+  const debouncedChangeHandler = useCallback(debounce(changeHandler, 300), []);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   if (isLoading) return <Loader />;
 
   if (error) return <Error error="An error has occurred: " />;
-  console.log('dataSelector221 :>> ', dataSelector);
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   return (
     <div className="box">
@@ -60,12 +76,13 @@ const Recipients = () => {
             <RecipientModal />
           </Modal>
         </div>
-        <div className="box-search">
+        <Box className="box-search">
           <TextField
             size="small"
             id="outlined-basic"
             label="Wyszukaj"
             variant="outlined"
+            onChange={debouncedChangeHandler}
           />
           <Box className="saved">
             <FormControlLabel
@@ -74,9 +91,11 @@ const Recipients = () => {
             />
             <LockIcon color="primary" />
           </Box>
-        </div>
+        </Box>
         <Box>
-          <TableWrapper recipients={dataSelector} />
+          <TableWrapper
+            recipients={search.length > 0 ? search : dataSelector}
+          />
         </Box>
       </Box>
       <Box className="box__saved">

@@ -30,8 +30,15 @@ export const TableData = (
 
   if (searchNameSelector.length > 3) {
     newTransfers = filterName(newTransfers, searchNameSelector);
+  } else {
+    newTransfers = filterRecExp(
+      transfersSelector,
+      searchRecExpSelector,
+      accountNumberSelector
+    );
   }
 
+  console.log(`newTransfers`, newTransfers)
   if (Number(searchAboveSelector) || Number(searchUpToSelector)) {
     newTransfers = filterMoneyRecExp(
       newTransfers,

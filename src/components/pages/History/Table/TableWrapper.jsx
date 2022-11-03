@@ -47,6 +47,8 @@ const columns = [
 
 const ContainerTable = ({ transfersSelector, accountNumberSelector }) => {
   const data = TableData(transfersSelector, accountNumberSelector) || [];
+  console.log('data :>> ', data);
+  // https://www.youtube.com/watch?v=NZKUirTtxcg
   // const userSelector = useSelector(selectorUser);
 
   const recExp = useMemo(() => {

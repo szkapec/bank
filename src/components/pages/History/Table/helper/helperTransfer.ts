@@ -62,11 +62,12 @@ export const filterName = (
   transfers: IColumn[],
   searchNameSelector: string
 ) => {
+  console.log(`transfers`, transfers)
   const newTransfersFromUser = transfers.filter(
-    (transfer) => transfer.fromUser.lastName === searchNameSelector
+    (transfer) => transfer.fromUser.lastName.search(searchNameSelector) === 0
   );
   const newTransfersToUser = transfers.filter(
-    (transfer) => transfer.toUser.lastName === searchNameSelector
+    (transfer) => transfer.toUser.lastName.search(searchNameSelector) === 0
   );
   return newTransfersFromUser.concat(newTransfersToUser);
 };

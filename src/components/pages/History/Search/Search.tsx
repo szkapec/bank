@@ -10,23 +10,19 @@ import {
 import "./Search.scss";
 import { RecExp } from '../../../../store/Search/searchInterface';
 
-const initialSum = {
-  above: '0',
-  upTo: '0',
-}
-
 const Search = () => {
   const dispatch = useAppDispatch();
   const [searchName, setSearchName] = useState("");
   const [searchRecExp, setSearchRecExp] = useState<string>(RecExp[0]);
-  const [searchSum, setSearchSum] = useState(initialSum)
 
   useEffect(() => {
     searchName && dispatch(filterTransferHistory({ searchName }));
   }, [searchName]);
 
   const debouncedChangeName = useCallback(
-    debounce((e: any) => setSearchName(e.target.value), 1000),
+    debounce((e) => {
+      return setSearchName(e.target.value || new String(''))
+    }, 1000),
     []
   );
 

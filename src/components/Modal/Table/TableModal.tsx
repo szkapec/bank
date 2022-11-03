@@ -49,7 +49,7 @@ const TableModal = ({
         <Box sx={{ ...style, width: 600 }}>
           <h2>Wybierz odbiorce</h2>
           <Box className="modal">
-            {recipients.map((recipient: any) => (
+            {recipients?.map((recipient: any) => (
               <div
                 className={
                   selectId === recipient._id
