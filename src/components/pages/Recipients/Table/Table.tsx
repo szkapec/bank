@@ -25,7 +25,6 @@ const Table = ({ recipient }: any) => {
   };
 
   useEffect(() => {
-    console.log("loginErrorSelectorxxdsa :>> ", loginErrorSelector);
     handleClose();
   }, [loginErrorSelector]);
 

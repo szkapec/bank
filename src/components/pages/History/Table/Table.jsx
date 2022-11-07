@@ -1,6 +1,6 @@
 import { useTable, useExpanded } from "react-table";
 
-const TableSearch = ({ columns, data }) => {
+const TableSearch = ({ columns, data, lastBookElementRef }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -13,6 +13,8 @@ const TableSearch = ({ columns, data }) => {
       columns: columns || [],
       data: data || [],
       initialState: { expanded: { 0: false } },
+
+
     },
     useExpanded
   );
@@ -31,13 +33,13 @@ const TableSearch = ({ columns, data }) => {
         </thead>
         <tbody {...getTableBodyProps()}>
           {data.length === 0 && <div className="no-data">Brak danych</div>}
-          {rows.map((row) => {
+          {rows.map((row, index) => {
             prepareRow(row);
             return (
-              <tr className={`${row.depth >=1 ? 'row-depth' : 'row'}` } {...row.getRowProps()}>
+              <tr ref={data.length === index + 1 ? lastBookElementRef : null} key={row._id} className={`${row.depth >=1 ? 'row-depth' : 'row'}` } {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td style={{padding: '20px 0.5rem'}}{...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
               </tr>

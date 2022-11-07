@@ -1,4 +1,4 @@
-import { IColumn } from "./helper.interface";
+import { IColumn } from "store/Transfer/transferInterface";
 import { RecExp } from "../../../../../store/Search/searchInterface";
 
 export const CountDay = (day: string) => {

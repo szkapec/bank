@@ -1,32 +1,38 @@
+
 export interface ITransfer {
-  transfers: {
-    transfer: {
-      error: boolean,
-      message: string,
-    }
-    data: [
-      {
-        _id: string,
-        body: string,
-        fromNumber: string,
-        toNumber: string,
-        error: boolean,
-        message: string,
-        createdAt: string
-        toUser: {
-          bankAccountNumber: String,
-          email: string,
-          id: string
-        },
-        fromUser: {
-          bankAccountNumber: String,
-          email: string,
-          id: string
-        }
-      }
-    ],
-    loading: boolean
+  transfer: {
+    error: boolean;
+    message: string;
   }
+  data: IColumn[];
+  loading: boolean;
+}
+export interface ITransfers {
+  transfers: ITransfer
+}
+export interface IColumn {
+  fromUser: {
+    bankAccountNumber: string,
+    email: string,
+    id: string,
+    firstName: string,
+    lastName: string,
+  };
+  toUser: {
+    bankAccountNumber: string,
+    email: string,
+    id: string,
+    firstName: string,
+    lastName: string,
+  };
+  _id: string,
+  id: string,
+  body: string,
+  createdAt: string,
+  howMuchMoney: string,
+  fromNumber: string,
+  error?: boolean,
+  toNumber: string,
 }
 
 export interface IPropsTransfer {

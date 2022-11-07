@@ -1,26 +1,18 @@
-import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../../store/hooks";
-import { getTransfers } from "../../../store/Transfer/transferThunk";
 import { selectorAuthLoginUserNumberAccount } from "../../../store/Login/loginSelector";
-import {
-  selectorLoaderTransfer,
-  selectorTransfers,
-} from "../../../store/Transfer/transferSelector";
-import "./History.scss";
+import { selectorLoaderTransfer } from "../../../store/Transfer/transferSelector";
 import Table from "./Table/TableWrapper";
 import Search from "./Search/Search";
 import Loader from "../../Loader/Loader";
+import "./History.scss";
 
 const History = () => {
-  const dispatch = useAppDispatch();
   const accountNumberSelector = useSelector(selectorAuthLoginUserNumberAccount);
-  const transfersSelector = useSelector(selectorTransfers);
   const loaderSelector = useSelector(selectorLoaderTransfer);
 
-  useEffect(() => {
-    accountNumberSelector && dispatch(getTransfers(accountNumberSelector));
-  }, [accountNumberSelector]);
+  //   const { isLoading, error } = useQuery("history", () =>
+  //     dispatch(getTransfers({ bankAccountNumber: accountNumberSelector, pageNumber: 1 }))
+  // );
 
   return (
     <div className="history">
@@ -28,10 +20,7 @@ const History = () => {
       {loaderSelector ? (
         <Loader text="Ładuje historie przelewów" />
       ) : (
-        <Table
-          transfersSelector={transfersSelector}
-          accountNumberSelector={accountNumberSelector}
-        />
+        <Table accountNumberSelector={accountNumberSelector} />
       )}
     </div>
   );

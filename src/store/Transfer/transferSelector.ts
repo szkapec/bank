@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { ITransfer } from './transferInterface';
+import { ITransfers } from './transferInterface';
 
-const selectSelf = (state: ITransfer) => state;
+const selectSelf = (state: ITransfers) => state;
 
 export const selectorLoginUser = createSelector(
   selectSelf,

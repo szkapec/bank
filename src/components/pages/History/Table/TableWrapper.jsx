@@ -1,11 +1,14 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
 import { TableData } from "./helper/helper";
 import Table from "./Table";
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
+import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import useSearch from "../Hook/useSearch";
+import Loader from "components/Loader/Loader";
+import { Box } from "@mui/material";
 
 const columns = [
   {
@@ -39,20 +42,38 @@ const columns = [
             },
           })}
         >
-          {row.isExpanded ? <ArrowDropDownIcon/> : <ArrowLeftIcon/>}
+          {row.isExpanded ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
         </span>
       ) : null,
   },
 ];
 
-const ContainerTable = ({ transfersSelector, accountNumberSelector }) => {
-  const data = TableData(transfersSelector, accountNumberSelector) || [];
-  console.log('data :>> ', data);
+const ContainerTable = ({ accountNumberSelector }) => {
   // https://www.youtube.com/watch?v=NZKUirTtxcg
-  // const userSelector = useSelector(selectorUser);
+  const [pageNumber, setPageNumber] = useState(1);
 
+  const { transfers, hasMore, loading, end, error } = useSearch(
+    accountNumberSelector,
+    pageNumber
+  );
+
+  const data = TableData(transfers, accountNumberSelector) || [];
+  const observer = useRef();
+  const lastBookElementRef = useCallback((node) => {
+    console.log("end :>> ", end);
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setPageNumber((prevPageNumber) => prevPageNumber + 1);
+      }
+    });
+    if (node) observer.current.observe(node);
+  }, []);
+
+  console.log("loading :>> ", loading);
+  console.log("transfers :>> ", transfers);
   const recExp = useMemo(() => {
-    const data = transfersSelector?.map((transfer) => {
+    const data = transfers?.map((transfer) => {
       return transfer.fromUser.bankAccountNumber === accountNumberSelector
         ? {
             receipts: -transfer.howMuchMoney,
@@ -71,7 +92,7 @@ const ContainerTable = ({ transfersSelector, accountNumberSelector }) => {
         ?.reduce((prev, value) => prev + Number(value.expenses), 0)
         .toFixed(2),
     };
-  }, [transfersSelector?.length]);
+  }, [transfers?.length]);
 
   const countPrecent = () => {
     const rec = -recExp.receipts;
@@ -94,34 +115,51 @@ const ContainerTable = ({ transfersSelector, accountNumberSelector }) => {
         rec={countPrecent().receiptsPercent}
         exp={countPrecent().expensesPercent}
       >
-        <div className="balance">
+        <Box className="balance">
           <div>Bilans wpływy i wydatki</div>
           <div className="money">
             {(recExp.expenses - -recExp.receipts).toFixed(2)} PLN
           </div>
-        </div>
-        <div className="line">
+        </Box>
+        <Box className="line">
           <span className="expenses">
-            <b><KeyboardReturnIcon/> Wpływy</b>
+            <b>
+              <KeyboardReturnIcon /> Wpływy
+            </b>
           </span>
-
           <span className="receipts">
-            <b> <KeyboardTabIcon/> Wydatki</b>
+            <b>
+              {" "}
+              <KeyboardTabIcon /> Wydatki
+            </b>
           </span>
-        </div>
-        <div className="price">
+        </Box>
+        <Box className="price">
           <span className="expenses">{recExp.expenses} PLN</span>
           <span className="receipts"> {recExp.receipts} PLN</span>
-        </div>
+        </Box>
       </StyledRecExp>
       <StyledOperation>
-        <div>
-          Lista operacji: <span>{transfersSelector?.length}</span>{" "}
-        </div>
-        <div>Exportuj historię operacji</div>
+        <Box>
+          Lista operacji: <span>{transfers?.length}</span>{" "}
+        </Box>
+        <Box>Exportuj historię operacji</Box>
       </StyledOperation>
       <StyledTable>
-        <Table columns={columns} data={data} />
+        <Table
+          columns={columns}
+          data={data}
+          lastBookElementRef={lastBookElementRef}
+        />
+        <Box>
+        {end && <StyledRecord>Nie ma więcej rekordów</StyledRecord>}
+        </Box>
+        <Box style={{ padding: "20px 0" }}>
+          {loading && <Loader text={"Ładuje dane"} />}
+        </Box>
+        <Box>
+          {error && <StyledRecord>Coś poszło nie tak, przepraszamy ;( </StyledRecord>}
+        </Box>
       </StyledTable>
     </StyledWrapper>
   );
@@ -158,6 +196,10 @@ const StyledTable = styled.div`
     }
   }
 `;
+const StyledRecord = styled.div`
+  padding: 20px;
+  font-weight: bold;
+`;
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -186,7 +228,7 @@ const StyledRecExp = styled.div`
       display: inline-block;
       color: white;
       padding: 10px 0;
-    
+
       b {
         display: flex;
         align-items: center;

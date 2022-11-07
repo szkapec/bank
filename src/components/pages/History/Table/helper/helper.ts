@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { IColumn } from "./helper.interface";
+import { IColumn } from "store/Transfer/transferInterface";
 import {
   selectorSearchName,
   selectorSearchRecExp,
   selectorSearchAbove,
   selectorSearchUpTo,
-} from "../../../../../store/Search/searchSelector";
+} from "store/Search/searchSelector";
 import {
   CountDay,
   filterMoneyRecExp,
@@ -38,7 +38,6 @@ export const TableData = (
     );
   }
 
-  console.log(`newTransfers`, newTransfers)
   if (Number(searchAboveSelector) || Number(searchUpToSelector)) {
     newTransfers = filterMoneyRecExp(
       newTransfers,

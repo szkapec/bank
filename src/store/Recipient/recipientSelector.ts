@@ -1,8 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { IRecipients } from "./recipientInterface";
-import { IInitialState } from "./recipientSlice";
+import { IGlobalRecipients } from "./recipientInterface";
 
-const selectSelf = (state: IRecipients) => state;
+const selectSelf = (state: IGlobalRecipients) => state;
 
 export const selectorLoaderRecipient = createSelector(
   selectSelf,

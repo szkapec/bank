@@ -1,9 +1,11 @@
-export interface IRecipients {
-  recipients: {
-    saved: IAddRecipient[];
-    loading: boolean;
-  }
+export interface IGlobalRecipients {
+  recipients: IRecipients
 }
+export interface IRecipients {
+  saved: IAddRecipient[];
+  loading: boolean;
+}
+
 export interface IAddRecipient {
   _id: string;
   recipientsAccount: string;

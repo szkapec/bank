@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
+  
   const host = process.env.REACT_APP_HOST;
   const token = localStorage.getItem("jwtToken");
   const config = {
@@ -16,10 +17,10 @@ export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
   try {
     const res = await axios.post(`${host}/api/transfer`, body, config);
     if (res.status === 200) {
-      toast.success('Przelew został zrealizowany!')
+      toast.success("Przelew został zrealizowany!");
       return res.data;
-    } else if (res.status >=500) {
-      toast.success('Przelew nie został zrealizowany!')
+    } else if (res.status >= 500) {
+      toast.success("Przelew nie został zrealizowany!");
       return res.data;
     }
     return;
@@ -34,7 +35,7 @@ export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
 
 export const getTransfers = createAsyncThunk(
   "GET_TRANSFER",
-  async (bankAccountNumber: string) => {
+  async (data: any) => {
     const host = process.env.REACT_APP_HOST;
     const token = localStorage.getItem("jwtToken");
     console.log(`token`, token);
@@ -45,10 +46,10 @@ export const getTransfers = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       },
     };
-
     try {
+      console.log(`data xxxxd`, data )
       const res = await axios.get(
-        `${host}/api/transfers/${bankAccountNumber}`,
+        `${host}/api/transfers/${data.bankAccountNumber}/${data.pageNumber}`,
         config
       );
       if (res.status === 200) {
@@ -56,7 +57,6 @@ export const getTransfers = createAsyncThunk(
       }
       return;
     } catch (error) {
-      console.log(`error`, error);
       return {
         message: error.response.data,
         error: true,

@@ -1,12 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IColumn, ITransfer } from "./transferInterface";
 import { sendTransfer, getTransfers } from "./transferThunk";
 
-const initialState = {
+const initialState: ITransfer = {
   transfer: {
+    error: false,
     message: '',
-    error: false
   },
-  data: [],
+  data: [
+    {
+      toUser: {
+        bankAccountNumber: '',
+        email: '',
+        id: '',
+        firstName: '',
+        lastName: '',
+      },
+      fromUser: {
+        bankAccountNumber: '',
+        email: '',
+        id: '',
+        firstName: '',
+        lastName: '',
+      },
+      _id: '',
+      id: '',
+      body: '',
+      createdAt: '',
+      howMuchMoney: '',
+      fromNumber: '',
+      error: false,
+      toNumber: '',
+    }
+  ],
   loading: false,
 };
 
@@ -22,32 +48,27 @@ export const transferSlice = createSlice({
     },
     messageClear: (state) => {
       state.transfer.message = ''
+    },
+    saveTransfer: (state, { payload }: PayloadAction<IColumn[]> ) => {
+      state.data = payload
     }
   },
-  // https://dev.to/chinwike/separating-logic-in-your-redux-toolkit-application-h7i
   extraReducers: {
     [sendTransfer.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [sendTransfer.fulfilled.toString()]: (state, { payload }) => {
-      state.transfer = payload;
+    [sendTransfer.fulfilled.toString()]: (state, { payload }: PayloadAction<IColumn> ) => {
+      state.data = [...state.data, payload];
       state.loading = false;
     },
     [sendTransfer.rejected.toString()]: (state) => {
       state.loading = false;
     },
-    [getTransfers.pending.toString()]: (state) => {
-      state.loading = true;
-    },
-    [getTransfers.fulfilled.toString()]: (state, { payload }) => {
-      state.data = payload;
-      state.loading = false;
-    },
-    [getTransfers.rejected.toString()]: (state) => {
-      state.loading = false;
-    },
+    [getTransfers.fulfilled.toString()]: (state, { payload }: PayloadAction<IColumn[]> ) => {
+      state.data = [...state.data, ...payload];
+    }
   }
 })
 
-export const { logOutTransfer, messageClear } = transferSlice.actions;
+export const { logOutTransfer, messageClear, saveTransfer } = transferSlice.actions;
 export default transferSlice.reducer;
