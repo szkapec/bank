@@ -11,7 +11,7 @@ import { userLoaded } from "./store/Login/loginThunk";
 import { useAppDispatch } from "./store/hooks";
 import "./App.scss";
 import GlobalLoader from "./components/Loader/GlobalLoader";
-import Recipients from "./components/pages/Recipients/Recipients";
+import Recipients from "./components/pages/Recipients/RecipientsWrapper";
 import { QueryClient, QueryClientProvider } from 'react-query'
 import Notification from './components/Notification/Notification';
 import { ToastContainer } from "react-toastify";
