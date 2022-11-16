@@ -9,6 +9,7 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import useSearch from "../Hook/useSearch";
 import Loader from "components/Loader/Loader";
 import { Box } from "@mui/material";
+import { configPdf } from './helper/configPdf';
 
 const columns = [
   {
@@ -30,6 +31,11 @@ const columns = [
   {
     Header: "Data",
     accessor: "date",
+  },
+  {
+    Header: "Potwierdzenie",
+    id: "confirmation",
+    Cell: ({ row }) => <button onClick={(e) => configPdf(row)}>Potwierdzenie</button>
   },
   {
     id: "expander",
@@ -58,6 +64,7 @@ const ContainerTable = ({ accountNumberSelector }) => {
   );
 
   const data = TableData(transfers, accountNumberSelector) || [];
+  console.log('data :>> ', data);
   const observer = useRef();
   const lastBookElementRef = useCallback((node) => {
     console.log("end :>> ", end);

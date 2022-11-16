@@ -61,8 +61,11 @@ const Transfer = () => {
         email: email,
         numberSend: bankAccountNumber,
       };
+     
       const sendTransferData = await dispatch(sendTransfer(form));
       if (!sendTransferData.payload.error) {
+        console.log('initialFormDataxxd :>> ', initialFormData);
+        setFormData(initialFormData)
         dispatch(subtractMoney(formData.howMuchMoney));
       }
     }

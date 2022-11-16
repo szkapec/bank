@@ -46,10 +46,10 @@ export const TableData = (
       accountNumberSelector
     );
   }
-
+  console.log(`newTransfers`, newTransfers)
   try {
     return newTransfers?.map(
-      ({ fromUser, toUser, body, howMuchMoney, createdAt }: IColumn) => ({
+      ({ fromUser, toUser, body, howMuchMoney, createdAt, _id }: IColumn) => ({
         firstName:
           accountNumberSelector === toUser.bankAccountNumber
             ? fromUser.firstName + " " + fromUser.lastName
@@ -64,6 +64,7 @@ export const TableData = (
             ? `${howMuchMoney}PLN`
             : `${-howMuchMoney}PLN`,
         date: CountDay(createdAt),
+        confirmation: _id + "&&" + createdAt,
         subRows: [
           {
             firstName:

@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: center;
   &__recipients {
+   
     background-color: #fff;
     width: 50%;
 
@@ -19,12 +20,15 @@
         padding: 10px 10px 0;
       }
     }
+    h3 {
+      padding-left: 10px;
+    }
   }
 
   &__saved {
     background-color: #fff;
     width: 30%;
-    max-height: 400px;
+    max-height: 350px;
   }
 
   &__recipients, &__saved {
@@ -113,4 +117,28 @@
     position: absolute;
   }
 
+}
+
+.type-transfer {
+  color: #3989d8;
+  padding: 20px;
+
+  section {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 20px 0;
+    cursor: pointer;
+    span { 
+      margin-left: 10px;
+    }
+  }
+  section:hover {
+    text-decoration: underline;
+    color: #1261af;
+  }
+
+  .recurring-payment {
+    border-top: 1px solid #1261af;
+  }
 }
