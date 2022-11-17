@@ -39,7 +39,6 @@ export const getTransfers = createAsyncThunk(
   async (data: any) => {
     const host = process.env.REACT_APP_HOST;
     const token = localStorage.getItem("jwtToken");
-    console.log(`token`, token);
     const config = {
       headers: {
         "Content-Type": "application/json",

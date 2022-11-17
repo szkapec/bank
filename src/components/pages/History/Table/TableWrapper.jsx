@@ -35,7 +35,9 @@ const columns = [
   {
     Header: "Potwierdzenie",
     id: "confirmation",
-    Cell: ({ row }) => <button onClick={(e) => configPdf(row)}>Potwierdzenie</button>
+    Cell: ({ row }) => row.canExpand ? ( 
+      <button className="btn-pdf" onClick={(e) => configPdf(row)}>Potwierdzenie</button>
+    ) : null
   },
   {
     id: "expander",

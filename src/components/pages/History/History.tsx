@@ -10,10 +10,6 @@ const History = () => {
   const accountNumberSelector = useSelector(selectorAuthLoginUserNumberAccount);
   const loaderSelector = useSelector(selectorLoaderTransfer);
 
-  //   const { isLoading, error } = useQuery("history", () =>
-  //     dispatch(getTransfers({ bankAccountNumber: accountNumberSelector, pageNumber: 1 }))
-  // );
-
   return (
     <div className="history">
       <Search />

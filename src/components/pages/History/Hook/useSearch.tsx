@@ -5,6 +5,7 @@ import { useAppDispatch } from "store/hooks";
 import { saveTransfer } from "store/Transfer/transferSlice";
 import { getTransfers } from "store/Transfer/transferThunk";
 import { IColumn } from "store/Transfer/transferInterface";
+
 export default function useSearch(
   accountNumberSelector: string,
   pageNumber: string
@@ -15,7 +16,6 @@ export default function useSearch(
   const [hasMore, setHasMore] = useState(false);
   const [end, setEnd] = useState(false);
 
-  console.log("transfers :>> ", transfers);
   const dispatch = useAppDispatch();
   useEffect(() => {
     setLoading(end ? false : true);
@@ -26,19 +26,23 @@ export default function useSearch(
         getTransfers({ bankAccountNumber: accountNumberSelector, pageNumber })
       )
         .then(({ payload }) => {
-          setTransfers((prevBooks): IColumn[] => {
-            return [...prevBooks, ...payload];
+          setTransfers((prevTransfer): IColumn[] => {
+            const transfers = [...prevTransfer, ...payload];
+            const uniqueTransfers = Array.from(
+              new Set(transfers.map((a) => a._id))
+            ).map((id) => {
+              return transfers.find((a) => a._id === id);
+            });
+            return uniqueTransfers;
           });
           setEnd(payload.length === 0);
           setLoading(false);
           setHasMore(false);
-      
         })
         .catch((e) => {
           if (axios.isCancel(e)) return;
           setError(true);
         });
-      // dispatch(saveTransfer(transfers));
     }, 1000)();
   }, [pageNumber]);
 
