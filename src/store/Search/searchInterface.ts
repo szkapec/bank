@@ -10,7 +10,7 @@ export interface ISearch {
 }
 
 export enum RecExp {
-  All, 
+  All,
   Receipts,
   Expenses,
 }

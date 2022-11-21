@@ -21,8 +21,9 @@ export const login = createAsyncThunk("LOGIN", async (text: ILoginUser) => {
       mode: "cors",
     },
   };
+  console.log('text221 :>> ', text);
   const body = JSON.stringify(text);
-
+  console.log('body221 :>> ', body);
   try {
     const res = await axios.post(`${host}/api/users/login`, body, config);
     if (res.status === 200) {

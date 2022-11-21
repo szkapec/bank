@@ -4,18 +4,7 @@ import setAuthenticationToken from "../../util/setAuthenticationToken";
 import { IAddRecipient } from "./recipientInterface";
 import { toast } from "react-toastify";
 
-
 const host = process.env.REACT_APP_HOST;
-
-const useToken = (token: string) => {
-  if (token) {
-    localStorage.removeItem("jwtToken");
-    localStorage.setItem("jwtToken", token);
-  } else {
-    console.log("Brak tokena :>> ");
-    localStorage.removeItem("jwtToken");
-  }
-};
 
 export const userRecipients = createAsyncThunk("RECIPIENTS", async () => {
   const token = localStorage.getItem("jwtToken");
@@ -42,7 +31,7 @@ export const userRecipients = createAsyncThunk("RECIPIENTS", async () => {
     return null;
   } catch (error) {
     console.log(`error`, error);
-    toast.error('Coś poszło nie tak', error)
+    toast.error("Coś poszło nie tak", error);
     return {
       message: error.response.data,
       error: true,
@@ -73,13 +62,13 @@ export const addUserRecipients = createAsyncThunk(
       const body = JSON.stringify({ ...data, id });
       const res = await axios.put(`${host}/api/recipient`, body, config);
       if (res.status === 200) {
-        toast.success("Dodany nowy odbiorca"); 
+        toast.success("Dodany nowy odbiorca");
         return res.data;
       }
       return null;
     } catch (error) {
       console.log(`error`, error);
-      toast.error('Coś poszło nie tak', error)
+      toast.error("Coś poszło nie tak", error);
       return {
         message: error.response.data,
         error: true,
@@ -111,13 +100,13 @@ export const editUserRecipients = createAsyncThunk(
       const body = JSON.stringify({ ...data, id });
       const res = await axios.patch(`${host}/api/recipient/edit`, body, config);
       if (res.status === 200) {
-        toast.success("Edycja przebiegła prawidłowo"); 
+        toast.success("Edycja przebiegła prawidłowo");
         return res.data;
       }
       return null;
     } catch (error) {
       console.log(`error`, error);
-      toast.error('Coś poszło nie tak', error)
+      toast.error("Coś poszło nie tak", error);
       return {
         message: error.response.data,
         error: true,
@@ -154,11 +143,11 @@ export const deleteUserRecipients = createAsyncThunk(
         toast.success("Odbiorca usunięty");
         return res.data;
       }
-      toast.error('Coś poszło nie tak')
+      toast.error("Coś poszło nie tak");
       return null;
     } catch (error) {
       console.log(`error`, error);
-      toast.error('Coś poszło nie tak', error)
+      toast.error("Coś poszło nie tak", error);
       return {
         message: error.response.data,
         error: true,

@@ -1,7 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { ISearch } from "./searchInterface";
 
-
 const selectSelf = (state: ISearch) => state;
 
 export const selectorSearch = createSelector(

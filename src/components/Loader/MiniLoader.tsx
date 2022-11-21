@@ -1,10 +1,8 @@
-import { CircularProgress } from '@mui/material'
-import React from 'react'
+import React from "react";
+import { CircularProgress } from "@mui/material";
 
-const MIniLoader = () => {
-  return (
-    <CircularProgress color="info" size={22}/>
-  )
-}
+const MiniLoader = () => {
+  return <CircularProgress color="info" size={22} />;
+};
 
-export default MIniLoader
+export default MiniLoader;

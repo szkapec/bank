@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Notification = () => {
+const AdminBan = () => {
   return (
     <div>
-      
+      Admin ban
     </div>
   )
 }
 
-export default Notification
+export default AdminBan

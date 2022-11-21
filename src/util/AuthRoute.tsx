@@ -13,7 +13,7 @@ export const AuthRoute = (props: any) => {
         {...rest}
         path={path}
         exact
-        element={auth?.user?.email ? <Navigate to="/history"/> : <Component />}
+        element={auth?.user?.email ? <Navigate to="/transfer"/> : <Component />}
       />
     </Routes>
   );
@@ -33,3 +33,18 @@ export const AuthRouteLogin = (props: any) => {
     </Routes>
   );
 };
+
+export const AuthRouteAdmin = (props: any) => {
+  const { component: Component, path, ...rest } = props;
+  const auth = useSelector(selectorLoginUser);
+  return (
+    <Routes>
+      <Route
+        {...rest}
+        path={path}
+        exact
+        element={auth?.user?.premium && <Component />}
+      />
+    </Routes>
+  );
+}

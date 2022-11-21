@@ -8,12 +8,14 @@ import transferSlice from "./Transfer/transferSlice";
 import searchSlice from "./Search/searchSlice";
 import { Reducer } from "redux";
 import recipientSlice from "./Recipient/recipientSlice";
+import adminSlice from "./Admin/adminSlice";
 
 const appReducer = combineReducers({
   auth: loginSlice,
   transfers: transferSlice,
   search: searchSlice,
-  recipients: recipientSlice
+  recipients: recipientSlice,
+  admin: adminSlice,
 });
 
 const rootReducer: Reducer<
@@ -22,6 +24,7 @@ const rootReducer: Reducer<
     transfers: any;
     search: any;
     recipients: any;
+    admin: any;
   }>
 > = (state, action) => {
   console.log(`action.type`, action.type)

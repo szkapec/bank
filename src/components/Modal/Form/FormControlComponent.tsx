@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import { Field } from "react-final-form";
 import { useTranslation } from "react-i18next";
@@ -6,7 +6,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import HelpIcon from "@mui/icons-material/Help";
 import { IInitialError } from "./RecipientModal";
 import { useSelector } from "react-redux";
-import { selectorLoaderRecipient } from "../../../store/Recipient/recipientSelector";
+import { selectorLoaderRecipient } from "store/Recipient/recipientSelector";
 import Loader from "../../Loader/Loader";
 
 interface IProps {
@@ -15,7 +15,6 @@ interface IProps {
 
 const FormControlComponent = ({ errorModal }: IProps) => {
   const { t } = useTranslation();
-  console.log(`errorModal`, errorModal);
   const loginErrorSelector = useSelector(selectorLoaderRecipient);
 
   return (

@@ -10,12 +10,9 @@ import { initialFormValue } from "./helper/helper";
 import {
   addUserRecipients,
   editUserRecipients,
-} from "../../../store/Recipient/recipientThunk";
-import { useAppDispatch } from "../../../store/hooks";
-import { IAddRecipient } from "../../../store/Recipient/recipientInterface";
-import { useSelector } from "react-redux";
-import { selectorLoaderRecipient } from "../../../store/Recipient/recipientSelector";
-import { createNotification } from "../../../util/notification";
+} from "store/Recipient/recipientThunk";
+import { useAppDispatch } from "store/hooks";
+import { IAddRecipient } from "store/Recipient/recipientInterface";
 
 interface IProps {
   initialValue?: IAddRecipient;
@@ -46,8 +43,6 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
   const [errorForm, setErrorForm] = useState<IInitialError>(initialError);
   const { t } = useTranslation();
 
-
-
   const dispatch = useAppDispatch();
   const onSubmit = (values: IAddRecipient) => {
     const { recipientsName, toRecipient, recipientsAccount, title, sum } =
@@ -64,8 +59,6 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
     errorToRecipient = errorHandler(toRecipient);
     errorTitle = errorHandler(title);
 
-    console.log("errorRecipientsAccount :>> ", errorRecipientsAccount);
-    console.log("errorRecipientsName :>> ", errorRecipientsName);
     if (
       !errorRecipientsName &&
       !errorToRecipient &&
@@ -73,18 +66,13 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
       !errorSum &&
       !errorRecipientsAccount
     ) {
-      console.log("errorrrr :>> ", errorRecipientsAccount);
-      setErrorForm(initialError)
-      createNotification('info', 'text')
+      setErrorForm(initialError);
       if (!edit) {
         dispatch(addUserRecipients(values));
       } else {
         dispatch(editUserRecipients(values));
       }
-     
-   
     } else {
-      console.log("errorrrr :>> ");
       setErrorForm({
         recipientsName: !!errorRecipientsName,
         toRecipient: !!errorToRecipient,
@@ -94,7 +82,6 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
       });
     }
   };
-  console.log("initialValue :>> ", initialValue);
   return (
     <Box className="modal" sx={{ ...style, width: 600 }}>
       <h2>{t("modal.addRecipients")}</h2>

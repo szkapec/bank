@@ -23,7 +23,12 @@ export const selectorLoginUserError = createSelector(
   (state) => state.auth?.user?.error
 );
 
-export const selectorUser = createSelector(
+// export const selectorUser = createSelector(
+//   selectSelf,
+//   (state) => state.auth?.user
+// );
+
+export const selectorAuthLoginId = createSelector(
   selectSelf,
-  (state) => state.auth?.user
+  (state) => state.auth?.user?.id
 );
