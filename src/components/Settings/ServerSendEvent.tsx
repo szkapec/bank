@@ -6,9 +6,17 @@ export const ServerSendEvent = (dispatch: any, userIdSelector: string) => {
   ssEvents.addEventListener("message", (e) => {});
 
   ssEvents.addEventListener("logout_user", (e: any) => {
-    if (e.data.replace(/"/g, "") === userIdSelector) {
+
+    if (e.data.replace(/"/g, "").split("||")[0] === userIdSelector) {
       dispatch(logOut());
-      toast.success("Zostałeś wylogowany przez Admina!");
+      toast.info("Zostałeś wylogowany przez Admina!");
+    }
+  });
+
+  ssEvents.addEventListener("ban_user", (e: any) => {
+    if (e.data.replace(/"/g, "").split("||")[0] === userIdSelector) {
+      dispatch(logOut());
+      toast.info("Twoje konto zostało zbanowane!");
     }
   });
 };

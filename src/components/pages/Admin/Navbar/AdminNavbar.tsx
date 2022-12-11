@@ -36,13 +36,13 @@ const AdminNavbar = ({ setRoute, route }: IPropsAdminNavbar) => {
       >
         Zbanuj użytkownika
       </Link>
-      <Link
+      {/* <Link
         to="/admin"
         className={Routes.Message === route ? 'admin-active' : Routes.Message}
         onClick={() => setRoute(Routes.Message)}
       >
         Wyślij wiadomość
-      </Link>
+      </Link> */}
     </nav>
   );
 };

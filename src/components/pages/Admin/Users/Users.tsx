@@ -50,9 +50,10 @@ const StyledAdminList = styled.ul<StyledProps>`
   padding: 10px;
   border: 1px solid black;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: 10px 20px;
+  max-width: 1100px;
   .index {
     border: 1px solid grey;
     padding: 7px;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
-import { register } from "../../../store/Login/loginThunk";
-import { useAppDispatch } from "../../../store/hooks";
+import { register } from "store/Login/loginThunk";
+import { useAppDispatch } from "store/hooks";
 import "./Register.scss";
 import Logo from "../../../assets/Logo";
 
@@ -36,7 +36,7 @@ const initialValue = {
 const Register = () => {
   const dispatch = useAppDispatch();
 
-  const [ErrorForm, setErrorForm] = useState<IErrorForm>(initialError);
+  const [errorForm, setErrorForm] = useState<IErrorForm>(initialError);
 
   const onSubmit = (values: any) => {
     const { firstName, lastName, email, password, repeatPassword } = values;
@@ -79,35 +79,35 @@ const Register = () => {
             <div>
               <label>Podaj Imię</label>
               <Field
-                className={ErrorForm.firstName ? "input-error" : "firstName"}
+                className={errorForm.firstName ? "input-error" : "firstName"}
                 name="firstName"
                 component="input"
                 placeholder="Imię"
               />
-              {ErrorForm.firstName && <div className="error">Podaj imię</div>}
+              {errorForm.firstName && <div className="error">Podaj imię</div>}
             </div>
             <div>
               <label>Podaj nazwisko</label>
               <Field
-                className={ErrorForm.lastName ? "input-error" : "lastName"}
+                className={errorForm.lastName ? "input-error" : "lastName"}
                 name="lastName"
                 component="input"
                 placeholder="Nazwisko"
               />
-              {ErrorForm.lastName && (
+              {errorForm.lastName && (
                 <div className="error">Podaj nazwisko</div>
               )}
             </div>
             <div>
               <label>Podaj Email</label>
               <Field
-                className={ErrorForm.email ? "input-error" : "email"}
+                className={errorForm.email ? "input-error" : "email"}
                 name="email"
                 type="email"
                 component="input"
                 placeholder="Email"
               />
-              {ErrorForm.email && (
+              {errorForm.email && (
                 <div className="error">Niepoprawny email!</div>
               )}
             </div>
@@ -148,20 +148,20 @@ const Register = () => {
             <div>
               <label>Hasło</label>
               <Field
-                className={ErrorForm.password && "input-error"}
+                className={errorForm.password && "input-error"}
                 name="password"
                 type="password"
                 component="input"
                 placeholder="Hasło"
               />
             </div>
-            {ErrorForm.password && (
+            {errorForm.password && (
               <div className="error">Hasło nie pasuje do siebie!</div>
             )}
             <div>
               <label>Powtórz hasło</label>
               <Field
-                className={ErrorForm.password && "input-error"}
+                className={errorForm.password && "input-error"}
                 name="repeatPassword"
                 type="password"
                 component="input"

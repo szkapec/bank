@@ -22,7 +22,7 @@ const Navbar = () => {
         Przelew
       </NavLink>
       <NavLink to="/recipients" className="recipients">
-        Płatności
+        Odbiorcy
       </NavLink>
       <NavLink to="/offers" className="offers">
         Oferty i wnioski

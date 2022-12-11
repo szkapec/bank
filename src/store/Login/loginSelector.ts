@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { IAuth, ILoginUser } from './loginInterface';
+import { IAuth } from './loginInterface';
 
 const selectSelf = (state: IAuth) => state;
 
@@ -23,12 +23,12 @@ export const selectorLoginUserError = createSelector(
   (state) => state.auth?.user?.error
 );
 
-// export const selectorUser = createSelector(
-//   selectSelf,
-//   (state) => state.auth?.user
-// );
-
 export const selectorAuthLoginId = createSelector(
   selectSelf,
   (state) => state.auth?.user?.id
+);
+
+export const selectorAuthLoading = createSelector(
+  selectSelf,
+  (state) => state.auth?.loading
 );

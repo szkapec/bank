@@ -17,8 +17,8 @@ const AdminWrapper = () => {
         return <AdminLogout />;
       case Routes.Ban:
         return <AdminBan />;
-      case Routes.Message:
-        return <AdminSendMessage />;
+      // case Routes.Message:
+      //   return <AdminSendMessage />;
       default:
         break;
     }

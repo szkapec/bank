@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction, nanoid  } from "@reduxjs/toolkit";
-import { login, register } from "./loginThunk";
-import { logOutTransfer } from '../Transfer/transferSlice'
+import { createSlice } from "@reduxjs/toolkit";
+import { changePassword, login, register, remindCode, remindPassword } from "./loginThunk";
 
 interface IInitialState {
   user: {
@@ -28,13 +27,6 @@ const initialState: IInitialState = {
   loading: false,
 };
 
-
-interface Item {
-  id: string
-  text: string
-}
-
-
 export const loginSlice = createSlice({
   name: "LOGIN",
   initialState,
@@ -49,7 +41,6 @@ export const loginSlice = createSlice({
       state.loading = false;
     },
     subtractMoney: (state, { payload }) => {
-      console.log(`payload`, payload)
       state.user.money = (Number(state.user.money) - Number(payload)).toString()
     }
   },
@@ -73,6 +64,33 @@ export const loginSlice = createSlice({
       state.loading = false;
     },
     [register.rejected.toString()]: (state) => {
+      state.loading = false;
+    },
+    [remindPassword.pending.toString()]: (state) => {
+      state.loading = true;
+    },
+    [remindPassword.fulfilled.toString()]: (state) => {
+      state.loading = false;
+    },
+    [remindPassword.rejected.toString()]: (state) => {
+      state.loading = false;
+    },
+    [remindCode.pending.toString()]: (state) => {
+      state.loading = true;
+    },
+    [remindCode.fulfilled.toString()]: (state, { payload }) => {
+      state.loading = false;
+    },
+    [remindCode.rejected.toString()]: (state) => {
+      state.loading = false;
+    },
+    [changePassword.pending.toString()]: (state) => {
+      state.loading = true;
+    },
+    [changePassword.fulfilled.toString()]: (state, { payload }) => {
+      state.loading = false;
+    },
+    [changePassword.rejected.toString()]: (state) => {
       state.loading = false;
     },
   },

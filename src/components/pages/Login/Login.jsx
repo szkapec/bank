@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectorAuthLoginUser,
   selectorLoginUserError,
-} from "../../../store/Login/loginSelector.ts";
-import { login } from "../../../store/Login/loginThunk.tsx";
+} from "store/Login/loginSelector.ts";
+import { login } from "store/Login/loginThunk.tsx";
 import { Link } from "react-router-dom";
 import "./Login.scss";
 import Logo from "../../../assets/Logo";
@@ -18,6 +18,9 @@ const Login = () => {
   const dispatch = useDispatch();
   const loginUserSelector = useSelector(selectorAuthLoginUser);
   const loginErrorSelector = useSelector(selectorLoginUserError);
+  console.log('DELETEDDD!! :>> ', );
+  localStorage.removeItem("emailChange");
+  localStorage.removeItem("emailCode");
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -45,7 +48,7 @@ const Login = () => {
 
   return (
     <div className="container-login">
-      <Logo/>
+      <Logo />
       <h2>Logowanie do CD-Bank</h2>
       <form
         className={loginErrorSelector ? "login-error" : "login"}
@@ -89,6 +92,12 @@ const Login = () => {
         Nie masz jeszcze konta?
         <Link to="/register">
           <span> zarejestruj się</span>
+        </Link>
+      </div>
+      <div className="label-wrapper-register">
+        Nie pamiętasz hasła?
+        <Link to="/identify">
+          <span> Przypomnij hasło</span>
         </Link>
       </div>
     </div>
