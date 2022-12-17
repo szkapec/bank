@@ -13,6 +13,11 @@ export const selectorAuthLoginUser = createSelector(
   (state) => state.auth?.user
 );
 
+export const selectorAuthLoginEmail = createSelector(
+  selectSelf,
+  (state) => state.auth?.user.email
+);
+
 export const selectorAuthLoginUserNumberAccount = createSelector(
   selectSelf,
   (state) => state.auth?.user?.bankAccountNumber
@@ -31,4 +36,24 @@ export const selectorAuthLoginId = createSelector(
 export const selectorAuthLoading = createSelector(
   selectSelf,
   (state) => state.auth?.loading
+);
+
+export const selectorLanguage = createSelector(
+  selectSelf,
+  (state) => state.auth?.user.language
+);
+
+export const selectorLimit = createSelector(
+  selectSelf,
+  (state) => state.auth?.user.limit
+);
+
+export const selectorPermision = createSelector(
+  selectSelf,
+  (state) => state.auth?.user.permission
+);
+
+export const selectorColor = createSelector(
+  selectSelf,
+  (state) => state.auth?.user.color
 );

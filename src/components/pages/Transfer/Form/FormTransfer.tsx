@@ -13,6 +13,7 @@ import TableModal from "components/Modal/Table/TableModal";
 import { selectorDataRecipient } from "store/Recipient/recipientSelector";
 import { userRecipients } from "store/Recipient/recipientThunk";
 import { IAddRecipient } from "store/Recipient/recipientInterface";
+import { selectorLimit } from "store/Login/loginSelector";
 
 const FormTransfer = ({
   error,
@@ -23,6 +24,8 @@ const FormTransfer = ({
   const messageSelector = useSelector(selectorTransferMessage);
   const loaderSelector = useSelector(selectorLoaderTransfer);
   const dataRecipientSelector = useSelector(selectorDataRecipient);
+  const limitSelector = useSelector(selectorLimit);
+
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
 
@@ -140,6 +143,11 @@ const FormTransfer = ({
         {Number(formData.howMuchMoney) > money && (
           <div className="error-transfer">
             Nie masz wystarczającej ilości pieniędzy!
+          </div>
+        )}
+         {limitSelector.limitDay < Number(formData.howMuchMoney) && (
+          <div className="error-transfer">
+            Przekroczony limit!
           </div>
         )}
       </div>

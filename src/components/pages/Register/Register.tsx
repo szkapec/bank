@@ -28,7 +28,7 @@ const initialValue = {
   firstName: "",
   lastName: "",
   email: "",
-  country: "Poland",
+  country: "pl_PL",
   password: "",
   repeatPassword: "",
 };
@@ -139,10 +139,10 @@ const Register = () => {
             <div>
               <label>Kraj pochodzenia</label>
               <Field name="country" component="select">
-                <option value="Poland">Polska</option>
-                <option value="#England">Anglia</option>
-                <option value="Germany">Niemcy</option>
-                <option value="Spain">Hiszpania</option>
+                <option value="pl_PL">Polska</option>
+                <option value="en_EN">Anglia</option>
+                <option value="gr_GR">Niemcy</option>
+                <option value="sp_SP">Hiszpania</option>
               </Field>
             </div>
             <div>
@@ -175,7 +175,6 @@ const Register = () => {
           </form>
         )}
       />
-      )
     </div>
   )
 };

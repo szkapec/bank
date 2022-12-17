@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "store/hooks";
 import { selectorAuthLoading } from "store/Login/loginSelector";
-import { remindCode } from "store/Login/loginThunk";
+import { loginRemindCode } from "store/Login/loginThunk";
 import Logo from "assets/Logo";
 import Loader from "components/Loader/Loader";
 
@@ -35,7 +35,7 @@ const RemindPassword = () => {
       setErrorForm(true);
     } else {
       setErrorForm(false);
-      dispatch(remindCode({ code: value.code, navigate }));
+      dispatch(loginRemindCode({ code: value.code, navigate }));
     }
   };
 

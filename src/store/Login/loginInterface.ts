@@ -9,7 +9,11 @@ export interface ILoginUser {
   transfers: any;
   premium: boolean;
   message: string;
-  money: number
+  money: number;
+  language: string;
+  permission: [EUserPermission];
+  limit: IUserLimit;
+  color: string;
 }
 
 export interface IAuth {
@@ -18,4 +22,15 @@ export interface IAuth {
     error: boolean;
     loading: boolean;
   };
+}
+
+export interface IUserLimit {
+  limitDay: number;
+  limitMouth: number; 
+  limitFull: number;
+}
+
+export enum EUserPermission {
+  DONE = "done",
+  USER = 'user',
 }

@@ -18,7 +18,7 @@ const Users = () => {
   return (
     <Box>
       {!spinnerSelector ? (
-        adminUsersSelector?.map(({ _id, firstName, email, premium }, index) => (
+        adminUsersSelector?.map(({ _id, firstName, email, ban, premium }, index) => (
           <Box key={_id}>
             <StyledAdminList premium={premium}>
               <span className="index">{index}: </span>
@@ -31,6 +31,9 @@ const Users = () => {
               </span>
               <span>
                 <b>email:</b> {email}{" "}
+              </span>
+              <span>
+                <b>ban:</b> {ban ? "Tak" : "Nie"}
               </span>
               <span>
                 <b>premium:</b> {premium ? "Tak" : "Nie"}

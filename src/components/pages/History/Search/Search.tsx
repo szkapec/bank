@@ -1,14 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react";
 import debounce from "lodash.debounce";
-import { useAppDispatch } from "../../../../store/hooks";
+import { useAppDispatch } from "store/hooks";
 import {
   filterTransferHistory,
   filterRecExp,
   filterSumAbove, 
   filterSumUpTo,
-} from "../../../../store/Search/searchSlice";
+} from "store/Search/searchSlice";
 import "./Search.scss";
-import { RecExp } from '../../../../store/Search/searchInterface';
+import { RecExp } from 'store/Search/searchInterface';
 
 const Search = () => {
   const dispatch = useAppDispatch();

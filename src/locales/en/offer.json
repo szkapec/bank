@@ -1,0 +1,18 @@
+{
+  "editProfil": "Edit profil",
+  "changePassword": "Change password",
+  "changeLanguage": "Change language",
+  "changeLimitTransaction": "Change limit transaction",
+  "newPassword": "Enter a new password",
+  "repeatPassword": "Repeat password",
+  "errorPasswordRepeat": "The passwords don't match!",
+  "errorPassword": "Error password",
+  "enterPassword": "Enter your password",
+  "button": "Check",
+  "language": "Language",
+  "poland": "Poland",
+  "england": "English",
+  "spain": "Spain",
+  "germany": "Germany",
+  "changeLanguageName": "Change language"
+}

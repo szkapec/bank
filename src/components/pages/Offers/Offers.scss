@@ -1,0 +1,25 @@
+.offers-profil { 
+  margin: 30px 20px;
+
+  section {
+    margin: 40px 14px 0;
+    border: 1px solid rgb(209,209,209);
+    background-color: #fff;
+    max-width: 350px;
+  }
+  .btn-info {
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    margin: 10px 0 20px;
+    svg {
+      font-size: 28px;
+      margin-right: 6px;
+    }
+  }
+  .btn-info:hover {
+    text-decoration: underline;
+    background-color: #fff;
+
+  }
+}

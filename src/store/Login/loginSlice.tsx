@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { changePassword, login, register, remindCode, remindPassword } from "./loginThunk";
+import { loginChangePassword, login, register, loginRemindCode, loginRemindPassword, loginChangeUserLanguage, loginChangeLanguage } from "./loginThunk";
 
 interface IInitialState {
   user: {
@@ -10,6 +10,9 @@ interface IInitialState {
     premium?: boolean,
     money?: string,
     message?: string,
+    language?: string,
+    permission?: [string]
+    limit: undefined
   },
   loading: boolean
 }
@@ -23,6 +26,9 @@ const initialState: IInitialState = {
     premium: false,
     money: undefined,
     message: undefined,
+    language: undefined,
+    permission: undefined,
+    limit: undefined,
   },
   loading: false,
 };
@@ -66,32 +72,38 @@ export const loginSlice = createSlice({
     [register.rejected.toString()]: (state) => {
       state.loading = false;
     },
-    [remindPassword.pending.toString()]: (state) => {
+    [loginRemindPassword.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [remindPassword.fulfilled.toString()]: (state) => {
+    [loginRemindPassword.fulfilled.toString()]: (state) => {
       state.loading = false;
     },
-    [remindPassword.rejected.toString()]: (state) => {
+    [loginRemindPassword.rejected.toString()]: (state) => {
       state.loading = false;
     },
-    [remindCode.pending.toString()]: (state) => {
+    [loginRemindCode.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [remindCode.fulfilled.toString()]: (state, { payload }) => {
+    [loginRemindCode.fulfilled.toString()]: (state, { payload }) => {
       state.loading = false;
     },
-    [remindCode.rejected.toString()]: (state) => {
+    [loginRemindCode.rejected.toString()]: (state) => {
       state.loading = false;
     },
-    [changePassword.pending.toString()]: (state) => {
+    [loginChangePassword.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [changePassword.fulfilled.toString()]: (state, { payload }) => {
+    [loginChangePassword.fulfilled.toString()]: (state, { payload }) => {
       state.loading = false;
     },
-    [changePassword.rejected.toString()]: (state) => {
+    [loginChangePassword.rejected.toString()]: (state) => {
       state.loading = false;
+    },
+    [loginChangeUserLanguage.fulfilled.toString()]: (state, { payload }) => {
+      state.user.language = payload.language;
+    },
+    [loginChangeLanguage.fulfilled.toString()]: (state, { payload }) => {
+      state.user.limit = payload.limit;
     },
   },
 });

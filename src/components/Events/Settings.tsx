@@ -1,15 +1,23 @@
+import React, { useEffect } from "react"
 import { useQuery } from "react-query";
 import { useAppDispatch } from "store/hooks";
-import { userLoaded } from "store/Login/loginThunk";
+import { loginUserLoaded } from "store/Login/loginThunk";
 import { ServerSendEvent } from "./ServerSendEvent";
-import { selectorAuthLoginId } from "store/Login/loginSelector";
+import {
+  selectorAuthLoginId,
+  selectorLanguage,
+} from "store/Login/loginSelector";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { initTranslation } from "util/initTranslation";
 
 const Settings = () => {
+  const languageSelector = useSelector(selectorLanguage);
+
+  initTranslation(languageSelector);
+
   const dispatch = useAppDispatch();
   const userIdSelector = useSelector(selectorAuthLoginId);
-  useQuery("login", () => dispatch(userLoaded()));
+  useQuery("login", () => dispatch(loginUserLoaded()));
 
   useEffect(() => {
     userIdSelector && ServerSendEvent(dispatch, userIdSelector);
@@ -18,4 +26,4 @@ const Settings = () => {
   return <></>;
 };
 
-export default Settings;
+export default React.memo(Settings);

@@ -30,7 +30,7 @@ const Transfer = () => {
 
   const [error, setError] = useState(initialError);
 
-  const submit = async (event: React.SyntheticEvent) => {
+  const onSubmit = async (event: React.SyntheticEvent) => {
     const { body, howMuchMoney, numberReceived } = formData;
     event.preventDefault();
     let errorAccount,
@@ -85,7 +85,7 @@ const Transfer = () => {
         </div>
       </header>
 
-      <form onSubmit={submit} className="form-transfer">
+      <form onSubmit={onSubmit} className="form-transfer">
         <FormTransfer
           error={error}
           formData={formData}

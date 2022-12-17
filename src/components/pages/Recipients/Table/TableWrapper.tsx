@@ -3,8 +3,7 @@ import { IAddRecipient } from "store/Recipient/recipientInterface";
 import Table from "./Table";
 
 const TableWrapper = ({ recipients }: any) => {
-  console.log("recipients2221 :>> ", recipients);
-  if (!recipients) return <div>Brak danych</div>;
+  if (!recipients?.length) return <div style={{padding: '20px 0 0 20px'}}>Brak dodanych odbiorców</div>;
 
   return recipients.map((recipient: IAddRecipient) => (
     <Table recipient={recipient}></Table>

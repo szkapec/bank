@@ -1,0 +1,17 @@
+{
+  "addRecipients": "Dodanie odbiorców",
+  "paymentMethod": "Rodzaj płatności",
+  "buttons": {
+    "domesticTransfer": "Przelew krajowy",
+    "topUpPhone": "Doładowanie telefonu",
+    "transferOffice": "Przelew do urzędu",
+    "exchange": "Walutowy / Zagraniczny"
+  },
+  "recipientsName": "Moja nazwa odbiorcy",
+  "toRecipient": "Do odbiorcy",
+  "recipientsAdress": "Adres odbiorcy (opcjonalnie)",
+  "recipientsAccount": "Rachunek odbiorcy",
+  "trustedRecipient": "Zaufany odbiorca",
+  "sum": "Kwota",
+  "title": "Tytuł (opcjonalnie)"
+}

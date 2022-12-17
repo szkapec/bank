@@ -13,12 +13,13 @@ import Recipients from "./components/pages/Recipients/RecipientsWrapper";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Settings from "components/Settings/Settings";
+import Settings from "components/Events/Settings";
 import AdminWrapper from "components/pages/Admin/AdminWrapper";
 import Offers from "components/pages/Offers/Offers";
 import EmailIdentify from "components/pages/Login/ChangePassword/EmailIdentify";
 import RemindPassword from "components/pages/Login/ChangePassword/RemindPassword";
 import ChangePassword from "components/pages/Login/ChangePassword/ChangePassword";
+import { initTranslation } from "util/initTranslation";
 
 const App = () => {
   const [load, setLoad] = useState(true);
@@ -30,7 +31,6 @@ const App = () => {
   };
 
   const queryClient = new QueryClient();
-
   return (
     <>
       <BrowserRouter>

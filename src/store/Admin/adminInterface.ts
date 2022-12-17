@@ -15,6 +15,7 @@ export interface AdminUsers {
   firstName: string;
   createdAt: string;
   premium: boolean;
+  ban: boolean;
 }
 
 export interface IAdminLoginUser {

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "store/hooks";
 import { selectorAuthLoading } from "store/Login/loginSelector";
-import { remindPassword } from "store/Login/loginThunk";
+import { loginRemindPassword } from "store/Login/loginThunk";
 
 const initialValue = {
   email: "",
@@ -24,7 +24,7 @@ const EmailIdentify = () => {
     } else {
       setErrorForm(false);
 
-      dispatch(remindPassword({ value, navigate }));
+      dispatch(loginRemindPassword({ value, navigate }));
     }
   };
 

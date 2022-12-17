@@ -1,0 +1,18 @@
+{
+  "editProfil": "Edytuj profil",
+  "changePassword": "Zmień hasło",
+  "changeLanguage": "Zmień język aplikacji",
+  "changeLimitTransaction": "Zmień limity transakcji",
+  "newPassword": "Wprowadz nowe hasło",
+  "repeatPassword": "Powtórz hasło",
+  "errorPasswordRepeat": "Hasła nie pasują do siebie!",
+  "errorPassword": "Błędne hasło",
+  "enterPassword": "Podaj swoje hasło",
+  "button": "Sprawdź",
+  "language": "Język",
+  "poland": "Polski",
+  "england": "Angielski",
+  "spain": "Hiszpański",
+  "germany": "Niemiecki",
+  "changeLanguageName": "Zmień język"
+}

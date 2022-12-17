@@ -1,39 +1,41 @@
-import { Box } from "@mui/material";
 import React from "react";
+import { Box } from "@mui/material";
 import AddRoadIcon from "@mui/icons-material/AddRoad";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import AssuredWorkloadIcon from "@mui/icons-material/AssuredWorkload";
 import AttractionsIcon from "@mui/icons-material/Attractions";
 import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
+import { useTranslation } from "react-i18next";
 
 const TypeTransfer = () => {
+  const { t } = useTranslation();
   return (
     <Box className="type-transfer">
       <section>
         <AddRoadIcon />
-        <span>Krajowy</span>
+        <span>{t("recipients.national")}</span>
       </section>
       <section>
         <AccountBoxIcon />
-        <span>Na własne konto</span>
+        <span>{t("recipients.forOwnAccount")}</span>
       </section>
       <section>
         <AdUnitsIcon />
-        <span>Doładowanie telefonu</span>
+        <span>{t("recipients.topUpPhone")}</span>
       </section>
       <section>
         <AssuredWorkloadIcon />
-        <span>Do urzędu</span>
+        <span>{t("recipients.office")}</span>
       </section>
       <section>
         <AttractionsIcon />
-        <span>Walutowy / Zagraniczny</span>
+        <span>{t("recipients.currencyOrForeign")}</span>
       </section>
       <div className='recurring-payment'>
         <section>
           <DataSaverOnIcon />
-          <span>Nowa płatność cykliczna</span>
+          <span>{t("recipients.newCecurringPayment")}</span>
         </section>
       </div>
     </Box>

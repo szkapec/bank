@@ -1,35 +1,36 @@
-import React from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import { selectorLoginUser } from "../../store/Login/loginSelector";
-import { logOut } from "../../store/Login/loginSlice";
-import { logOutTransfer } from "../../store/Transfer/transferSlice";
+import { NavLink } from "react-router-dom";
+import { selectorLoginUser } from "store/Login/loginSelector";
+import { logOut } from "store/Login/loginSlice";
+import { logOutTransfer } from "store/Transfer/transferSlice";
 import "./Navbar.scss";
 
 const Navbar = () => {
   const { user } = useSelector(selectorLoginUser) || {};
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   return user?.email ? (
     <nav className="navbar">
       <NavLink to="/" className="page" end>
-        Strona Główna
+        {t("navbar.homePage")}
       </NavLink>
       <NavLink to="/history" className="history">
-        Historia
+        {t("navbar.history")}
       </NavLink>
       <NavLink to="/transfer" className="transfer">
-        Przelew
+        {t("navbar.transfer")}
       </NavLink>
       <NavLink to="/recipients" className="recipients">
-        Odbiorcy
+        {t("navbar.recipients")}
       </NavLink>
       <NavLink to="/offers" className="offers">
-        Oferty i wnioski
+        {t("navbar.offerAndRequests")}
       </NavLink>
       {user.premium && (
         <NavLink to="/admin" className="admin">
-          Panel Admina
+          {t("navbar.adminPanel")}
         </NavLink>
       )}
       <NavLink
@@ -39,20 +40,22 @@ const Navbar = () => {
           dispatch(logOutTransfer());
         }}
       >
-        Wyloguj
-        <i className="fas fa-sign-out-alt"></i>
+        <>
+          {t("navbar.logout")}
+          <i className="fas fa-sign-out-alt"></i>
+        </>
       </NavLink>
     </nav>
   ) : (
     <nav className="navbar">
       <NavLink to="/" className="page" end>
-        Strona Główna
+        {t("navbar.homePage")}
       </NavLink>
       <NavLink to="/login" className="login">
-        Zaloguj
+        {t("navbar.login")}
       </NavLink>
       <NavLink to="/register" className="register">
-        Zarejestruj
+        {t("navbar.register")}
       </NavLink>
     </nav>
   );

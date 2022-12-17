@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "store/hooks";
 import { selectorAuthLoading } from "store/Login/loginSelector";
-import { changePassword } from "store/Login/loginThunk";
+import { loginChangePassword } from "store/Login/loginThunk";
 
 const initialValue = {
   code: "",
@@ -29,7 +29,7 @@ const ChangePassword = () => {
         password,
         navigate,
       };
-      dispatch(changePassword(submit));
+      dispatch(loginChangePassword(submit));
     }
   };
 

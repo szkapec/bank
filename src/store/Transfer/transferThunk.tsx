@@ -26,7 +26,7 @@ export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
     return;
   } catch (error) {
     console.log(`error`, error.response.data.message);
-    toast.success(error.response.data.message || "Przelew nie został zrealizowany!");
+    toast.info(error.response.data.message || "Przelew nie został zrealizowany!");
     return {
       message: error.response.data,
       error: true,

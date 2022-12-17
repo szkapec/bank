@@ -1,19 +1,10 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import { Field, Form } from "react-final-form";
 import { useTranslation } from "react-i18next";
 import { Button, Modal } from "@mui/material";
-
-import {
-  addUserRecipients,
-  editUserRecipients,
-} from "../../../store/Recipient/recipientThunk";
-import { useAppDispatch } from "../../../store/hooks";
 import { IAddRecipient } from "../../../store/Recipient/recipientInterface";
-import { selectorLoaderRecipient } from "../../../store/Recipient/recipientSelector";
 import { style } from "./helper/helper";
 import "./TableModal.scss";
-
 interface IPropsTableModal {
   recipients: IAddRecipient[];
   open: boolean;

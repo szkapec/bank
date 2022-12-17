@@ -1,0 +1,35 @@
+.change-limit {
+  margin: 0 15px 10px;
+  display: flex;
+  justify-content: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      label {
+        text-align: center;
+      }
+      input {
+        width: 150px;
+        margin: 10px 0;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid gray;
+      }
+      .error {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+  .btn-change {
+    margin: 15px 0 10px;
+    padding: 5px 25px;
+  }
+}
