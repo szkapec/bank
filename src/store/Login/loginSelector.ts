@@ -40,20 +40,20 @@ export const selectorAuthLoading = createSelector(
 
 export const selectorLanguage = createSelector(
   selectSelf,
-  (state) => state.auth?.user.language
+  (state) => state.auth?.user?.language
 );
 
 export const selectorLimit = createSelector(
   selectSelf,
-  (state) => state.auth?.user.limit
+  (state) => state.auth?.user?.limit
 );
 
 export const selectorPermision = createSelector(
   selectSelf,
-  (state) => state.auth?.user.permission
+  (state) => state.auth?.user?.permission
 );
 
 export const selectorColor = createSelector(
   selectSelf,
-  (state) => state.auth?.user.color
+  (state) => state.auth?.user?.color
 );

@@ -9,12 +9,14 @@ import searchSlice from "./Search/searchSlice";
 import { Reducer } from "redux";
 import recipientSlice from "./Recipient/recipientSlice";
 import adminSlice from "./Admin/adminSlice";
+import subAccountSlice from "./SubAccount/subAccountSlice";
 
 const appReducer = combineReducers({
   auth: loginSlice,
   transfers: transferSlice,
   search: searchSlice,
   recipients: recipientSlice,
+  subAccounts: subAccountSlice,
   admin: adminSlice,
 });
 
@@ -24,11 +26,11 @@ const rootReducer: Reducer<
     transfers: any;
     search: any;
     recipients: any;
+    subAccounts: any;
     admin: any;
   }>
 > = (state, action) => {
-  console.log(`action.type`, action.type)
-  if (action.type === "logout") {
+  if (action.type === "LOGIN/logOut") {
     state = undefined;
   }
   return appReducer(state, action)

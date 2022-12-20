@@ -5,7 +5,9 @@ import LockResetIcon from "@mui/icons-material/LockReset";
 import Loader from "components/Loader/Loader";
 import TextWrapper from "components/Contents/TextWrapper";
 import LanguageIcon from "@mui/icons-material/Language";
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import ConnectAccount from "components/Settings/ConnectAccount/ConnectAccount";
+import SwitchAccount from "components/Settings/SwitchAccount/SwitchAccount";
 
 const ChangePassword = lazy(
   () => import("../../Settings/ChangePassword/ChangePassword")
@@ -26,7 +28,9 @@ const Offers = () => {
   const [password, setPassword] = useState(false);
   const [language, setLanguage] = useState(false);
   const [colorPage, setColorPage] = useState(false);
+  const [connectAccount, setConnectAccount] = useState(false);
   const [limit, setlimit] = useState(false);
+  const [switchAccount, setSwitchAccount] = useState(false);
 
   return (
     <Box className="offers-profil">
@@ -52,7 +56,7 @@ const Offers = () => {
       </section>
       <section>
         <Button className="btn-info" onClick={() => setlimit(!limit)}>
-          <AccountBalanceIcon/>
+          <AccountBalanceIcon />
           <TextWrapper label="offer.changeLimitTransaction" />
         </Button>
         <Suspense fallback={renderLoader()}>
@@ -62,7 +66,7 @@ const Offers = () => {
 
       <section>
         <Button className="btn-info" onClick={() => setColorPage(!colorPage)}>
-          <AccountBalanceIcon/>
+          <AccountBalanceIcon />
           <TextWrapper label="zmiana koloru strony" />
         </Button>
         <Suspense fallback={renderLoader()}>
@@ -71,19 +75,35 @@ const Offers = () => {
       </section>
 
       <section>
-        <Button className="btn-info" onClick={() => setlimit(true)}>
-          <AccountBalanceIcon/>
-          <TextWrapper label="Moze jakies pozyczki albo konto oszczednosciowe"/>
+        <Button
+          className="btn-info"
+          onClick={() => setConnectAccount(!connectAccount)}
+        >
+          <AccountBalanceIcon />
+          <TextWrapper label="Połącz konta" />
         </Button>
         <Suspense fallback={renderLoader()}>
-          {/* {limit && <ChangeLimit />} */}
+          {connectAccount && <ConnectAccount setOffer={setConnectAccount} />}
+        </Suspense>
+      </section>
+
+      <section>
+        <Button
+          className="btn-info"
+          onClick={() => setSwitchAccount(!switchAccount)}
+        >
+          <AccountBalanceIcon />
+          <TextWrapper label="Przełącz konto" />
+        </Button>
+        <Suspense fallback={renderLoader()}>
+          {switchAccount && <SwitchAccount setOffer={setSwitchAccount} />}
         </Suspense>
       </section>
 
       <section>
         <Button className="btn-info" onClick={() => setlimit(true)}>
-          <AccountBalanceIcon/>
-          <TextWrapper label="Moze subkonta utwozone w ramach tego konta?"/>
+          <AccountBalanceIcon />
+          <TextWrapper label="Moze jakies pozyczki albo konto oszczednosciowe" />
         </Button>
         <Suspense fallback={renderLoader()}>
           {/* {limit && <ChangeLimit />} */}

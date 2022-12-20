@@ -6,14 +6,6 @@ import { toast } from "react-toastify";
 
 const host = process.env.REACT_APP_HOST;
 
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    mode: "cors",
-    Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-  },
-};
-
 const useToken = (token: string) => {
   if (token) {
     localStorage.removeItem("jwtToken");
@@ -25,6 +17,13 @@ const useToken = (token: string) => {
 };
 
 export const login = createAsyncThunk("LOGIN", async (text: ILoginUser) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+    },
+  };
   const body = JSON.stringify(text);
   try {
     const res = await axios.post(`${host}/api/users/login`, body, config);
@@ -43,6 +42,13 @@ export const login = createAsyncThunk("LOGIN", async (text: ILoginUser) => {
 });
 
 export const register = createAsyncThunk("REGISTER", async (text: IAuth) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+    },
+  };
   const body = JSON.stringify(text);
   try {
     const res = await axios.post(`${host}/api/users/register`, body, config);
@@ -60,6 +66,13 @@ export const register = createAsyncThunk("REGISTER", async (text: IAuth) => {
 });
 
 export const loginUserLoaded = createAsyncThunk("LOGIN", async () => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+    },
+  };
   const token = localStorage.getItem("jwtToken");
   let userId = null;
   if (token) {
@@ -85,6 +98,13 @@ export const loginUserLoaded = createAsyncThunk("LOGIN", async () => {
 export const loginRemindPassword = createAsyncThunk(
   "REMIND_PASSWORD",
   async ({ value, navigate }: any) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
     const body = JSON.stringify({ email: value.email });
     try {
       const res = await axios.post(
@@ -111,6 +131,14 @@ export const loginRemindPassword = createAsyncThunk(
 export const loginRemindCode = createAsyncThunk(
   "REMIND_CODE",
   async ({ code, navigate }: any) => {
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
     const body = JSON.stringify({ code });
     try {
       const res = await axios.post(
@@ -138,6 +166,13 @@ export const loginRemindCode = createAsyncThunk(
 export const loginChangePassword = createAsyncThunk(
   "CHANGE_PASSWORD",
   async ({ email, code, password, navigate }: any) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
     const body = JSON.stringify({ email, code, password });
     try {
       const res = await axios.post(
@@ -164,6 +199,13 @@ export const loginChangePassword = createAsyncThunk(
 export const loginCheckPassword = createAsyncThunk(
   "CHANGE_PASSWORD_ACCOUNT",
   async ({ email, password }: any) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
     const body = JSON.stringify({ email, password });
     try {
       const res = await axios.post(
@@ -187,6 +229,13 @@ export const loginCheckPassword = createAsyncThunk(
 export const loginSetNewPassword = createAsyncThunk(
   "SET_NEW_PASSWORD",
   async ({ email, newPassword, oldPassword }: any) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
     const body = JSON.stringify({ email, newPassword, oldPassword });
     try {
       const res = await axios.post(
@@ -211,6 +260,13 @@ export const loginSetNewPassword = createAsyncThunk(
 export const loginChangeMyAccountPassword = createAsyncThunk(
   "CHANGE_PASSWORD_ACCOUNT",
   async ({ email, password }: any) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
     const body = JSON.stringify({ email, password });
     try {
       const res = await axios.post(
@@ -236,6 +292,13 @@ export const loginChangeMyAccountPassword = createAsyncThunk(
 export const loginChangeUserLanguage = createAsyncThunk(
   "CHANGE_USER_LANGUAGE",
   async (language: string) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
     console.log('language :>> ', language);
     const body = JSON.stringify({ language });
     try {
@@ -263,6 +326,13 @@ export const loginChangeUserLanguage = createAsyncThunk(
 export const loginChangeLanguage = createAsyncThunk(
   "CHANGE_USER_LIMIT",
   async ({ limitDay, limitMouth, limitFull }: IUserLimit) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
     const body = JSON.stringify({ limitDay, limitMouth, limitFull });
     try {
       const res = await axios.post(

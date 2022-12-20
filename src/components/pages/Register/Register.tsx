@@ -4,6 +4,7 @@ import { register } from "store/Login/loginThunk";
 import { useAppDispatch } from "store/hooks";
 import "./Register.scss";
 import Logo from "../../../assets/Logo";
+import { Box } from "@mui/material";
 
 interface IRegister {
   firstName: string;
@@ -29,6 +30,7 @@ const initialValue = {
   lastName: "",
   email: "",
   country: "pl_PL",
+  account: "general",
   password: "",
   repeatPassword: "",
 };
@@ -68,7 +70,7 @@ const Register = () => {
   };
 
   return (
-    <div className="container-register">
+    <section className="container-register">
       <Form
         onSubmit={onSubmit}
         initialValues={initialValue}
@@ -76,7 +78,7 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="container-register__form">
             <Logo />
             <h2>Zarejestruj się do CD-Bank</h2>
-            <div>
+            <Box>
               <label>Podaj Imię</label>
               <Field
                 className={errorForm.firstName ? "input-error" : "firstName"}
@@ -85,8 +87,8 @@ const Register = () => {
                 placeholder="Imię"
               />
               {errorForm.firstName && <div className="error">Podaj imię</div>}
-            </div>
-            <div>
+            </Box>
+            <Box>
               <label>Podaj nazwisko</label>
               <Field
                 className={errorForm.lastName ? "input-error" : "lastName"}
@@ -97,8 +99,8 @@ const Register = () => {
               {errorForm.lastName && (
                 <div className="error">Podaj nazwisko</div>
               )}
-            </div>
-            <div>
+            </Box>
+            <Box>
               <label>Podaj Email</label>
               <Field
                 className={errorForm.email ? "input-error" : "email"}
@@ -110,7 +112,7 @@ const Register = () => {
               {errorForm.email && (
                 <div className="error">Niepoprawny email!</div>
               )}
-            </div>
+            </Box>
             <div>
               <label>Płeć</label>
             </div>
@@ -136,7 +138,7 @@ const Register = () => {
             <label className="custom-control-label" htmlFor="female">
               Mężczyzna
             </label>
-            <div>
+            <Box>
               <label>Kraj pochodzenia</label>
               <Field name="country" component="select">
                 <option value="pl_PL">Polska</option>
@@ -144,8 +146,17 @@ const Register = () => {
                 <option value="gr_GR">Niemcy</option>
                 <option value="sp_SP">Hiszpania</option>
               </Field>
-            </div>
-            <div>
+            </Box>
+            <Box>
+              <label>Rodzaj konta</label>
+              <Field name="account" component="select">
+                <option value="general">Konto bankowe (osobiste)</option>
+                <option value="saving">Oszczędnościowe</option>
+                <option value="credit">Kredytowe</option>
+                <option value="investment">Inwestycyjne</option>
+              </Field>
+            </Box>
+            <Box>
               <label>Hasło</label>
               <Field
                 className={errorForm.password && "input-error"}
@@ -154,11 +165,11 @@ const Register = () => {
                 component="input"
                 placeholder="Hasło"
               />
-            </div>
+            </Box>
             {errorForm.password && (
-              <div className="error">Hasło nie pasuje do siebie!</div>
+              <Box className="error">Hasło nie pasuje do siebie!</Box>
             )}
-            <div>
+            <Box>
               <label>Powtórz hasło</label>
               <Field
                 className={errorForm.password && "input-error"}
@@ -167,16 +178,15 @@ const Register = () => {
                 component="input"
                 placeholder="Powtórz hasło"
               />
-            </div>
-
+            </Box>
             <button className="btn-login" type="submit">
               Zarejestruj się
             </button>
           </form>
         )}
       />
-    </div>
-  )
+    </section>
+  );
 };
 
 export default Register;
