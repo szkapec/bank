@@ -3,6 +3,7 @@ import axios from "axios";
 import setAuthenticationToken from "../../util/setAuthenticationToken";
 import { IAuth, ILoginUser, IUserLimit } from "./loginInterface";
 import { toast } from "react-toastify";
+import { sleep } from "helpers/sleep";
 
 const host = process.env.REACT_APP_HOST;
 
@@ -343,6 +344,48 @@ export const loginChangeLanguage = createAsyncThunk(
       if (res.status === 200) {
         toast.success("Limity zostały zmienione!");
         return res.data;
+      }
+      return;
+    } catch (error) {
+      toast.error("Coś poszło nie tak");
+      console.log(`error`, error);
+      return {
+        message: error.response.data,
+        error: true,
+      };
+    }
+  }
+);
+
+export const loginSwitchAccount = createAsyncThunk(
+  "SWITCH_ACCOUNT",
+  async ({ accountId }: any) => {
+
+    const useToken = (token: string) => {
+      if (token) {
+        localStorage.removeItem("jwtToken");
+        localStorage.setItem("jwtToken", token);
+      } else {
+        console.log("Brak tokena :>> ");
+        localStorage.removeItem("jwtToken");
+      }
+    };
+    const body = JSON.stringify({ accountId });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    };
+    try {
+      const res = await axios.post(
+        `${host}/api/users/switch-account`, body, config);
+      if (res.status === 200) {
+        await sleep(6000)
+        await toast.success("Zostałeś przelogowany");
+        useToken(res.data.token)
+        return await res.data;
       }
       return;
     } catch (error) {

@@ -7,7 +7,7 @@ import {
 import { messageClear } from "store/Transfer/transferSlice";
 import { initialFormData } from "../Transfer";
 import { useAppDispatch } from "store/hooks";
-import MIniLoader from "components/Loader/MiniLoader";
+import MiniLoader from "components/Loader/MiniLoader";
 import { IPropsTransfer } from "store/Transfer/transferInterface";
 import TableModal from "components/Modal/Table/TableModal";
 import { selectorDataRecipient } from "store/Recipient/recipientSelector";
@@ -152,7 +152,7 @@ const FormTransfer = ({
         )}
       </div>
       <button type="submit">
-        {loaderSelector ? <MIniLoader /> : "Wyślij"}
+        {loaderSelector ? <MiniLoader /> : "Wyślij"}
       </button>
     </div>
   );

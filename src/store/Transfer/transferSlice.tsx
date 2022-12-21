@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { loginSwitchAccount } from "store/Login/loginThunk";
 import { IColumn, ITransfer } from "./transferInterface";
 import { sendTransfer, getTransfers } from "./transferThunk";
 
@@ -66,6 +67,9 @@ export const transferSlice = createSlice({
     },
     [getTransfers.fulfilled.toString()]: (state, { payload }: PayloadAction<IColumn[]> ) => {
       state.data = [...state.data, ...payload];
+    },
+    [loginSwitchAccount.fulfilled.toString()]: (state) => {
+      state.data = [];
     }
   }
 })

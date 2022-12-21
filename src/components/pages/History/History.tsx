@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { selectorAuthLoginUserNumberAccount } from "../../../store/Login/loginSelector";
-import { selectorLoaderTransfer } from "../../../store/Transfer/transferSelector";
+import { selectorAuthLoginUserNumberAccount } from "store/Login/loginSelector";
+import { selectorLoaderTransfer } from "store/Transfer/transferSelector";
 import Table from "./Table/TableWrapper";
 import Search from "./Search/Search";
 import Loader from "../../Loader/Loader";

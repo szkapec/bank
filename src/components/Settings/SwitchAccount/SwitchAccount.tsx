@@ -7,14 +7,18 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import GlobalLoader from "components/Loader/GlobalLoader";
 import Loader from "components/Loader/Loader";
+import MiniLoader from "components/Loader/MiniLoader";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { useAppDispatch } from "store/hooks";
+import { selectorAuthLoading } from "store/Login/loginSelector";
+import { loginSwitchAccount } from "store/Login/loginThunk";
 import { selectorSubAccounts } from "store/SubAccount/subAccountSelector";
 import { getConnectAccount } from "store/SubAccount/subAccountThunk";
-import { switchAccount } from "store/SubAccount/subAccountThunk";
 
 interface IProps {
   setOffer: Function;
@@ -26,8 +30,12 @@ interface IAccount {
 }
 const SwitchAccount = ({ setOffer }: IProps) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [account, setAccount] = useState("");
   const accountsSelector = useSelector(selectorSubAccounts);
+  const loaderSelector = useSelector(selectorAuthLoading);
+
+
   let generals: IAccount[] = [];
   let savings: IAccount[] = [];
   let credits: IAccount[] = [];
@@ -51,9 +59,13 @@ const SwitchAccount = ({ setOffer }: IProps) => {
     setAccount(e.target.value);
   };
 
-  const submit = () => {
-    dispatch(switchAccount({ accountId: account }));
+  const submit = async() => {
+    const switchAccount = await dispatch(loginSwitchAccount({ accountId: account }));
+    if(switchAccount.payload.token) {
+      navigate("/transfer");
+    }
   };
+  console.log('loaderSelector :>> ', loaderSelector);
 
   return (
     <Box className="connect-account">
@@ -79,7 +91,7 @@ const SwitchAccount = ({ setOffer }: IProps) => {
             sx={{ margin: "30px 0 20px" }}
             variant="contained"
           >
-            Przełącz konto
+            { loaderSelector ? <MiniLoader /> : 'Przełącz konto'}
           </Button>
         </FormControl>
       ) : isLoading ? (
@@ -87,8 +99,18 @@ const SwitchAccount = ({ setOffer }: IProps) => {
       ) : (
         <Box>Brak powiązanych kont</Box>
       )}
+      { loaderSelector && <GlobalLoader noBackground={true} messages={testData} />}
     </Box>
   );
 };
 
 export default SwitchAccount;
+
+const testData = [
+  "Sprawdzam dane...",
+  "Weryfikuje dane...",
+  "Pobieram dane...",
+  "Ustawiam dane...",
+  "Zmieniam język",
+  "Weryfikacja...",
+];

@@ -42,8 +42,6 @@ export const subAccountSlice = createSlice({
         state.loading = false;
         state.error = payload?.error;
       }
-     
-     
     },
     [newConnectAccount.rejected.toString()]: (state) => {
       state.loading = true;

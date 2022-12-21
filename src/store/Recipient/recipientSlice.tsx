@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, nanoid  } from "@reduxjs/toolkit";
 import { userRecipients } from "./recipientThunk";
 import { IAddRecipient, IRecipients } from './recipientInterface'
+import { loginSwitchAccount } from "store/Login/loginThunk";
 
 
 const initialState: IRecipients = {
@@ -29,6 +30,9 @@ export const recipientSlice = createSlice({
     [userRecipients.rejected.toString()]: (state) => {
       state.loading = false;
     },
+    [loginSwitchAccount.fulfilled.toString()]: (state) => {
+      state.saved = []
+    }
   },
 });
 

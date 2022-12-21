@@ -24,8 +24,21 @@
     color: white;
     font-weight: bold;
   }
+  &__data {
+    margin-top: 10px;
+    font-size: 18px;
+    width: 250px;
+    background-color: var(--global-color);
+    text-align: center;
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+  }
 }
-
+.global-loader.none {
+  background: rgba(72, 122, 180, .0);
+}
 .loader {
   display: flex;
   flex-direction: column;

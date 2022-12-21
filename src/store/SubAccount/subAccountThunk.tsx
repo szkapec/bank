@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { sleep } from "helpers/sleep";
 import { toast } from "react-toastify";
 import { IConnectAccount } from "./subAccountInterface";
 
@@ -20,14 +21,17 @@ export const newConnectAccount = createAsyncThunk(
     const body = JSON.stringify({ email: login, password });
     console.log('config :>> ', config);
     try {
+      
       const res = await axios.post(
         `${host}/api/users/new-connect-account`,
         body,
         config
       );
+      
       if (res.status === 200) {
-        toast.success("Konto zostało połączone!");
-        return res.data;
+        await sleep();
+        await toast.success("Konto zostało połączone!");
+        return await res.data;
       }
       return;
     } catch (error) {
@@ -70,31 +74,3 @@ export const getConnectAccount = createAsyncThunk(
   }
 );
 
-export const switchAccount = createAsyncThunk(
-  "SWITCH_ACCOUNT",
-  async ({ accountId }: any) => {
-    const body = JSON.stringify({ accountId });
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        mode: "cors",
-        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-      },
-    };
-    try {
-      const res = await axios.post(
-        `${host}/api/users/switch-account`, body, config);
-      if (res.status === 200) {
-        return res.data;
-      }
-      return;
-    } catch (error) {
-      toast.error("Coś poszło nie tak");
-      console.log(`error`, error);
-      return {
-        message: error.response.data,
-        error: true,
-      };
-    }
-  }
-);

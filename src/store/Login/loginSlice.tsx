@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { loginChangePassword, login, register, loginRemindCode, loginRemindPassword, loginChangeUserLanguage, loginChangeLanguage } from "./loginThunk";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { loginChangePassword, login, register, loginRemindCode, loginRemindPassword, loginChangeUserLanguage, loginChangeLanguage, loginSwitchAccount } from "./loginThunk";
 
 interface IInitialState {
   user: {
@@ -104,6 +104,17 @@ export const loginSlice = createSlice({
     },
     [loginChangeLanguage.fulfilled.toString()]: (state, { payload }) => {
       state.user.limit = payload.limit;
+    },
+    [loginSwitchAccount.pending.toString()]: (state) => {
+      state.loading = true;
+    },
+    [loginSwitchAccount.fulfilled.toString()]: (state, { payload }: PayloadAction<any> ) => {
+      state.user = payload.connectAccount;
+      state.user.id = payload.connectAccount._id
+      state.loading = false;
+    },
+    [loginSwitchAccount.rejected.toString()]: (state) => {
+      state.loading = true;
     },
   },
 });
