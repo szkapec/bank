@@ -1,9 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import setAuthenticationToken from "../../util/setAuthenticationToken";
-import { IAuth, ILoginUser, IUserLimit } from "./loginInterface";
+import {
+  ILoginUser,
+  IUserLimit,
+  IRegisterUser,
+  ILoginToApp,
+  IChangePassword,
+} from "./loginInterface";
 import { toast } from "react-toastify";
 import { sleep } from "helpers/sleep";
+import { API } from "api/dev-api";
 
 const host = process.env.REACT_APP_HOST;
 
@@ -17,7 +24,7 @@ const useToken = (token: string) => {
   }
 };
 
-export const login = createAsyncThunk("LOGIN", async (text: ILoginUser) => {
+export const login = createAsyncThunk("LOGIN", async (text: ILoginToApp) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +34,7 @@ export const login = createAsyncThunk("LOGIN", async (text: ILoginUser) => {
   };
   const body = JSON.stringify(text);
   try {
-    const res = await axios.post(`${host}/api/users/login`, body, config);
+    const res = await axios.post(API.POST_USER_LOGIN, body, config);
     if (res.status === 200) {
       useToken(res.data.token);
       return res.data;
@@ -42,29 +49,32 @@ export const login = createAsyncThunk("LOGIN", async (text: ILoginUser) => {
   }
 });
 
-export const register = createAsyncThunk("REGISTER", async (text: IAuth) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      mode: "cors",
-      Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-    },
-  };
-  const body = JSON.stringify(text);
-  try {
-    const res = await axios.post(`${host}/api/users/register`, body, config);
-    if (res.status === 200) {
-      useToken(res.data.token);
-      return res.data;
-    }
-    return;
-  } catch (error) {
-    return {
-      message: error.response.data,
-      error: true,
+export const register = createAsyncThunk(
+  "REGISTER",
+  async (text: IRegisterUser) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
     };
+    const body = JSON.stringify(text);
+    try {
+      const res = await axios.post(API.POST_USER_REGISTER, body, config);
+      if (res.status === 200) {
+        useToken(res.data.token);
+        return res.data;
+      }
+      return;
+    } catch (error) {
+      return {
+        message: error.response.data,
+        error: true,
+      };
+    }
   }
-});
+);
 
 export const loginUserLoaded = createAsyncThunk("LOGIN", async () => {
   const config = {
@@ -83,7 +93,7 @@ export const loginUserLoaded = createAsyncThunk("LOGIN", async () => {
     return;
   }
   try {
-    const res = await axios.get(`${host}/api/auth/${userId}`, config);
+    const res = await axios.get(API.GET_USER_AUTH + userId, config);
     if (res.status === 200) {
       return res.data;
     }
@@ -108,11 +118,7 @@ export const loginRemindPassword = createAsyncThunk(
     };
     const body = JSON.stringify({ email: value.email });
     try {
-      const res = await axios.post(
-        `${host}/api/users/remind-password`,
-        body,
-        config
-      );
+      const res = await axios.post(API.POST_USER_REMIND_PASSWORD, body, config);
       if (res.status === 200) {
         localStorage.setItem("emailChange", value.email);
         navigate("/remind-password");
@@ -132,7 +138,6 @@ export const loginRemindPassword = createAsyncThunk(
 export const loginRemindCode = createAsyncThunk(
   "REMIND_CODE",
   async ({ code, navigate }: any) => {
-
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -142,11 +147,7 @@ export const loginRemindCode = createAsyncThunk(
     };
     const body = JSON.stringify({ code });
     try {
-      const res = await axios.post(
-        `${host}/api/users/remind-code`,
-        body,
-        config
-      );
+      const res = await axios.post(API.POST_USER_REMIND_CODE, body, config);
       console.log(`res.status`, res);
       if (res.status === 200) {
         localStorage.setItem("emailCode", code);
@@ -166,7 +167,7 @@ export const loginRemindCode = createAsyncThunk(
 
 export const loginChangePassword = createAsyncThunk(
   "CHANGE_PASSWORD",
-  async ({ email, code, password, navigate }: any) => {
+  async ({ email, code, password, navigate }: IChangePassword) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -176,13 +177,9 @@ export const loginChangePassword = createAsyncThunk(
     };
     const body = JSON.stringify({ email, code, password });
     try {
-      const res = await axios.post(
-        `${host}/api/users/change-password`,
-        body,
-        config
-      );
+      const res = await axios.post(API.POST_USER_CHANGE_PASSWORD, body, config);
       if (res.status === 200) {
-        res.data.password && navigate("/login");
+        res.data.password && navigate?.("/login");
         toast.success("Hasło zostało zmienione!");
         return res.data;
       }
@@ -199,7 +196,7 @@ export const loginChangePassword = createAsyncThunk(
 
 export const loginCheckPassword = createAsyncThunk(
   "CHANGE_PASSWORD_ACCOUNT",
-  async ({ email, password }: any) => {
+  async ({ email, password }: {email: string; password: string}) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -209,11 +206,7 @@ export const loginCheckPassword = createAsyncThunk(
     };
     const body = JSON.stringify({ email, password });
     try {
-      const res = await axios.post(
-        `${host}/api/users/check-password`,
-        body,
-        config
-      );
+      const res = await axios.post(API.POST_USER_CHECK_PASSWORD, body, config);
       if (res.status === 200) {
         return res.data;
       }
@@ -229,7 +222,15 @@ export const loginCheckPassword = createAsyncThunk(
 
 export const loginSetNewPassword = createAsyncThunk(
   "SET_NEW_PASSWORD",
-  async ({ email, newPassword, oldPassword }: any) => {
+  async ({
+    email,
+    newPassword,
+    oldPassword,
+  }: {
+    email: string;
+    newPassword: string;
+    oldPassword: string;
+  }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -240,12 +241,12 @@ export const loginSetNewPassword = createAsyncThunk(
     const body = JSON.stringify({ email, newPassword, oldPassword });
     try {
       const res = await axios.post(
-        `${host}/api/users/set-new-password`,
+        API.POST_USER_SET_NEW_PASSWORD,
         body,
         config
       );
       if (res.status === 200) {
-        toast.success(res.data.message)
+        toast.success(res.data.message);
         return res.data;
       }
       return;
@@ -260,7 +261,7 @@ export const loginSetNewPassword = createAsyncThunk(
 
 export const loginChangeMyAccountPassword = createAsyncThunk(
   "CHANGE_PASSWORD_ACCOUNT",
-  async ({ email, password }: any) => {
+  async ({ email, password }: { email: string; password: string }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -270,11 +271,7 @@ export const loginChangeMyAccountPassword = createAsyncThunk(
     };
     const body = JSON.stringify({ email, password });
     try {
-      const res = await axios.post(
-        `${host}/api/users/change-password`,
-        body,
-        config
-      );
+      const res = await axios.post(API.POST_USER_CHANGE_PASSWORD, body, config);
       if (res.status === 200) {
         toast.success("Hasło zostało zmienione!");
         return res.data;
@@ -300,14 +297,10 @@ export const loginChangeUserLanguage = createAsyncThunk(
         Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
       },
     };
-    console.log('language :>> ', language);
+    console.log("language :>> ", language);
     const body = JSON.stringify({ language });
     try {
-      const res = await axios.post(
-        `${host}/api/users/change-language`,
-        body,
-        config
-      );
+      const res = await axios.post(API.POST_USER_CHANGE_LANGUAGE, body, config);
       if (res.status === 200) {
         toast.success("Język został zmieniony!");
         return res.data;
@@ -336,11 +329,7 @@ export const loginChangeLanguage = createAsyncThunk(
     };
     const body = JSON.stringify({ limitDay, limitMouth, limitFull });
     try {
-      const res = await axios.post(
-        `${host}/api/users/change-limit`,
-        body,
-        config
-      );
+      const res = await axios.post(API.POST_USER_CHANGE_LIMIT, body, config);
       if (res.status === 200) {
         toast.success("Limity zostały zmienione!");
         return res.data;
@@ -359,8 +348,7 @@ export const loginChangeLanguage = createAsyncThunk(
 
 export const loginSwitchAccount = createAsyncThunk(
   "SWITCH_ACCOUNT",
-  async ({ accountId }: any) => {
-
+  async ({ accountId }: { accountId: string }) => {
     const useToken = (token: string) => {
       if (token) {
         localStorage.removeItem("jwtToken");
@@ -379,12 +367,11 @@ export const loginSwitchAccount = createAsyncThunk(
       },
     };
     try {
-      const res = await axios.post(
-        `${host}/api/users/switch-account`, body, config);
+      const res = await axios.post(API.POST_USER_SWITCH_ACCOUNT, body, config);
       if (res.status === 200) {
-        await sleep(6000)
+        await sleep(6000);
         await toast.success("Zostałeś przelogowany");
-        useToken(res.data.token)
+        useToken(res.data.token);
         return await res.data;
       }
       return;

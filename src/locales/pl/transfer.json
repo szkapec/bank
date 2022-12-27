@@ -1,0 +1,17 @@
+{
+  "adressDefined": "+ Adresy zdefiniowane",
+  "toRecipient": "Do odbiorcy",
+  "bankAccountNumber": "Numer konta bankowego",
+  "accountValid": "Numer konta nie prawidłowy!",
+  "transferTitle": "Tytuł przelewu",
+  "transferContent": "Treść przelewu",
+  "contentTransferValid": "Treść przelewu nie prawidłowa!",
+  "sum": "Kwota",
+  "wrongValue": "Nieprawidłowa wartość!",
+  "moneyValid": "Nie masz wystarczającej ilości pieniędzy!",
+  "exceedLimit": "Przekroczony limit!",
+  "transferMoney": "Kwota przelewu",
+  "send": "Wyślij",
+  "nameRecipient": "Wpisz nazwę odbiorcy",
+  "recipientAccountNumber": "Wpisz numer rachunku odbiorcy"
+}

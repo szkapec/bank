@@ -7,9 +7,16 @@ import { useNavigate } from "react-router";
 import { useAppDispatch } from "store/hooks";
 import { selectorAuthLoading } from "store/Login/loginSelector";
 import { loginChangePassword } from "store/Login/loginThunk";
+import TextWrapper from "components/Contents/TextWrapper";
+import { Box } from "@mui/material";
+import { IChangePassword } from "store/Login/loginInterface";
+import { t } from "i18next";
 
-const initialValue = {
-  code: "",
+
+const initialValue: IChangePassword = {
+  password: "",
+  repeatPassword: "",
+  code: ""
 };
 
 const ChangePassword = () => {
@@ -18,7 +25,7 @@ const ChangePassword = () => {
   const dispatch = useAppDispatch();
   const loaderSelector = useSelector(selectorAuthLoading);
 
-  const onSubmit = ({ password, repeatPassword }: any) => {
+  const onSubmit = ({ password, repeatPassword }: IChangePassword) => {
     if (password !== repeatPassword) {
       setErrorForm(true);
     } else {
@@ -34,43 +41,45 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="container-register identify-data">
+    <Box className="container-register identify-data">
       <Form
         onSubmit={onSubmit}
         initialValues={initialValue}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className="container-register__form">
             <Logo />
-            <h2>Zmień hasło</h2>
-            <div className="password">
-              <label>Hasło</label>
+            <TextWrapper label="login.changePassword" Selector="h2" />
+            <Box className="password">
+              <TextWrapper label="login.password" />
               <Field
                 className={errorForm ? "input-error" : "lastName"}
                 name="password"
                 component="input"
                 placeholder="password"
               />
-            </div>
-            <div className="password">
-              <label>Powtórz hasło</label>
+            </Box>
+            <Box className="password">
+              <TextWrapper label="login.repeatPassword" />
               <Field
                 className={errorForm ? "input-error" : "lastName"}
                 name="repeatPassword"
                 component="input"
-                placeholder="Repeat password"
+                placeholder={t('login.repeatPassword')}
               />
               {errorForm && (
-                <div className="error">Hasła się nie zgadzają!</div>
+                <div className="error">
+                  <TextWrapper label="login.passwordDontMatch" />
+                </div>
               )}
-            </div>
+            </Box>
             <button className="btn-login" type="submit">
-              Zapisz
+              <TextWrapper label="login.save" />
             </button>
           </form>
         )}
       />
-      {loaderSelector && <Loader text="Zmieniam hasło..." />}
-    </div>
+      {loaderSelector && <Loader text={t('login.changeMyPassword')} />}
+    </Box>
   );
 };
 

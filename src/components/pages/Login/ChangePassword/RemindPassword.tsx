@@ -7,6 +7,11 @@ import { selectorAuthLoading } from "store/Login/loginSelector";
 import { loginRemindCode } from "store/Login/loginThunk";
 import Logo from "assets/Logo";
 import Loader from "components/Loader/Loader";
+import TextWrapper from "components/Contents/TextWrapper";
+
+interface ISubmit {
+  code: string;
+}
 
 const initialValue = {
   code: "",
@@ -30,7 +35,7 @@ const RemindPassword = () => {
     navigate("/login");
   }
 
-  const onSubmit = (value: any) => {
+  const onSubmit = (value: ISubmit) => {
     if (value.code.length <= 4) {
       setErrorForm(true);
     } else {
@@ -47,23 +52,28 @@ const RemindPassword = () => {
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className="container-register__form">
             <Logo />
-            <h2>Podaj kod wysłany na email</h2>
+            <TextWrapper label="login.enterCodeByEmail" Selector="h2" />
             <div className="identify">
-              <label>Podaj kod</label>
+              <TextWrapper label="login.enterCode" />
               <Field
                 className={errorForm ? "input-error" : "lastName"}
                 name="code"
                 component="input"
                 placeholder="code"
               />
-              {errorForm && <div className="error">Nieprawidłowy kod</div>}
+              {errorForm && (
+                <div className="error">
+                  <TextWrapper label="login.incorrectCode" />
+                </div>
+              )}
             </div>
             <button className="btn-login" type="submit">
-              zresetuj hasło
+              <TextWrapper label="login.resetPassword" />
             </button>
 
             <div className="timer">
-              Pozostało czasu: <b>{time}</b> sekund
+              <TextWrapper label="login.timeLeft" /> <b>{time}</b>{" "}
+              <TextWrapper label="login.seconds" />
             </div>
           </form>
         )}

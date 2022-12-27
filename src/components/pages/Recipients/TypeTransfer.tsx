@@ -5,39 +5,38 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import AssuredWorkloadIcon from "@mui/icons-material/AssuredWorkload";
 import AttractionsIcon from "@mui/icons-material/Attractions";
-import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
-import { useTranslation } from "react-i18next";
+import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
+import TextWrapper from "components/Contents/TextWrapper";
 
 const TypeTransfer = () => {
-  const { t } = useTranslation();
   return (
     <Box className="type-transfer">
       <section>
         <AddRoadIcon />
-        <span>{t("recipients.national")}</span>
+        <TextWrapper label="recipients.national" />
       </section>
       <section>
         <AccountBoxIcon />
-        <span>{t("recipients.forOwnAccount")}</span>
+        <TextWrapper label="recipients.forOwnAccount" />
       </section>
       <section>
         <AdUnitsIcon />
-        <span>{t("recipients.topUpPhone")}</span>
+        <TextWrapper label="recipients.topUpPhone" />
       </section>
       <section>
         <AssuredWorkloadIcon />
-        <span>{t("recipients.office")}</span>
+        <TextWrapper label="recipients.office" />
       </section>
       <section>
         <AttractionsIcon />
-        <span>{t("recipients.currencyOrForeign")}</span>
+        <TextWrapper label="recipients.currencyOrForeign" />
       </section>
-      <div className='recurring-payment'>
+      <Box className="recurring-payment">
         <section>
           <DataSaverOnIcon />
-          <span>{t("recipients.newCecurringPayment")}</span>
+          <TextWrapper label="recipients.newCecurringPayment" />
         </section>
-      </div>
+      </Box>
     </Box>
   );
 };

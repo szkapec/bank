@@ -43,7 +43,7 @@ const ChangeColor = ({ setOffer }: IProps) => {
       </Box>
       <FormControl>
         <InputLabel id="color">
-          <TextWrapper label="Wybierz kolor" />
+          <TextWrapper label="offer.chooseColor" />
         </InputLabel>
         <Select
           sx={{ width: "180px", margin: "10px 0 20px" }}
@@ -53,10 +53,10 @@ const ChangeColor = ({ setOffer }: IProps) => {
           onChange={handleChange}
         >
           <MenuItem value={EnumColor.LIGHT}>
-            <TextWrapper label="Jasny" />
+            <TextWrapper label="offer.light" />
           </MenuItem>
           <MenuItem disabled={true} value={EnumColor.DARK}>
-            <TextWrapper  label="Ciemny" />
+            <TextWrapper label="offer.dark" />
           </MenuItem>
         </Select>
         <Button
@@ -65,7 +65,7 @@ const ChangeColor = ({ setOffer }: IProps) => {
           type="submit"
           variant="contained"
         >
-          <TextWrapper label="Wybierz" />
+          <TextWrapper label="offer.choose" />
         </Button>
       </FormControl>
     </Box>

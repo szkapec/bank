@@ -13,5 +13,14 @@
   "recipientsAccount": "Rachunek odbiorcy",
   "trustedRecipient": "Zaufany odbiorca",
   "sum": "Kwota",
-  "title": "Tytuł (opcjonalnie)"
+  "title": "Tytuł (opcjonalnie)",
+  "dataRequired": "Dane wymagane!",
+  "wrongValue": "Nie prawidłowa wartość",
+  "next": "Dalej",
+  "back": "Wróć",
+  "selectRecipient": "Wybierz odbiorce",
+  "nameRecipient": "Nazwa odbiorcy:",
+  "titleAndTotal": "Tytuł i suma:",
+  "choose": "Wybierz",
+  "cancel": "Anuluj"
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormControlLabel, Switch, Modal, Button, Box } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import RecipientModal from "components/Modal/Form/RecipientModal";
@@ -17,6 +17,8 @@ import Error from "components/Error/Error";
 import { useAppDispatch } from "store/hooks";
 import { useQuery } from "react-query";
 import { userRecipients } from "store/Recipient/recipientThunk";
+import TextWrapper from "components/Contents/TextWrapper";
+import { useTranslation } from "react-i18next";
 
 const Recipients = () => {
   const loginErrorSelector = useSelector(selectorLoaderRecipient);
@@ -24,6 +26,7 @@ const Recipients = () => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState<IAddRecipient[]>([]);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const { isLoading, error } = useQuery("recipients", () =>
     dispatch(userRecipients())
   );
@@ -57,11 +60,11 @@ const Recipients = () => {
 
   return (
     <>
-      <h3>Odbiorcy zdefiniowani</h3>
-      <div>
+      <TextWrapper label="recipients.definedRecipients" Selector="h3"/>
+      <Box>
         <Button onClick={handleOpen}>
           <AddCircleOutlineIcon />
-          <span>Dodaj odbiorce</span>
+          <TextWrapper label="recipients.addRecipient"/>
         </Button>
         <Modal
           open={open}
@@ -71,19 +74,19 @@ const Recipients = () => {
         >
           <RecipientModal />
         </Modal>
-      </div>
+      </Box>
       <Box className="box-search">
         <TextField
           size="small"
           id="outlined-basic"
-          label="Wyszukaj"
+          label={t('recipients.search')}
           variant="outlined"
           onChange={debouncedChangeHandler}
         />
         <Box className="saved">
           <FormControlLabel
             control={<Switch defaultChecked />}
-            label="Tylko zaufani odbiorcy"
+            label={t('recipients.onlyTrustedRecipients')}
           />
           <LockIcon color="primary" />
         </Box>

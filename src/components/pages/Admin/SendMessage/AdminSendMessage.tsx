@@ -1,10 +1,11 @@
-import React from 'react'
+import { Box } from '@mui/material'
+import TextWrapper from 'components/Contents/TextWrapper'
 
 const AdminSendMessage = () => {
   return (
-    <div>
-      Admin Send Message
-    </div>
+    <Box>
+      <TextWrapper label="admin.sendMessage"/>
+    </Box>
   )
 }
 

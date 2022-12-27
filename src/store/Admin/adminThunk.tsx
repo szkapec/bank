@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { API } from "api/dev-api";
 import axios from "axios";
 import { IAdminGetUser } from "./adminInterface";
 
@@ -7,7 +8,6 @@ const host = process.env.REACT_APP_HOST;
 export const GetUsersAdmin = createAsyncThunk(
   "GET_USERS",
   async (formData: IAdminGetUser) => {
-    console.log("formData :>> ", formData);
     const token = localStorage.getItem("jwtToken");
     const config = {
       headers: {
@@ -18,7 +18,7 @@ export const GetUsersAdmin = createAsyncThunk(
     };
     const body = JSON.stringify(formData);
     try {
-      const res = await axios.post(`${host}/api/admin/users`, body, config);
+      const res = await axios.post(API.POST_ADMIN_USER, body, config);
       if (res.status === 200) {
         return res.data;
       }

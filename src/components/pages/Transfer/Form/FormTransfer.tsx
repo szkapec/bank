@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import {
   selectorLoaderTransfer,
@@ -14,6 +14,9 @@ import { selectorDataRecipient } from "store/Recipient/recipientSelector";
 import { userRecipients } from "store/Recipient/recipientThunk";
 import { IAddRecipient } from "store/Recipient/recipientInterface";
 import { selectorLimit } from "store/Login/loginSelector";
+import { Box } from "@mui/material";
+import TextWrapper from "components/Contents/TextWrapper";
+import { useTranslation } from "react-i18next";
 
 const FormTransfer = ({
   error,
@@ -25,7 +28,7 @@ const FormTransfer = ({
   const loaderSelector = useSelector(selectorLoaderTransfer);
   const dataRecipientSelector = useSelector(selectorDataRecipient);
   const limitSelector = useSelector(selectorLimit);
-
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
 
@@ -64,7 +67,6 @@ const FormTransfer = ({
   );
 
   const handleModal = () => {
-    //loader
     if (dataRecipientSelector.length === 0) {
       dispatch(userRecipients());
     }
@@ -72,24 +74,24 @@ const FormTransfer = ({
   };
 
   return (
-    <div className="container-transfer">
+    <Box className="container-transfer">
       {messageSelector && (
-        <div className="error-transfer-global">{messageSelector}</div>
+        <Box className="error-transfer-global">{messageSelector}</Box>
       )}
-      <div className="container-transfer__transfer">
-        <label htmlFor="text">Do odbiorcy</label>
+      <Box className="container-transfer__transfer">
+        <label htmlFor="text">{t('transfer.toRecipient')}</label>
         <input
           type="text"
           name="nameReceived"
           value={formData.nameReceived}
-          placeholder="Wpisz nazwę odbiorcy"
+          placeholder={t('recipient.nameRecipient')}
           onChange={handleChange}
         />
         <div
           className="container-transfer__address"
           onClick={() => handleModal()}
         >
-          + Adresy zdefiniowane
+          <TextWrapper label="transfer.adressDefined"/>
         </div>
         <TableModal
           recipients={dataRecipientSelector}
@@ -97,64 +99,69 @@ const FormTransfer = ({
           open={open}
           setData={setDataRecipients}
         />
-      </div>
-      <div className="container-transfer__transfer">
-        <label htmlFor="numberReceived">Numer konta bankowego</label>
+      </Box>
+      <Box className="container-transfer__transfer">
+        <label htmlFor="numberReceived">{t('transfer.bankAccountNumber')}</label>
         <input
           className={error.errorAccount ? "error-input" : ""}
           type="number"
           value={formData.numberReceived}
           name="numberReceived"
-          placeholder="Wpisz numer rachunku odbiorcy"
+          placeholder={t('transfer.recipientAccountNumber')}
           onChange={handleChange}
         />
         {error.errorAccount && (
-          <div className="error-transfer">Numer konta nie prawidłowy!</div>
+          <div className="error-transfer">
+            <TextWrapper label="transfer.accountValid"/>
+          </div>
         )}
-      </div>
-      <div className="container-transfer__transfer">
-        <label htmlFor="body">Tytył przelewu</label>
-
+      </Box>
+      <Box className="container-transfer__transfer">
+        <label htmlFor="body">{t('transfer.transferTitle')}</label>
         <input
           className={error.errorBody ? "error-input" : ""}
           type="text"
           value={formData.body}
           name="body"
-          placeholder="Treść przelewu"
+          placeholder={t('transfer.transferContent')}
           onChange={handleChange}
         />
         {error.errorBody && (
-          <div className="error-transfer">Treść przelewu nie prawidłowa!</div>
+          <div className="error-transfer">
+            <TextWrapper label="transfer.contentTransferValid"/>
+          </div>
         )}
-      </div>
-      <div className="container-transfer__transfer">
-        <label htmlFor="howMuchMoney">Kwota</label>
+      </Box>
+      <Box className="container-transfer__transfer">
+        <label htmlFor="howMuchMoney">{t('transfer.sum')}</label>
         <input
           className={error.errorMoney ? "error-input" : ""}
           type="number"
           value={formData.howMuchMoney}
           name="howMuchMoney"
-          placeholder="Kwota przelewu"
+          placeholder={t('transfer.transferMoney')}
           onChange={handleChange}
         />
         {error.errorMoney && (
-          <div className="error-transfer">Nieprawidłowa wartość!</div>
+          <div className="error-transfer">
+            <TextWrapper label="transfer.wrongValue"/>
+          </div>
         )}
         {Number(formData.howMuchMoney) > money && (
           <div className="error-transfer">
-            Nie masz wystarczającej ilości pieniędzy!
+            <TextWrapper label="transfer.moneyValid"/>
           </div>
         )}
          {limitSelector.limitDay < Number(formData.howMuchMoney) && (
           <div className="error-transfer">
-            Przekroczony limit!
+            <TextWrapper label="transfer.exceedLimit"/>
           </div>
         )}
-      </div>
+      </Box>
       <button type="submit">
-        {loaderSelector ? <MiniLoader /> : "Wyślij"}
+        {loaderSelector ? <MiniLoader /> : t('transfer.send')}
       </button>
-    </div>
+    </Box>
   );
 };
 

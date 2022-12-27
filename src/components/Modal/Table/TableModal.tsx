@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
-import { useTranslation } from "react-i18next";
 import { Button, Modal } from "@mui/material";
-import { IAddRecipient } from "../../../store/Recipient/recipientInterface";
+import { IAddRecipient } from "store/Recipient/recipientInterface";
 import { style } from "./helper/helper";
 import "./TableModal.scss";
+import TextWrapper from "components/Contents/TextWrapper";
 interface IPropsTableModal {
   recipients: IAddRecipient[];
   open: boolean;
@@ -27,44 +27,47 @@ const TableModal = ({
   setData,
 }: IPropsTableModal) => {
   const [selectId, setSelectId] = useState("");
-  const { t } = useTranslation();
 
   return (
-    <>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
-        <Box sx={{ ...style, width: 600 }}>
-          <h2>Wybierz odbiorce</h2>
-          <Box className="modal">
-            {recipients?.map((recipient: any) => (
-              <div
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="parent-modal-title"
+      aria-describedby="parent-modal-description"
+    >
+      <Box sx={{ ...style, width: 600 }}>
+        <TextWrapper label="modal.selectRecipient" Selector="h2" />
+        <Box className="modal">
+          {recipients?.map(
+            ({ _id, title, sum, recipientsName }: IAddRecipient) => (
+              <Box
                 className={
-                  selectId === recipient._id
+                  selectId === _id
                     ? "modal--recipient active"
                     : "modal--recipient"
                 }
-                key={recipient._id}
-                onClick={() => setSelectId(recipient._id)}
+                key={_id}
+                onClick={() => setSelectId(_id)}
               >
-                <div className="name">
-                  <span>Nazwa odbiorcy:</span> {recipient.recipientsName}
-                </div>
-                <div className="title">
-                  <span>Tytuł i suma:</span> {recipient.title} <span> || </span>{" "}
-                  {recipient.sum}zł
-                </div>
-              </div>
-            ))}
-          </Box>
-          <Button onClick={() => setData(selectId, recipients)}>Wybierz</Button>
-          <Button onClick={handleClose}>Anuluj</Button>
+                <Box className="name">
+                  <TextWrapper label="modal.nameRecipient" /> {recipientsName}
+                </Box>
+                <Box className="title">
+                  <TextWrapper label="modal.titleAndTotal" /> {title}
+                  <span> || </span> {sum}zł
+                </Box>
+              </Box>
+            )
+          )}
         </Box>
-      </Modal>
-    </>
+        <Button onClick={() => setData(selectId, recipients)}>
+          <TextWrapper label="modal.choose" />
+        </Button>
+        <Button onClick={handleClose}>
+          <TextWrapper label="modal.cancel" />
+        </Button>
+      </Box>
+    </Modal>
   );
 };
 

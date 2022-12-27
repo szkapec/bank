@@ -3,10 +3,11 @@ import axios from "axios";
 import setAuthenticationToken from "../../util/setAuthenticationToken";
 import { IAddRecipient } from "./recipientInterface";
 import { toast } from "react-toastify";
+import { API } from "api/dev-api";
 
 const host = process.env.REACT_APP_HOST;
 
-export const userRecipients = createAsyncThunk("RECIPIENTS", async () => {
+export const userRecipients = createAsyncThunk("RECIPIENTS_GET", async () => {
   const token = localStorage.getItem("jwtToken");
   let userId = null;
   if (token) {
@@ -24,7 +25,7 @@ export const userRecipients = createAsyncThunk("RECIPIENTS", async () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const res = await axios.get(`${host}/api/recipient/${userId}`, config);
+    const res = await axios.get(API.GET_RECIPIENTS + userId, config);
     if (res.status === 200) {
       return res.data;
     }
@@ -40,7 +41,7 @@ export const userRecipients = createAsyncThunk("RECIPIENTS", async () => {
 });
 
 export const addUserRecipients = createAsyncThunk(
-  "RECIPIENTS",
+  "RECIPIENTS_PUT",
   async (data: IAddRecipient) => {
     const token = localStorage.getItem("jwtToken");
     let id = null;
@@ -60,7 +61,7 @@ export const addUserRecipients = createAsyncThunk(
         },
       };
       const body = JSON.stringify({ ...data, id });
-      const res = await axios.put(`${host}/api/recipient`, body, config);
+      const res = await axios.put(API.PUT_RECIPIENTS, body, config);
       if (res.status === 200) {
         toast.success("Dodany nowy odbiorca");
         return res.data;
@@ -78,7 +79,7 @@ export const addUserRecipients = createAsyncThunk(
 );
 
 export const editUserRecipients = createAsyncThunk(
-  "RECIPIENTS",
+  "RECIPIENTS_PATCH",
   async (data: IAddRecipient) => {
     const token = localStorage.getItem("jwtToken");
     let id = null;
@@ -98,7 +99,7 @@ export const editUserRecipients = createAsyncThunk(
         },
       };
       const body = JSON.stringify({ ...data, id });
-      const res = await axios.patch(`${host}/api/recipient/edit`, body, config);
+      const res = await axios.patch(API.PATCH_RECIPIENTS, body, config);
       if (res.status === 200) {
         toast.success("Edycja przebiegła prawidłowo");
         return res.data;
@@ -116,7 +117,7 @@ export const editUserRecipients = createAsyncThunk(
 );
 
 export const deleteUserRecipients = createAsyncThunk(
-  "RECIPIENTS",
+  "RECIPIENTS_DELETE",
   async (recipientId: string) => {
     const token = localStorage.getItem("jwtToken");
     let id = null;
@@ -136,7 +137,7 @@ export const deleteUserRecipients = createAsyncThunk(
         },
       };
       const res = await axios.delete(
-        `${host}/api/recipient/${recipientId}`,
+        API.DELETE_RECIPIENTS + recipientId,
         config
       );
       if (res.status === 200) {

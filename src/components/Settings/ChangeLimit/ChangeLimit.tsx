@@ -70,7 +70,7 @@ const ChangeLimit = ({ setOffer }: IProps) => {
         render={({ handleSubmit }): JSX.Element => (
           <form onSubmit={handleSubmit}>
             <Box className="box">
-              <TextWrapper label="Limit dzienny" Selector="label" />
+              <TextWrapper label="offer.dailyLimit" Selector="label" />
               <Field
                 className={error ? "input-error" : "new-limit"}
                 isVisible="false"
@@ -87,7 +87,7 @@ const ChangeLimit = ({ setOffer }: IProps) => {
             </Box>
             <Box className="box">
               <label htmlFor="fors"></label>
-              <TextWrapper label="Limit miesięczny" Selector="label" />
+              <TextWrapper label="offer.monthLimit" Selector="label" />
               <Field
                 className={error ? "input-error" : "new-limit"}
                 name="limitMouth"
@@ -102,7 +102,7 @@ const ChangeLimit = ({ setOffer }: IProps) => {
               />
             </Box>
             <Box className="box">
-              <TextWrapper label="Max wartość przelewu" Selector="label" />
+              <TextWrapper label="offer.maxTransferValue" Selector="label" />
               <Field
                 className={error ? "input-error" : "new-limit"}
                 name="limitFull"
@@ -118,16 +118,16 @@ const ChangeLimit = ({ setOffer }: IProps) => {
             </Box>
             {error && (
               <Box className="error">
-                <TextWrapper label="Nieprawidłowy limit" />
+                <TextWrapper label="offer.invalidLimit" />
               </Box>
             )}
             {errorLimit && (
               <Box className="error">
-                <TextWrapper label="Nie masz uprawnień aby zwiększyć limit" />
+                <TextWrapper label="offer.invalidAuthorizedLimit" />
               </Box>
             )}
             <Button className="btn-change" type="submit" variant="contained">
-              <TextWrapper label="Wyślij" />
+              <TextWrapper label="offer.send" />
             </Button>
           </form>
         )}

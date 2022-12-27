@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/hooks";
 import { selectorAuthLoginUser } from "store/Login/loginSelector";
@@ -16,10 +16,8 @@ export const initialFormData = {
 
 const Transfer = () => {
   const userDataSelector = useSelector(selectorAuthLoginUser);
-
   const dispatch = useAppDispatch();
   const { bankAccountNumber, id, email, money } = userDataSelector || {};
-
   const [formData, setFormData] = useState(initialFormData);
 
   const initialError = {
@@ -64,7 +62,6 @@ const Transfer = () => {
      
       const sendTransferData = await dispatch(sendTransfer(form));
       if (!sendTransferData.payload.error) {
-        console.log('initialFormDataxxd :>> ', initialFormData);
         setFormData(initialFormData)
         dispatch(subtractMoney(formData.howMuchMoney));
       }

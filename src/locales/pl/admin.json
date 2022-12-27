@@ -1,0 +1,19 @@
+{
+  "userId": "Wprowadz ID użytkownika",
+  "userBan": "Zbanuj użytkownika",
+  "check": "Sprawdz",
+  "wantToBan": "Chcesz zbanować:",
+  "firstName": "Imię:",
+  "lastName": "Nazwisko:",
+  "bankNumber": "Number banku",
+  "ban": "Zbanuj",
+  "email": "email",
+  "logOutUser": "Wyloguj użytkownika",
+  "logOut": "wyloguj",
+  "users": "Użytkownicy",
+  "sendMessage": "Wyślij wiadomość",
+  "isBan": "ban:",
+  "yes": "Tak",
+  "no": "Nie",
+  "premium": "premium"
+}

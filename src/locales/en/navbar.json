@@ -1,11 +1,11 @@
 {
-  "homePage": "Strona Główna",
-  "history": "Historia",
-  "transfer": "Przelew",
-  "recipients": "Odbiorcy",
-  "offerAndRequests": "Oferty i wnioski",
-  "adminPanel": "Panel Admina",
-  "logout": "Wyloguj",
-  "login": "Zaloguj",
-  "register": "Zarejestruj"
+  "homePage": "Home",
+  "history": "History",
+  "transfer": "Transfer",
+  "recipients": "Recipients",
+  "offerAndRequests": "Offers and requests",
+  "adminPanel": "Admin Panel",
+  "logout": "Logout",
+  "login": "Login",
+  "register": "Register"
 }

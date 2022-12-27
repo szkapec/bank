@@ -1,3 +1,4 @@
+import TextWrapper from "components/Contents/TextWrapper";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -14,23 +15,23 @@ const Navbar = () => {
   return user?.email ? (
     <nav className="navbar">
       <NavLink to="/" className="page" end>
-        {t("navbar.homePage")}
+        <TextWrapper label="navbar.homePage" />
       </NavLink>
       <NavLink to="/history" className="history">
-        {t("navbar.history")}
+        <TextWrapper label="navbar.history" />
       </NavLink>
       <NavLink to="/transfer" className="transfer">
-        {t("navbar.transfer")}
+        <TextWrapper label="navbar.transfer" />
       </NavLink>
       <NavLink to="/recipients" className="recipients">
-        {t("navbar.recipients")}
+        <TextWrapper label="navbar.recipients" />
       </NavLink>
       <NavLink to="/offers" className="offers">
-        {t("navbar.offerAndRequests")}
+        <TextWrapper label="navbar.offerAndRequests" />
       </NavLink>
       {user.premium && (
         <NavLink to="/admin" className="admin">
-          {t("navbar.adminPanel")}
+          <TextWrapper label="navbar.adminPanel" />
         </NavLink>
       )}
       <NavLink
@@ -41,6 +42,7 @@ const Navbar = () => {
         }}
       >
         <>
+          <TextWrapper label="" />
           {t("navbar.logout")}
           <i className="fas fa-sign-out-alt"></i>
         </>
@@ -49,13 +51,13 @@ const Navbar = () => {
   ) : (
     <nav className="navbar">
       <NavLink to="/" className="page" end>
-        {t("navbar.homePage")}
+        <TextWrapper label="navbar.homePage" />
       </NavLink>
       <NavLink to="/login" className="login">
-        {t("navbar.login")}
+        <TextWrapper label="navbar.login" />
       </NavLink>
       <NavLink to="/register" className="register">
-        {t("navbar.register")}
+        <TextWrapper label="navbar.register" />
       </NavLink>
     </nav>
   );

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../store/Login/loginThunk';
 import { useTranslation } from 'react-i18next';
 import jwtDecode from 'jwt-decode';
+import TestZone from './TestZone';
 
 interface IDecodedToken {
   id: string;
@@ -51,6 +52,7 @@ const Test = () => {
       <input type="text" onChange={(e) => setName(e.target.value)}/>
       <button onClick={(e) => click(e)}>CLICK</button>
       <button onClick={() => token()}>CLICKSPRAWDZENIE TOKENA</button>
+      <TestZone/>
     </div>
   )
 }

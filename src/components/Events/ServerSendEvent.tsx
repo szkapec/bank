@@ -1,8 +1,9 @@
+import { API } from "api/dev-api";
 import { toast } from "react-toastify";
 import { logOut } from "store/Login/loginSlice";
 
 export const ServerSendEvent = (dispatch: any, userIdSelector: string) => {
-  const ssEvents = new EventSource("http://localhost:5000/stream");
+  const ssEvents = new EventSource(API.USER_EVENT_STREAM);
   ssEvents.addEventListener("message", (e) => {});
 
   ssEvents.addEventListener("logout_user", (e: any) => {

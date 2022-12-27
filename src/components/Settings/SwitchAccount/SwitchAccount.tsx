@@ -7,10 +7,12 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import TextWrapper from "components/Contents/TextWrapper";
 import GlobalLoader from "components/Loader/GlobalLoader";
 import Loader from "components/Loader/Loader";
 import MiniLoader from "components/Loader/MiniLoader";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -27,6 +29,7 @@ interface IProps {
 interface IAccount {
   accountId?: string;
   accountName?: string;
+  accountEmail?: string;
 }
 const SwitchAccount = ({ setOffer }: IProps) => {
   const dispatch = useAppDispatch();
@@ -34,7 +37,6 @@ const SwitchAccount = ({ setOffer }: IProps) => {
   const [account, setAccount] = useState("");
   const accountsSelector = useSelector(selectorSubAccounts);
   const loaderSelector = useSelector(selectorAuthLoading);
-
 
   let generals: IAccount[] = [];
   let savings: IAccount[] = [];
@@ -59,13 +61,14 @@ const SwitchAccount = ({ setOffer }: IProps) => {
     setAccount(e.target.value);
   };
 
-  const submit = async() => {
-    const switchAccount = await dispatch(loginSwitchAccount({ accountId: account }));
-    if(switchAccount.payload.token) {
+  const submit = async () => {
+    const switchAccount = await dispatch(
+      loginSwitchAccount({ accountId: account })
+    );
+    if (switchAccount.payload.token) {
       navigate("/transfer");
     }
   };
-  console.log('loaderSelector :>> ', loaderSelector);
 
   return (
     <Box className="connect-account">
@@ -73,16 +76,22 @@ const SwitchAccount = ({ setOffer }: IProps) => {
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Konta</InputLabel>
           <Select id="grouped-select" label="Grouping" onChange={onChange}>
-            <ListSubheader>Konta osobiste</ListSubheader>
+            <ListSubheader>
+              <TextWrapper label="offer.personalAccounts" />
+            </ListSubheader>
             {generals?.map((general) => (
               <MenuItem key={general.accountId} value={general.accountId}>
-                {general.accountId}
+                {general.accountEmail}
               </MenuItem>
             ))}
-            <ListSubheader>K. Oszczędnościowe</ListSubheader>
+            {savings.length && (
+              <ListSubheader>
+                <TextWrapper label="offer.savingsAccount" />
+              </ListSubheader>
+            )}
             {savings?.map((savigs) => (
               <MenuItem key={savigs.accountId} value={savigs.accountId}>
-                {savigs.accountId}
+                {savigs.accountEmail}
               </MenuItem>
             ))}
           </Select>
@@ -91,15 +100,23 @@ const SwitchAccount = ({ setOffer }: IProps) => {
             sx={{ margin: "30px 0 20px" }}
             variant="contained"
           >
-            { loaderSelector ? <MiniLoader /> : 'Przełącz konto'}
+            {loaderSelector ? (
+              <MiniLoader />
+            ) : (
+              <TextWrapper label="offer.switchAccount" />
+            )}
           </Button>
         </FormControl>
       ) : isLoading ? (
         <Loader></Loader>
       ) : (
-        <Box>Brak powiązanych kont</Box>
+        <Box>
+          <TextWrapper label="offer.noAssociatedAccounts" />
+        </Box>
       )}
-      { loaderSelector && <GlobalLoader noBackground={true} messages={testData} />}
+      {loaderSelector && (
+        <GlobalLoader noBackground={true} messages={testData} />
+      )}
     </Box>
   );
 };

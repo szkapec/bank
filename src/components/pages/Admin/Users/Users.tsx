@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import TextWrapper from "components/Contents/TextWrapper";
 import Loader from "components/Loader/Loader";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -15,32 +16,39 @@ interface StyledProps {
 const Users = () => {
   const adminUsersSelector = useSelector(selectorAdminUsers);
   const spinnerSelector = useSelector(selectorAdminUsersLoader);
+
   return (
     <Box>
       {!spinnerSelector ? (
-        adminUsersSelector?.map(({ _id, firstName, email, ban, premium }, index) => (
-          <Box key={_id}>
-            <StyledAdminList premium={premium}>
-              <span className="index">{index}: </span>
-              <span>
-                <b>ID:</b>
-                {_id}
-              </span>
-              <span>
-                <b>fisrtName:</b> {firstName}
-              </span>
-              <span>
-                <b>email:</b> {email}{" "}
-              </span>
-              <span>
-                <b>ban:</b> {ban ? "Tak" : "Nie"}
-              </span>
-              <span>
-                <b>premium:</b> {premium ? "Tak" : "Nie"}
-              </span>
-            </StyledAdminList>
-          </Box>
-        ))
+        adminUsersSelector?.map(
+          ({ _id, firstName, email, ban, premium }, index) => (
+            <Box key={_id}>
+              <StyledAdminList premium={premium}>
+                <TextWrapper className="index" label={index} />
+                <Box>
+                  <TextWrapper label="ID:" Selector="b" />
+                  <TextWrapper label={_id} />
+                </Box>
+                <Box>
+                  <TextWrapper label="admin.firstName" Selector="b" />
+                  <TextWrapper label={firstName} />
+                </Box>
+                <Box>
+                  <TextWrapper label="admin.email" Selector="b" />
+                  <TextWrapper label={email} />
+                </Box>
+                <Box>
+                  <TextWrapper label="admin.isBan" Selector="b" />
+                  <TextWrapper label={ban ? "admin.yes" : "admin.no"} />
+                </Box>
+                <Box>
+                  <TextWrapper label="admin.premium" Selector="b" />
+                  <TextWrapper label={premium ? "admin.yes" : "admin.no"} />
+                </Box>
+              </StyledAdminList>
+            </Box>
+          )
+        )
       ) : (
         <Loader />
       )}

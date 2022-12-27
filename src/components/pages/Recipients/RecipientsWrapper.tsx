@@ -6,14 +6,14 @@ import "./Recipients.scss";
 
 const RecipientsWrapper = () => {
   return (
-    <div className="box">
+    <Box className="box">
       <Box className="box__recipients">
         <Recipients />
       </Box>
       <Box className="box__saved">
         <TypeTransfer />
       </Box>
-    </div>
+    </Box>
   );
 };
 

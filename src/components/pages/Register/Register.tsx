@@ -5,32 +5,23 @@ import { useAppDispatch } from "store/hooks";
 import "./Register.scss";
 import Logo from "../../../assets/Logo";
 import { Box } from "@mui/material";
+import { IRegisterUser, IErrorFormRegister } from "store/Login/loginInterface";
+import TextWrapper from "components/Contents/TextWrapper";
 
-interface IRegister {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-interface IErrorForm {
-  firstName: boolean;
-  lastName: boolean;
-  email: boolean;
-  password: boolean;
-}
-const initialError = {
+const initialError: IErrorFormRegister = {
   firstName: false,
   lastName: false,
   email: false,
   password: false,
 };
 
-const initialValue = {
+const initialValue: IRegisterUser = {
   firstName: "",
   lastName: "",
   email: "",
   country: "pl_PL",
   account: "general",
+  sex: "female",
   password: "",
   repeatPassword: "",
 };
@@ -38,9 +29,9 @@ const initialValue = {
 const Register = () => {
   const dispatch = useAppDispatch();
 
-  const [errorForm, setErrorForm] = useState<IErrorForm>(initialError);
+  const [errorForm, setErrorForm] = useState<IErrorFormRegister>(initialError);
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: IRegisterUser) => {
     const { firstName, lastName, email, password, repeatPassword } = values;
     let errorFirst,
       errorLast,
@@ -77,6 +68,7 @@ const Register = () => {
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className="container-register__form">
             <Logo />
+            <TextWrapper label="" Selector="h2" />
             <h2>Zarejestruj się do CD-Bank</h2>
             <Box>
               <label>Podaj Imię</label>

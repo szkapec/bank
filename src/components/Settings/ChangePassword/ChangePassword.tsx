@@ -8,7 +8,12 @@ import { selectorAuthLoginEmail } from "store/Login/loginSelector";
 import { useSelector } from "react-redux";
 import TextWrapper from "components/Contents/TextWrapper";
 
-const initialValues = {
+interface IChangePassword {
+  password: string;
+  newPassword: string;
+  repeatNewPassword: string
+}
+const initialValues: IChangePassword = {
   password: "",
   newPassword: "",
   repeatNewPassword: "",
@@ -22,12 +27,12 @@ const ChangePassword = ({ setOffer }: IProps) => {
   const [error, setError] = useState(false);
   const [changePassword, setChangePassword] = useState("");
   const [formPassword, setFormPassword] = useState(initialValues);
-
+  
   const dispatch = useAppDispatch();
   const email = useSelector(selectorAuthLoginEmail);
 
   const checkOldPassword = async (password: string) => {
-    const action: any = await dispatch(loginCheckPassword({ email, password }));
+    const action = await dispatch(loginCheckPassword({ email, password }));
     if (action.payload?.message === email) {
       setChangePassword(password);
     } else {
@@ -48,7 +53,7 @@ const ChangePassword = ({ setOffer }: IProps) => {
     password,
     newPassword,
     repeatNewPassword,
-  }: any) => {
+  }: IChangePassword) => {
     setError(false);
     if (password) checkOldPassword(password);
     else if (newPassword === repeatNewPassword) setPassword(newPassword);

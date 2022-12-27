@@ -6,8 +6,13 @@ import { deleteUserRecipients } from "store/Recipient/recipientThunk";
 import { useAppDispatch } from "store/hooks";
 import { selectorLoaderRecipient } from "store/Recipient/recipientSelector";
 import { useSelector } from "react-redux";
+import { IAddRecipient } from "store/Recipient/recipientInterface";
+import TextWrapper from "components/Contents/TextWrapper";
 
-const Table = ({ recipient }: any) => {
+interface IPropsRecipient {
+  recipient: IAddRecipient;
+}
+const Table = ({ recipient }: IPropsRecipient) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const open = Boolean(anchorEl);
@@ -19,7 +24,6 @@ const Table = ({ recipient }: any) => {
   };
 
   const handleClose = () => {
-    console.log("Dziala :>> ");
     setAnchorEl(null);
     setIsOpenModal(false);
   };
@@ -33,10 +37,8 @@ const Table = ({ recipient }: any) => {
     setAnchorEl(null);
     setIsOpenModal(false);
   };
-  const openModal = (data: any) => {
+  const openModal = () => {
     setIsOpenModal(true);
-    // console.log('newData :>> ', newData);
-    // setModalData(newData);
   };
 
   return (
@@ -50,17 +52,14 @@ const Table = ({ recipient }: any) => {
           {recipient.recipientsAccount} | Bank CD S.A
         </Box>
       </Box>
-      <Box
-        className="title"
-        onClick={() => console.log(`recipient22`, recipient)}
-      >
+      <Box className="title">
         <div className="sum">{recipient.sum} PLN</div>
         <Box sx={{ fontWeight: "300", textAlign: "right" }}>
           {recipient.title}
         </Box>
       </Box>
       <Box className="menu">
-        <div onClick={() => console.log(`recipient2`, recipient)}>
+        <div>
           <Button
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}
@@ -78,9 +77,12 @@ const Table = ({ recipient }: any) => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={deleteRecipient}>Usuń</MenuItem>
-            <MenuItem onClick={openModal}>Edytuj</MenuItem>
-
+            <MenuItem onClick={deleteRecipient}>
+              <TextWrapper label="recipients.delete" />
+            </MenuItem>
+            <MenuItem onClick={openModal}>
+              <TextWrapper label="recipients.edit" />
+            </MenuItem>
             <Modal
               open={isOpenModal}
               onClose={handleClose}

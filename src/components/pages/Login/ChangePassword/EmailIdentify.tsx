@@ -7,6 +7,13 @@ import { useNavigate } from "react-router";
 import { useAppDispatch } from "store/hooks";
 import { selectorAuthLoading } from "store/Login/loginSelector";
 import { loginRemindPassword } from "store/Login/loginThunk";
+import { Box } from "@mui/material";
+import TextWrapper from "components/Contents/TextWrapper";
+import { t } from "i18next";
+
+interface ISubmit {
+  email: string;
+}
 
 const initialValue = {
   email: "",
@@ -18,43 +25,46 @@ const EmailIdentify = () => {
   const dispatch = useAppDispatch();
   const loaderSelector = useSelector(selectorAuthLoading);
 
-  const onSubmit = (value: any) => {
+  const onSubmit = (value: ISubmit) => {
     if (value.email.length <= 4) {
       setErrorForm(true);
     } else {
       setErrorForm(false);
-
       dispatch(loginRemindPassword({ value, navigate }));
     }
   };
 
   return (
-    <div className="container-register identify-data">
+    <Box className="container-register identify-data">
       <Form
         onSubmit={onSubmit}
         initialValues={initialValue}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className="container-register__form">
             <Logo />
-            <h2>Zresetuj hasło</h2>
-            <div className="identify">
-              <label>Podaj email</label>
+            <TextWrapper label="login.resetPassword" Selector="h2" />
+            <Box className="identify">
+              <TextWrapper label="login.enterEmail" />
               <Field
                 className={errorForm ? "input-error" : "lastName"}
                 name="email"
                 component="input"
                 placeholder="Email"
               />
-              {errorForm && <div className="error">Nieprawidłowy email</div>}
-            </div>
+              {errorForm && (
+                <Box className="error">
+                  <TextWrapper label="login.invalidEmail" />
+                </Box>
+              )}
+            </Box>
             <button className="btn-login" type="submit">
-              zresetuj hasło
+              <TextWrapper label="login.resetPassword" />
             </button>
           </form>
         )}
       />
-      {loaderSelector && <Loader text="Sprawdzam email..." />}
-    </div>
+      {loaderSelector && <Loader text={t('login.checkingEmail')} />}
+    </Box>
   );
 };
 

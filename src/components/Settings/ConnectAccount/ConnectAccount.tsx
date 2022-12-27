@@ -15,6 +15,7 @@ import {
 } from "store/SubAccount/subAccountSelector";
 import Loader from "components/Loader/Loader";
 import { refreshAccount } from "store/SubAccount/subAccountSlice";
+import { useTranslation } from "react-i18next";
 
 const initialValues = {
   login: "",
@@ -32,6 +33,7 @@ const ConnectAccount = ({ setOffer }: IProps) => {
   const subAccountsSelector = useSelector(selectorNewSubAccounts);
   const errorSelector = useSelector(selectorSubError);
   const messageSelector = useSelector(selectorNewSubAccountsMessage);
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
@@ -68,24 +70,23 @@ const ConnectAccount = ({ setOffer }: IProps) => {
       </Box>
     );
   }
-  console.log("messageSelector :>> ", messageSelector);
+
   if (loadingSelector) {
-    return <Loader text="Sprawdzam"></Loader>;
+    return <Loader text="offer.checking"></Loader>;
   }
-  console.log("subAccountsSelector :>> ", subAccountsSelector);
 
   return (
     <Box className="connect-account">
       {subAccountsSelector?.accountId ? (
         <Box sx={{ textAlign: "center" }}>
-          <div>Dodano nowe konto</div>
-          <div>Nr: {subAccountsSelector.accountId}</div>
+          <TextWrapper label="Dodano nowe konto" Selector="div"/>
+          <TextWrapper Selector="div">Nr: {subAccountsSelector.accountId}</TextWrapper>
           <Button
             className="btn-change"
             variant="contained"
             onClick={() => refresh()}
           >
-            <TextWrapper label="Dodaj ponownie" />
+            <TextWrapper label="offer.addAgain" />
           </Button>
         </Box>
       ) : (
@@ -95,7 +96,7 @@ const ConnectAccount = ({ setOffer }: IProps) => {
           render={({ handleSubmit }): JSX.Element => (
             <form onSubmit={handleSubmit}>
               <Box className="box">
-                <TextWrapper label="Podaj login" Selector="label" />
+                <TextWrapper label="offer.enterLogin" Selector="label" />
                 <Field
                   className={error ? "input-error" : "new-limit"}
                   isVisible="false"
@@ -107,23 +108,23 @@ const ConnectAccount = ({ setOffer }: IProps) => {
                 />
               </Box>
               <Box className="box">
-                <TextWrapper label="Podaj hasło" Selector="label" />
+                <TextWrapper label="offer.enterPassword" Selector="label" />
                 <Field
                   className={error ? "input-error" : "new-limit"}
                   name="password"
                   onChange={(e: any) => handleChange(e)}
                   component="input"
                   type="password"
-                  placeholder="Hasło"
+                  placeholder={t('offer.password')}
                 />
               </Box>
               {error && (
                 <Box className="error">
-                  <TextWrapper label="Nieprawidłowy limit" />
+                  <TextWrapper label="offer.invalidLimit" />
                 </Box>
               )}
               <Button className="btn-change" type="submit" variant="contained">
-                <TextWrapper label="Połącz" />
+                <TextWrapper label="offer.connect" />
               </Button>
             </form>
           )}

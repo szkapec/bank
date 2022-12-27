@@ -1,4 +1,3 @@
-import React from "react";
 import { Box } from "@mui/material";
 import { Field } from "react-final-form";
 import { useTranslation } from "react-i18next";
@@ -8,6 +7,7 @@ import { IInitialError } from "./RecipientModal";
 import { useSelector } from "react-redux";
 import { selectorLoaderRecipient } from "store/Recipient/recipientSelector";
 import Loader from "../../Loader/Loader";
+import TextWrapper from "components/Contents/TextWrapper";
 
 interface IProps {
   errorModal: IInitialError;
@@ -25,7 +25,7 @@ const FormControlComponent = ({ errorModal }: IProps) => {
             <Loader text="Zapis danych" />
           </div>
         )}
-        <label>{t("modal.recipientsName")}</label>
+        <TextWrapper label="modal.recipientsName" Selector="label" />
         <Field
           className={errorModal.recipientsName ? "input-error" : ""}
           name="recipientsName"
@@ -34,11 +34,11 @@ const FormControlComponent = ({ errorModal }: IProps) => {
           placeholder={t("modal.recipientsName")}
         />
         {errorModal.recipientsName && (
-          <div className="error">Dane wymagane!</div>
+          <TextWrapper label="modal.dataRequired" Selector="div" />
         )}
       </Box>
       <Box>
-        <label>{t("modal.toRecipient")}</label>
+        <TextWrapper label="modal.toRecipient" Selector="label" />
         <Field
           className={errorModal.toRecipient ? "input-error" : ""}
           name="toRecipient"
@@ -46,10 +46,14 @@ const FormControlComponent = ({ errorModal }: IProps) => {
           type="text"
           placeholder={t("modal.toRecipient")}
         />
-        {errorModal.toRecipient && <div className="error">Dane wymagane!</div>}
+        {errorModal.toRecipient && (
+          <div className="error">
+            <TextWrapper label="modal.dataRequired" />
+          </div>
+        )}
       </Box>
       <Box>
-        <label>{t("modal.recipientsAdress")}</label>
+        <TextWrapper label="modal.recipientsAdress" Selector="label" />
         <Field
           name="recipientsAdress"
           component="input"
@@ -57,9 +61,8 @@ const FormControlComponent = ({ errorModal }: IProps) => {
           placeholder={t("modal.recipientsAdress")}
         />
       </Box>
-
       <Box>
-        <label>{t("modal.recipientsAccount")}</label>
+        <TextWrapper label="modal.recipientsAccount" Selector="label" />
         <Field
           className={errorModal.recipientsAccount ? "input-error" : ""}
           name="recipientsAccount"
@@ -68,18 +71,21 @@ const FormControlComponent = ({ errorModal }: IProps) => {
           placeholder={t("modal.recipientsAccount")}
         />
         {errorModal.recipientsAccount && (
-          <div className="error">Dane wymagane!</div>
+          <div className="error">
+            {" "}
+            <TextWrapper label="modal.dataRequired" />
+          </div>
         )}
       </Box>
       <Box className="form-modal__checkbox">
         <Field name="trustedRecipient" component="input" type="checkbox" />
-        <label>{t("modal.trustedRecipient")}</label>
+        <TextWrapper label="modal.trustedRecipient" Selector="label" />
         <LockIcon sx={{ marginLeft: "10px", color: "#1976d2" }} />
         <HelpIcon sx={{ marginLeft: "10px", color: "#1976d2" }} />
       </Box>
       <Box className="form-modal__box">
         <Box sx={{ marginRight: 5 }} className="form-modal__box--item">
-          <label>{t("modal.sum")}</label>
+          <TextWrapper label="modal.sum" Selector="label" />
           <Field
             className={errorModal.sum ? "input-error" : ""}
             name="sum"
@@ -88,11 +94,13 @@ const FormControlComponent = ({ errorModal }: IProps) => {
             placeholder={t("modal.sum")}
           />
           {errorModal.sum && (
-            <div className="error">Nie prawidłowa wartość</div>
+            <div className="error">
+              <TextWrapper label="modal.wrongValue" />
+            </div>
           )}
         </Box>
         <Box sx={{ marginLeft: 3 }} className="form-modal__box--item">
-          <label>{t("modal.title")}</label>
+          <TextWrapper label="modal.title" Selector="label" />
           <Field
             className={errorModal.title ? "input-error" : ""}
             name="title"
@@ -100,7 +108,11 @@ const FormControlComponent = ({ errorModal }: IProps) => {
             type="text"
             placeholder={t("modal.title")}
           />
-          {errorModal.title && <div className="error">Dane wymagane!</div>}
+          {errorModal.title && (
+            <div className="error">
+              <TextWrapper label="modal.dataRequired" Selector="label" />
+            </div>
+          )}
         </Box>
       </Box>
     </Box>

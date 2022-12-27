@@ -1,30 +1,38 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectorAuthLoginUser,
   selectorLoginUserError,
-} from "store/Login/loginSelector.ts";
-import { login } from "store/Login/loginThunk.tsx";
+} from "store/Login/loginSelector";
+import { login } from "store/Login/loginThunk";
 import { Link } from "react-router-dom";
 import "./Login.scss";
-import Logo from "../../../assets/Logo";
+import Logo from "assets/Logo";
+import { ILoginToApp } from "store/Login/loginInterface";
+import { useAppDispatch } from "store/hooks";
+import TextWrapper from "components/Contents/TextWrapper";
+import { useTranslation } from "react-i18next";
+import { Box } from "@mui/material";
 
-const initialFormData = {
+const initialFormData: ILoginToApp = {
   email: "",
   password: "",
 };
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const loginUserSelector = useSelector(selectorAuthLoginUser);
   const loginErrorSelector = useSelector(selectorLoginUserError);
-  console.log('DELETEDDD!! :>> ', );
+  const { t } = useTranslation();
+
   localStorage.removeItem("emailChange");
   localStorage.removeItem("emailCode");
 
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState<ILoginToApp>(initialFormData);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -39,7 +47,7 @@ const Login = () => {
     return true;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: any) => {
     e.preventDefault();
     const val = validate();
     val && dispatch(login(formData));
@@ -47,9 +55,9 @@ const Login = () => {
   };
 
   return (
-    <div className="container-login">
+    <Box className="container-login">
       <Logo />
-      <h2>Logowanie do CD-Bank</h2>
+      <TextWrapper label="login.loginToBank" Selected="h2"/>
       <form
         className={loginErrorSelector ? "login-error" : "login"}
         onSubmit={onSubmit}
@@ -58,49 +66,55 @@ const Login = () => {
           <div className="login-error-text">{loginUserSelector.message}</div>
         ) : (
           loginErrorSelector && (
-            <div className="login-error-text">Niepoprawne dane logowania!</div>
+            <div className="login-error-text">
+              <TextWrapper label="login.loginInvalid"/>
+            </div>
           )
         )}
         <div className="container-login__data">
-          <label htmlFor="email">Podaj Email</label>
+          <label htmlFor="email">
+            <TextWrapper label="login.enterEmail"/>
+          </label>
           <br />
           <input
             name="email"
             type="email"
-            placeholder="Podaj email"
+            placeholder={t('login.enterEmail')}
             value={formData.email}
             onChange={handleChange}
           />
         </div>
         <div className="container-login__data">
-          <label htmlFor="password">Podaj hasło</label>
+          <label htmlFor="password">
+            <TextWrapper label="login.enterPassword"/>
+          </label>
           <br />
           <input
             name="password"
             type="password"
-            placeholder="Podaj hasło"
+            placeholder={t('login.enterPassword')}
             value={formData.password}
             onChange={handleChange}
           />
         </div>
         <button className="btn-login" type="submit">
-          Wyślij
+          <TextWrapper label="login.send"/>
         </button>
       </form>
 
       <div className="label-wrapper-register">
-        Nie masz jeszcze konta?
+        <TextWrapper label="login.haveAnAccount"/>
         <Link to="/register">
-          <span> zarejestruj się</span>
+        <TextWrapper label="login.register"/>
         </Link>
       </div>
       <div className="label-wrapper-register">
-        Nie pamiętasz hasła?
+      <TextWrapper label="login.rememberPassword"/>
         <Link to="/identify">
-          <span> Przypomnij hasło</span>
+        <TextWrapper label="login.remindPassword"/>
         </Link>
       </div>
-    </div>
+    </Box>
   );
 };
 

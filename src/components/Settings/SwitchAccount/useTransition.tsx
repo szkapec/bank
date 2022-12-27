@@ -8,8 +8,6 @@ import {
 import React, { useEffect, useRef, useState, useTransition } from "react";
 import axios from "axios";
 
-//https://javascript.plainenglish.io/react-v18-0-usetransition-master-in-2-minutes-3493281690ab
-
 const api = async() => {
   const token = localStorage.getItem("jwtToken");
     const config = {
@@ -34,8 +32,8 @@ const initialValues = {
 };
 
 const useTransitionTest = () => {
-  const [isPending, startTransition] = useTransition(); //useTransition Hook Declaration
-  const [images, setImages] = useState(null); //useState hook
+  const [isPending, startTransition] = useTransition();
+  const [images, setImages] = useState(null);
 
   startTransition(() => {
     loadData();

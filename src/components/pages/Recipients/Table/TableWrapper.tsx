@@ -1,13 +1,28 @@
+import { Box } from "@mui/material";
+import TextWrapper from "components/Contents/TextWrapper";
 import React from "react";
 import { IAddRecipient } from "store/Recipient/recipientInterface";
 import Table from "./Table";
 
-const TableWrapper = ({ recipients }: any) => {
-  if (!recipients?.length) return <div style={{padding: '20px 0 0 20px'}}>Brak dodanych odbiorców</div>;
+export interface IPropsRecipients {
+  recipients: IAddRecipient[];
+}
 
-  return recipients.map((recipient: IAddRecipient) => (
-    <Table recipient={recipient}></Table>
-  ));
+const TableWrapper = ({ recipients }: IPropsRecipients) => {
+  if (!recipients?.length)
+    return (
+      <Box sx={{ padding: "20px 0 0 20px" }}>
+        <TextWrapper label="recipients.noRecipientsAdded" />
+      </Box>
+    );
+
+  return (
+    <Box>
+      {recipients.map((recipient: IAddRecipient) => (
+        <Table key={recipient._id} recipient={recipient}></Table>
+      ))}
+    </Box>
+  );
 };
 
 export default React.memo(TableWrapper);

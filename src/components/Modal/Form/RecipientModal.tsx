@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import { Form } from "react-final-form";
 import { useTranslation } from "react-i18next";
@@ -13,6 +13,7 @@ import {
 } from "store/Recipient/recipientThunk";
 import { useAppDispatch } from "store/hooks";
 import { IAddRecipient } from "store/Recipient/recipientInterface";
+import TextWrapper from "components/Contents/TextWrapper";
 
 interface IProps {
   initialValue?: IAddRecipient;
@@ -41,7 +42,6 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
     value?.length > 3 ? false : true;
 
   const [errorForm, setErrorForm] = useState<IInitialError>(initialError);
-  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
   const onSubmit = (values: IAddRecipient) => {
@@ -84,19 +84,23 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
   };
   return (
     <Box className="modal" sx={{ ...style, width: 600 }}>
-      <h2>{t("modal.addRecipients")}</h2>
-      <Box>{t("modal.paymentMethod")}</Box>
+      <TextWrapper label="modal.addRecipients" Selector="h2" />
+      <Box>
+        <TextWrapper label="modal.paymentMethod" />
+      </Box>
       <Form
         onSubmit={onSubmit}
         initialValues={initialValue || initialFormValue}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
+        render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <>
-              <ButtonGroupCompomnent buttons={buttons} />
-              <FormControlComponent errorModal={errorForm} />
-              <Button type="submit">Dalej</Button>
-              <Button type="submit">Wróć</Button>
-            </>
+            <ButtonGroupCompomnent buttons={buttons} />
+            <FormControlComponent errorModal={errorForm} />
+            <Button type="submit">
+              <TextWrapper label="modal.next" />
+            </Button>
+            <Button type="submit">
+              <TextWrapper label="modal.back" />
+            </Button>
           </form>
         )}
       />
