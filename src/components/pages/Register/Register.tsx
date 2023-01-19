@@ -69,31 +69,31 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="container-register__form">
             <Logo />
             <TextWrapper label="" Selector="h2" />
-            <h2>Zarejestruj się do CD-Bank</h2>
+            <h2>Register with CD-Bank</h2>
             <Box>
-              <label>Podaj Imię</label>
+              <label>Your name</label>
               <Field
                 className={errorForm.firstName ? "input-error" : "firstName"}
                 name="firstName"
                 component="input"
-                placeholder="Imię"
+                placeholder="Name"
               />
-              {errorForm.firstName && <div className="error">Podaj imię</div>}
+              {errorForm.firstName && <div className="error">Your name</div>}
             </Box>
             <Box>
-              <label>Podaj nazwisko</label>
+              <label>Your surname</label>
               <Field
                 className={errorForm.lastName ? "input-error" : "lastName"}
                 name="lastName"
                 component="input"
-                placeholder="Nazwisko"
+                placeholder="Surname"
               />
               {errorForm.lastName && (
-                <div className="error">Podaj nazwisko</div>
+                <div className="error">Your surname</div>
               )}
             </Box>
             <Box>
-              <label>Podaj Email</label>
+              <label>Enter Email</label>
               <Field
                 className={errorForm.email ? "input-error" : "email"}
                 name="email"
@@ -102,11 +102,11 @@ const Register = () => {
                 placeholder="Email"
               />
               {errorForm.email && (
-                <div className="error">Niepoprawny email!</div>
+                <div className="error">Invalid email!</div>
               )}
             </Box>
             <div>
-              <label>Płeć</label>
+              <label>Sex</label>
             </div>
             <Field
               name="sex"
@@ -117,7 +117,7 @@ const Register = () => {
               id="male"
             />
             <label className="custom-control-label" htmlFor="male">
-              Kobieta
+              Male
             </label>
             <Field
               name="sex"
@@ -128,51 +128,51 @@ const Register = () => {
               id="female"
             />
             <label className="custom-control-label" htmlFor="female">
-              Mężczyzna
+              Female
             </label>
             <Box>
-              <label>Kraj pochodzenia</label>
+              <label>Country of origin</label>
               <Field name="country" component="select">
-                <option value="pl_PL">Polska</option>
-                <option value="en_EN">Anglia</option>
-                <option value="gr_GR">Niemcy</option>
-                <option value="sp_SP">Hiszpania</option>
+                <option value="pl_PL">Poland</option>
+                <option value="en_EN">England</option>
+                <option value="gr_GR">Germany</option>
+                <option value="sp_SP">Spain</option>
               </Field>
             </Box>
             <Box>
-              <label>Rodzaj konta</label>
+              <label>Account type</label>
               <Field name="account" component="select">
-                <option value="general">Konto bankowe (osobiste)</option>
-                <option value="saving">Oszczędnościowe</option>
-                <option value="credit">Kredytowe</option>
-                <option value="investment">Inwestycyjne</option>
+                <option value="general">Bank account (personal)</option>
+                <option value="saving">Savings</option>
+                <option value="credit">Credit</option>
+                <option value="investment">Investment</option>
               </Field>
             </Box>
             <Box>
-              <label>Hasło</label>
+              <label>Password</label>
               <Field
                 className={errorForm.password && "input-error"}
                 name="password"
                 type="password"
                 component="input"
-                placeholder="Hasło"
+                placeholder="Password"
               />
             </Box>
             {errorForm.password && (
-              <Box className="error">Hasło nie pasuje do siebie!</Box>
+              <Box className="error">Password does not match!</Box>
             )}
             <Box>
-              <label>Powtórz hasło</label>
+              <label>Repeat password</label>
               <Field
                 className={errorForm.password && "input-error"}
                 name="repeatPassword"
                 type="password"
                 component="input"
-                placeholder="Powtórz hasło"
+                placeholder="Repeat password"
               />
             </Box>
             <button className="btn-login" type="submit">
-              Zarejestruj się
+              Register
             </button>
           </form>
         )}

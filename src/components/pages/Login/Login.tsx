@@ -79,6 +79,7 @@ const Login = () => {
           <input
             name="email"
             type="email"
+            className="email"
             placeholder={t('login.enterEmail')}
             value={formData.email}
             onChange={handleChange}

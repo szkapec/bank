@@ -16,7 +16,7 @@ export const checkPermissions = (
     const isVisible = permissionForInput(levelPermission, permissionSelected);
     return !isVisible;
   } else {
-    return true
+    return true;
   }
 };
 
@@ -29,8 +29,8 @@ export const permissionForInput = (
       return permissionSelected === EUserPermission.DONE;
     }
     case 2: {
-      const user = permissionSelected === EUserPermission.USER
-      const done = permissionSelected === EUserPermission.DONE
+      const user = permissionSelected === EUserPermission.USER;
+      const done = permissionSelected === EUserPermission.DONE;
       return user || done;
     }
     default:
@@ -53,15 +53,15 @@ export const permissionForChangeLimitTransaction = (
     } else if (name === EnumLimitTransaction.FULL) {
       return value <= limit.limitFull;
     }
-  }
+  };
 
   switch (permision) {
     case 1: {
-      const value = validate(limitInputDone)
+      const value = validate(limitInputDone);
       return value;
     }
     case 2: {
-      const value = validate(limitInputUser)
+      const value = validate(limitInputUser);
       return value;
     }
   }

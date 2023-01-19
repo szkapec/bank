@@ -18,8 +18,8 @@ export const API = {
   POST_USER_CHANGE_LIMIT: HOST + "/api/users/change-limit",
   POST_USER_SWITCH_ACCOUNT: HOST + "/api/users/switch-account",
 
-  GET_RECIPIENTS: HOST + "/api/recipient/",
-  PUT_RECIPIENTS: HOST + "/api/recipient",
-  PATCH_RECIPIENTS: HOST + "/api/recipient/edit",
+  GET_USER_RECIPIENTS: HOST + "/api/recipient/",
+  PUT_ADD_RECIPIENTS: HOST + "/api/recipient",
+  PATCH_EDIT_RECIPIENTS: HOST + "/api/recipient/edit",
   DELETE_RECIPIENTS: HOST + "/api/recipient/"
 };

@@ -1,7 +1,8 @@
 import TextWrapper from "components/Contents/TextWrapper";
+import AdditionalNavbar from "components/Navbar/AdditionalNavbar";
 import { Link } from "react-router-dom";
 
-export enum Routes {
+export enum RoutesAdmin {
   Users = "Users",
   Logout = "Logout",
   Ban = "Ban",
@@ -16,27 +17,17 @@ interface IPropsAdminNavbar {
 const AdminNavbar = ({ setRoute, route }: IPropsAdminNavbar) => {
   return (
     <nav className="navbar-admin">
-      <Link
-        to="/admin"
-        className={Routes.Users === route ? "admin-active" : Routes.Users}
-        onClick={() => setRoute(Routes.Users)}
-      >
-        <TextWrapper label="admin.users" />
-      </Link>
-      <Link
-        to="/admin"
-        className={Routes.Logout === route ? "admin-active" : Routes.Logout}
-        onClick={() => setRoute(Routes.Logout)}
-      >
-        <TextWrapper label="admin.logOutUser" />
-      </Link>
-      <Link
-        to="/admin"
-        className={Routes.Ban === route ? "admin-active" : Routes.Ban}
-        onClick={() => setRoute(Routes.Ban)}
-      >
-        <TextWrapper label="admin.userBan" />
-      </Link>
+      <AdditionalNavbar
+        setRoute={setRoute}
+        useRoutes={[
+          RoutesAdmin.Users,
+          RoutesAdmin.Logout,
+          RoutesAdmin.Ban
+        ]}
+        route={route}
+        path="/admin"
+        label={["admin.users", "admin.logOutUser", "admin.userBan"]}
+      />
     </nav>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AdminNavbar, { Routes } from "./Navbar/AdminNavbar";
+import AdminNavbar, { RoutesAdmin } from "./Navbar/AdminNavbar";
 import AdminUsers from "./Users/AdminUsers";
 import AdminLogout from "./Logout/AdminLogout";
 import AdminBan from "./Ban/AdminBan";
@@ -7,15 +7,15 @@ import AdminSendMessage from "./SendMessage/AdminSendMessage";
 import { Box } from "@mui/material";
 
 const AdminWrapper = () => {
-  const [route, setRoute] = useState<Routes>(Routes.Users);
+  const [route, setRoute] = useState<RoutesAdmin>(RoutesAdmin.Users);
 
   const generateRoute = (route: string) => {
     switch (route) {
-      case Routes.Users:
+      case RoutesAdmin.Users:
         return <AdminUsers />;
-      case Routes.Logout:
+      case RoutesAdmin.Logout:
         return <AdminLogout />;
-      case Routes.Ban:
+      case RoutesAdmin.Ban:
         return <AdminBan />;
       // case Routes.Message:
       //   return <AdminSendMessage />;

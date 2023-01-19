@@ -40,5 +40,12 @@ export const store = configureStore({
   reducer: rootReducer
 });
 
+export const setupStore = (preloadedState:any) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState
+  })
+}
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

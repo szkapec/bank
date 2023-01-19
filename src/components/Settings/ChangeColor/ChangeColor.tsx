@@ -8,7 +8,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import TextWrapper from "components/Contents/TextWrapper";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/hooks";
 import { selectorColor } from "store/Login/loginSelector";
@@ -24,7 +24,7 @@ interface IProps {
 }
 
 const ChangeColor = ({ setOffer }: IProps) => {
-  const [color, setColor] = React.useState("");
+  const [color, setColor] = useState("");
   const colorSelector = useSelector(selectorColor);
 
   const dispatch = useAppDispatch();
@@ -39,6 +39,7 @@ const ChangeColor = ({ setOffer }: IProps) => {
   return (
     <Box sx={styleColor}>
       <Box sx={{ padding: "0px 0 15px" }}>
+        <div>testas</div>
         <TextWrapper label="Zmień kolor" />
       </Box>
       <FormControl>

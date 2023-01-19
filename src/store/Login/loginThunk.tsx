@@ -40,10 +40,10 @@ export const login = createAsyncThunk("LOGIN", async (text: ILoginToApp) => {
       return res.data;
     }
     return;
-  } catch (error) {
-    console.log(`error`, error);
+  } catch ({ response }) {
+    console.log(`error`, response);
     return {
-      message: error.response.data,
+      message: response.data.message,
       error: true,
     };
   }
