@@ -10,6 +10,7 @@ import { Reducer } from "redux";
 import recipientSlice from "./Recipient/recipientSlice";
 import adminSlice from "./Admin/adminSlice";
 import subAccountSlice from "./SubAccount/subAccountSlice";
+import homeSlice from "./Home/homeSlice";
 
 const appReducer = combineReducers({
   auth: loginSlice,
@@ -18,6 +19,7 @@ const appReducer = combineReducers({
   recipients: recipientSlice,
   subAccounts: subAccountSlice,
   admin: adminSlice,
+  home: homeSlice
 });
 
 const rootReducer: Reducer<
@@ -28,6 +30,7 @@ const rootReducer: Reducer<
     recipients: any;
     subAccounts: any;
     admin: any;
+    home: any;
   }>
 > = (state, action) => {
   if (action.type === "LOGIN/logOut") {
