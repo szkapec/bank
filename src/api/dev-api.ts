@@ -1,4 +1,3 @@
-const LOCAL = "http://localhost:5000/api/";
 const HOST = process.env.REACT_APP_HOST;
 
 export const API = {

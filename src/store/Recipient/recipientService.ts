@@ -11,7 +11,8 @@ export const getRecipients = async() => {
     },
   };
 
-  const res = await axios.get(`http://localhost:5000/api/recipient/63503f3f4093e59d0eaf3c9c`, config);
+  // const res = await axios.get(`http://localhost:5005/api/recipient/63503f3f4093e59d0eaf3c9c`, config);
+  const res = await axios.get(`${process.env.REACT_APP_HOST}/api/recipient/63503f3f4093e59d0eaf3c9c`, config);
   console.log(`response`, res.data)
   // getRecipientTest(res.data)
   return res.data;

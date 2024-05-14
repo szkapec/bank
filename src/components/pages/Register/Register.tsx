@@ -69,7 +69,7 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="container-register__form">
             <Logo />
             <TextWrapper label="" Selector="h2" />
-            <h2>Register with CD-Bank</h2>
+            <h2>Register</h2>
             <Box>
               <label>Your name</label>
               <Field

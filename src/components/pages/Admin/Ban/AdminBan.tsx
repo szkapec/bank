@@ -29,7 +29,6 @@ const AdminBan = () => {
         ban,
       });
       setDataBanned(data);
-      console.log("data :>> ", data);
       if (data?.ban) {
         toast.success(data?.text);
       }

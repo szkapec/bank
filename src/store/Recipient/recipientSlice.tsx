@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, nanoid  } from "@reduxjs/toolkit";
-import { userRecipients } from "./recipientThunk";
+import { addUserRecipients, deleteUserRecipients, editUserRecipients, userRecipients } from "./recipientThunk";
 import { IAddRecipient, IRecipients } from './recipientInterface'
 import { loginSwitchAccount } from "store/Login/loginThunk";
 
@@ -32,6 +32,15 @@ export const recipientSlice = createSlice({
     },
     [loginSwitchAccount.fulfilled.toString()]: (state) => {
       state.saved = []
+    },
+    [addUserRecipients.fulfilled.toString()]: (state, { payload }: PayloadAction<any>) => {
+      state.saved = payload
+    },
+    [editUserRecipients.fulfilled.toString()]: (state, { payload }: PayloadAction<any>) => {
+      state.saved = payload
+    },
+    [deleteUserRecipients.fulfilled.toString()]: (state, { payload }: PayloadAction<any>) => {
+      state.saved = payload
     }
   },
 });

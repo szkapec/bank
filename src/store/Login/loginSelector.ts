@@ -15,7 +15,7 @@ export const selectorAuthLoginUser = createSelector(
 
 export const selectorAuthLoginEmail = createSelector(
   selectSelf,
-  (state) => state.auth?.user.email
+  (state) => state.auth?.user?.email
 );
 
 export const selectorAuthLoginUserNumberAccount = createSelector(
@@ -56,4 +56,9 @@ export const selectorPermision = createSelector(
 export const selectorColor = createSelector(
   selectSelf,
   (state) => state.auth?.user?.color
+);
+
+export const selectorError = createSelector(
+  selectSelf,
+  (state) => state.auth?.error
 );

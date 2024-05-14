@@ -15,5 +15,6 @@
   "somethingWentWrong": "Coś poszło nie tak",
   "addedNewRecipient": "Dodany nowy odbiorca",
   "editingWentFine": "Edycja przebiegła prawidłowo",
-  "recipientDeleted": "Odbiorca usunięty"
+  "recipientDeleted": "Odbiorca usunięty",
+  "nameRecipient": "Nazwa odbiorcy"
 }

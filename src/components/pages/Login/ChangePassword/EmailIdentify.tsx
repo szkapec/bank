@@ -1,70 +1,107 @@
-import { useState } from "react";
-import Logo from "assets/Logo";
-import Loader from "components/Loader/Loader";
-import { Field, Form } from "react-final-form";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { useAppDispatch } from "store/hooks";
-import { selectorAuthLoading } from "store/Login/loginSelector";
-import { loginRemindPassword } from "store/Login/loginThunk";
-import { Box } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import TextWrapper from "components/Contents/TextWrapper";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
+import { useAppDispatch } from "store/hooks";
+import { loginRemindPassword } from "store/Login/loginThunk";
+import { Link, useNavigate } from "react-router-dom";
+import LoginIcon from "@mui/icons-material/Login";
+import { useSelector } from "react-redux";
+import { selectorAuthLoading } from "store/Login/loginSelector";
+import Loader from "components/Loader/Loader";
 import { t } from "i18next";
 
-interface ISubmit {
+type FormValues = {
   email: string;
-}
-
-const initialValue = {
-  email: "",
 };
 
 const EmailIdentify = () => {
-  const navigate = useNavigate();
-  const [errorForm, setErrorForm] = useState(false);
   const dispatch = useAppDispatch();
-  const loaderSelector = useSelector(selectorAuthLoading);
 
-  const onSubmit = (value: ISubmit) => {
-    if (value.email.length <= 4) {
-      setErrorForm(true);
-    } else {
-      setErrorForm(false);
-      dispatch(loginRemindPassword({ value, navigate }));
-    }
+  const form = useForm<FormValues>({
+    defaultValues: {
+      email: "",
+    },
+  });
+  const navigate = useNavigate();
+  const loaderSelector = useSelector(selectorAuthLoading);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = form;
+
+  const onSubmit = (value: FormValues) => {
+    console.log("value", value);
+    dispatch(loginRemindPassword({ value, navigate }));
+  };
+
+  const helperTextErrorEmail = () => {
+    if (errors?.email?.type === "required") return "This is required";
+    else if (errors?.email?.type === "minLength") {
+      return "Min length exceeded";
+    } else return null;
   };
 
   return (
-    <Box className="container-register identify-data">
-      <Form
-        onSubmit={onSubmit}
-        initialValues={initialValue}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className="container-register__form">
-            <Logo />
-            <TextWrapper label="login.resetPassword" Selector="h2" />
-            <Box className="identify">
-              <TextWrapper label="login.enterEmail" />
-              <Field
-                className={errorForm ? "input-error" : "lastName"}
-                name="email"
-                component="input"
-                placeholder="Email"
+    <>
+      <Box className="login">
+        <Box className="login__model">
+          <div className="login__model--log">
+            <LoginIcon />
+            <TextWrapper label="Zresetuj hasło"></TextWrapper>
+          </div>
+          <form
+            className="login__model--form"
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
+            <Box className="login-box">
+              <TextField
+                className="login-input"
+                label="Email"
+                type="email"
+                {...register("email", {
+                  required: "Email is required",
+                  minLength: 6,
+                })}
+                error={!!errors.email}
+                helperText={helperTextErrorEmail()}
               />
-              {errorForm && (
-                <Box className="error">
-                  <TextWrapper label="login.invalidEmail" />
-                </Box>
-              )}
             </Box>
-            <button className="btn-login" type="submit">
-              <TextWrapper label="login.resetPassword" />
-            </button>
+
+            <Box className="login-box">
+              <Button
+                className="login-input"
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Zresetuj hasło
+              </Button>
+            </Box>
           </form>
-        )}
-      />
-      {loaderSelector && <Loader text={t('login.checkingEmail')} />}
-    </Box>
+          <Box className="login-wrapper">
+            <Box>
+              <TextWrapper label="login.haveAnAccount" />
+              <Link to="/register">
+                <TextWrapper label="login.register" />
+              </Link>
+            </Box>
+            <Box className="">
+              <TextWrapper label="Wrócić do logowania?" />
+              <Link to="/login">
+                <TextWrapper label="Wróć do logowania" />
+              </Link>
+            </Box>
+          </Box>
+
+          <DevTool control={control} />
+        </Box>
+      </Box>
+      {loaderSelector && <Loader text={t("login.checkingEmail")} />}
+    </>
   );
 };
 

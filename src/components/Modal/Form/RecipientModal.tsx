@@ -18,7 +18,7 @@ import TextWrapper from "components/Contents/TextWrapper";
 interface IProps {
   initialValue?: IAddRecipient;
   edit?: boolean;
-  handleClose?: Function;
+  handleClose: Function;
 }
 
 export interface IInitialError {
@@ -46,8 +46,13 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const onSubmit = (values: IAddRecipient) => {
-    const { recipientsName, toRecipient, recipientsAccount, title, sum } =
-      values;
+    const {
+      recipientsName,
+      toRecipient,
+      recipientsAccount,
+      title,
+      sum,
+    } = values;
     let errorRecipientsName,
       errorToRecipient,
       errorTitle,
@@ -68,7 +73,7 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
       !errorRecipientsAccount
     ) {
       setErrorForm(initialError);
-      console.log(`values`, values)
+      console.log(`values`, values);
       if (!edit) {
         dispatch(addUserRecipients(values));
       } else {
@@ -84,6 +89,7 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
       });
     }
   };
+
   return (
     <Box className="modal" sx={{ ...style, width: 600 }}>
       <TextWrapper label="modal.addRecipients" Selector="h2" />
@@ -98,9 +104,9 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
             <ButtonGroupCompomnent buttons={buttons} />
             <FormControlComponent errorModal={errorForm} />
             <Button type="submit">
-              <TextWrapper label="modal.next" />
+              <TextWrapper label="modal.save" />
             </Button>
-            <Button type="submit">
+            <Button onClick={() => handleClose()}>
               <TextWrapper label="modal.back" />
             </Button>
           </form>

@@ -10,7 +10,6 @@ const i18n = i18next;
 
 export function initTranslation(languageName = "pl_PL"): void {
   const language = languageName.split('_')[0]
-  console.log(`languageName`, language)
   i18n
     .use(I18nextBrowserLanguageDetector)
     .use(initReactI18next)
