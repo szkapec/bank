@@ -1,11 +1,11 @@
 {
-  "loginToBank": "Logowanie do CD-Bank",
+  "loginToBank": "Logowanie do banku",
   "loginInvalid": "Niepoprawne dane logowania!",
   "enterEmail": "Podaj Email",
   "enterPassword": "Podaj hasło",
   "send": "Wyślij",
   "haveAnAccount": "Nie masz jeszcze konta?",
-  "register": "zarejestruj się",
+  "register": "Zarejestruj się",
   "rememberPassword": "Nie pamiętasz hasła?",
   "remindPassword": "Przypomnij hasło",
   "changePassword": "Zmień hasło",

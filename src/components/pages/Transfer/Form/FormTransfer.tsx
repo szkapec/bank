@@ -84,7 +84,7 @@ const FormTransfer = ({
           type="text"
           name="nameReceived"
           value={formData.nameReceived}
-          placeholder={t('recipient.nameRecipient')}
+          placeholder={t('recipients.nameRecipient')}
           onChange={handleChange}
         />
         <div

@@ -28,7 +28,6 @@ export const userRecipients = createAsyncThunk("RECIPIENTS_GET", async () => {
 export const addUserRecipients = createAsyncThunk(
   "ADD_USER_RECIPIENTS",
   async (data: IAddRecipient) => {
-    // const { t } = useTranslation();
     try {
       const token = localStorage.getItem("jwtToken");
       const { config, userId } = globalConfig(token);
@@ -61,6 +60,7 @@ export const editUserRecipients = createAsyncThunk(
       const res = await axios.patch(API.PATCH_EDIT_RECIPIENTS, body, config);
       if (res.status === 200) {
         toast.success("recipients.editingWentFine");
+        console.log('res.data', res.data)
         return res.data;
       }
       return null;

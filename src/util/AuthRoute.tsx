@@ -6,7 +6,7 @@ import { selectorLoginUser } from "../store/Login/loginSelector";
 export const AuthRoute = (props: any) => {
   const auth = useSelector(selectorLoginUser);
   const { component: Component, path, ...rest } = props;
-  console.log('props :>> ', props);
+
   return (
     <Routes>
       <Route
@@ -21,7 +21,7 @@ export const AuthRoute = (props: any) => {
 export const AuthRouteLogin = (props: any) => {
   const { component: Component, path, ...rest } = props;
   const auth = useSelector(selectorLoginUser);
-  console.log('props2 :>> ', props);
+
   return (
     <Routes>
       <Route

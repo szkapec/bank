@@ -48,7 +48,6 @@ export const getTransfers = createAsyncThunk(
       },
     };
     try {
-      console.log(`data xxxxd`, data);
       const res = await axios.get(
         `${host}/api/transfers/${data.bankAccountNumber}/${data.pageNumber}`,
         config

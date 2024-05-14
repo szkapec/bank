@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import setAuthenticationToken from "../../util/setAuthenticationToken";
 import {
-  ILoginUser,
   IUserLimit,
   IRegisterUser,
   ILoginToApp,

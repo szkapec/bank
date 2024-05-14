@@ -38,7 +38,6 @@ const Test = () => {
         console.log(`WYGASL!!!`);
         return false;
       } else {
-        console.log(`JESZCZE PRAWIDLOWY!!!`);
         return decodedToken?.id;
       }
     }

@@ -89,7 +89,7 @@ const Table = ({ recipient }: IPropsRecipient) => {
               aria-labelledby="parent-modal-title"
               aria-describedby="parent-modal-description"
             >
-              <RecipientModal edit={true} initialValue={recipient} />
+              <RecipientModal edit={true} initialValue={recipient} handleClose={handleClose} />
             </Modal>
           </Menu>
         </div>

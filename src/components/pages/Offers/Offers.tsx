@@ -23,8 +23,11 @@ const ChangeColor = lazy(
   () => import("../../Settings/ChangeColor/ChangeColor")
 );
 
+const renderLoader = () => <Loader />;
+
 const Offers = () => {
-  const renderLoader = () => <Loader />;
+  console.log('Offers', )
+
   const [password, setPassword] = useState(false);
   const [language, setLanguage] = useState(false);
   const [colorPage, setColorPage] = useState(false);

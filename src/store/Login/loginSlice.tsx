@@ -1,20 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { loginChangePassword, login, register, loginRemindCode, loginRemindPassword, loginChangeUserLanguage, loginChangeLanguage, loginSwitchAccount } from "./loginThunk";
+import {
+  loginChangePassword,
+  login,
+  register,
+  loginRemindCode,
+  loginRemindPassword,
+  loginChangeUserLanguage,
+  loginChangeLanguage,
+  loginSwitchAccount,
+} from "./loginThunk";
 
 interface IInitialState {
   user: {
-    id?: string,
-    email?: string,
-    error?: boolean,
-    bankAccountNumber?: string,
-    premium?: boolean,
-    money?: string,
-    message?: string,
-    language?: string,
-    permission?: [string]
-    limit: undefined
-  },
-  loading: boolean
+    id?: string;
+    email?: string;
+    error?: boolean;
+    bankAccountNumber?: string;
+    premium?: boolean;
+    money?: string;
+    message?: string;
+    language?: string;
+    permission?: [string];
+    limit: undefined;
+  };
+  loading: boolean;
+  error: string;
 }
 
 const initialState: IInitialState = {
@@ -31,6 +41,7 @@ const initialState: IInitialState = {
     limit: undefined,
   },
   loading: false,
+  error: "",
 };
 
 export const loginSlice = createSlice({
@@ -42,13 +53,15 @@ export const loginSlice = createSlice({
       state.loading = false;
     },
     logOut: (state) => {
-      localStorage.removeItem('jwtToken');
+      localStorage.removeItem("jwtToken");
       state.user = initialState.user;
       state.loading = false;
     },
     subtractMoney: (state, { payload }) => {
-      state.user.money = (Number(state.user.money) - Number(payload)).toString()
-    }
+      state.user.money = (
+        Number(state.user.money) - Number(payload)
+      ).toString();
+    },
   },
   // https://dev.to/chinwike/separating-logic-in-your-redux-toolkit-application-h7i
   extraReducers: {
@@ -95,6 +108,7 @@ export const loginSlice = createSlice({
     },
     [loginChangePassword.fulfilled.toString()]: (state, { payload }) => {
       state.loading = false;
+      state.error = payload.message.message;
     },
     [loginChangePassword.rejected.toString()]: (state) => {
       state.loading = false;
@@ -108,9 +122,12 @@ export const loginSlice = createSlice({
     [loginSwitchAccount.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [loginSwitchAccount.fulfilled.toString()]: (state, { payload }: PayloadAction<any> ) => {
+    [loginSwitchAccount.fulfilled.toString()]: (
+      state,
+      { payload }: PayloadAction<any>
+    ) => {
       state.user = payload.connectAccount;
-      state.user.id = payload.connectAccount._id
+      state.user.id = payload.connectAccount._id;
       state.loading = false;
     },
     [loginSwitchAccount.rejected.toString()]: (state) => {

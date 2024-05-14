@@ -19,7 +19,7 @@ const api = async() => {
     };
 
     const res = await axios.get(
-      `http://localhost:5000/api/users/connect-account`,
+      `${process.env.REACT_APP_HOST}/api/users/connect-account`,
       config
     );
     return res.data;

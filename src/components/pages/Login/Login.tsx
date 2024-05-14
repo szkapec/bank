@@ -1,122 +1,179 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import {
-  selectorAuthLoginUser,
-  selectorLoginUserError,
-} from "store/Login/loginSelector";
-import { login } from "store/Login/loginThunk";
-import { Link } from "react-router-dom";
-import "./Login.scss";
-import Logo from "assets/Logo";
-import { ILoginToApp } from "store/Login/loginInterface";
-import { useAppDispatch } from "store/hooks";
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import TextWrapper from "components/Contents/TextWrapper";
-import { useTranslation } from "react-i18next";
-import { Box } from "@mui/material";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
+import { useAppDispatch } from "store/hooks";
+import { login } from "store/Login/loginThunk";
+import { selectorAuthLoginUser } from "store/Login/loginSelector";
+import { useSelector } from "react-redux";
+import "./LoginStyle.scss";
+import { Link } from "react-router-dom";
+import LoginIcon from "@mui/icons-material/Login";
 
-const initialFormData: ILoginToApp = {
+type FormValues = {
+  email: string;
+  password: string;
+};
+
+const initialFormData = {
   email: "",
   password: "",
 };
-
-const Login = () => {
+const NewLogin = () => {
+  const [userList, setUserList] = useState(0);
+  const [user, setUser] = useState(initialFormData);
   const dispatch = useAppDispatch();
   const loginUserSelector = useSelector(selectorAuthLoginUser);
-  const loginErrorSelector = useSelector(selectorLoginUserError);
-  const { t } = useTranslation();
 
-  localStorage.removeItem("emailChange");
-  localStorage.removeItem("emailCode");
+  const form = useForm<FormValues>({
+    defaultValues: user,
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    setValue,
+  } = form;
 
-  const [formData, setFormData] = useState<ILoginToApp>(initialFormData);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = (data: FormValues) => {
+    console.log("data", data);
+    dispatch(login(data));
+    setUser(initialFormData);
   };
 
-  const validate = () => {
-    const { email, password } = formData;
-    if (password.length <= 3) {
-      return false;
+  const handleChange = (e: any) => {
+    if (e.target.value === 10) {
+      setValue("email", `${process.env.REACT_APP_USER_LOGIN_EMAIL}`, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      setValue("password", `${process.env.REACT_APP_USER_LOGIN_PASSWORD}`, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    } else if (e.target.value === 20) {
+      setValue("email", `${process.env.REACT_APP_USER_LOGIN_EMAIL}`, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      setValue("password", `${process.env.REACT_APP_USER_LOGIN_PASSWORD}`, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
     }
-    if (email.length <= 3) {
-      return false;
-    }
-    return true;
+    setUserList(e.target.value);
   };
 
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-    const val = validate();
-    val && dispatch(login(formData));
-    setFormData(initialFormData);
+  const helperTextErrorEmail = () => {
+    if (errors?.email?.type === "required") return "This is required";
+    else if (errors?.email?.type === "minLength") {
+      return "Min length exceeded";
+    } else return null;
+  };
+
+  const onChangeTool = (e: any) => {
+    setUser({ ...user, [e.target.type]: e.target.value });
   };
 
   return (
-    <Box className="container-login">
-      <Logo />
-      <TextWrapper label="login.loginToBank" Selected="h2"/>
-      <form
-        className={loginErrorSelector ? "login-error" : "login"}
-        onSubmit={onSubmit}
-      >
-        {loginUserSelector?.message ? (
-          <div className="login-error-text">{loginUserSelector.message}</div>
-        ) : (
-          loginErrorSelector && (
-            <div className="login-error-text">
-              <TextWrapper label="login.loginInvalid"/>
-            </div>
-          )
-        )}
-        <div className="container-login__data">
-          <label htmlFor="email">
-            <TextWrapper label="login.enterEmail"/>
-          </label>
-          <br />
-          <input
-            name="email"
-            type="email"
-            className="email"
-            placeholder={t('login.enterEmail')}
-            value={formData.email}
-            onChange={handleChange}
-          />
+    <Box className="login">
+      <Box className="login__model">
+        <div className="login__model--log">
+          <LoginIcon />
+          <TextWrapper label="Zaloguj się"></TextWrapper>
         </div>
-        <div className="container-login__data">
-          <label htmlFor="password">
-            <TextWrapper label="login.enterPassword"/>
-          </label>
-          <br />
-          <input
-            name="password"
-            type="password"
-            placeholder={t('login.enterPassword')}
-            value={formData.password}
+        <FormControl className="login__model--form-control" fullWidth>
+          <InputLabel>Zaloguj się na użytkownika testowego</InputLabel>
+          <Select
+            className="login-select"
+            value={userList}
+            label="User"
             onChange={handleChange}
-          />
-        </div>
-        <button className="btn-login" type="submit">
-          <TextWrapper label="login.send"/>
-        </button>
-      </form>
+          >
+            <MenuItem disabled={true} value={0}>
+              Wybierz
+            </MenuItem>
+            <MenuItem value={10}>Podstawowy</MenuItem>
+            <MenuItem value={20}>Admin</MenuItem>
+          </Select>
+        </FormControl>
+        <form
+          className="login__model--form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
+          <Box className="login-box">
+            <TextField
+              className="login-input"
+              label="Email"
+              InputLabelProps={{ shrink: !!user.email || !!userList }}
+              type="email"
+              {...register("email", {
+                required: "Email is required",
+                minLength: 6,
+              })}
+              error={!!errors.email}
+              helperText={helperTextErrorEmail()}
+              onChange={onChangeTool}
+            />
+          </Box>
+          <Box className="login-box">
+            <TextField
+              className="login-input"
+              label="Password"
+              InputLabelProps={{ shrink: !!user.password || !!userList }}
+              type="password"
+              {...register("password", {
+                required: "Password is required",
+              })}
+              error={!!errors.password}
+              helperText={errors.password?.message}
+              onChange={onChangeTool}
+            />
+          </Box>
+          {loginUserSelector?.message && (
+            <Box className="login-error">{loginUserSelector.message}</Box>
+          )}
+          <Box className="login-box">
+            <Button
+              className="login-input"
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Dalej
+            </Button>
+          </Box>
+        </form>
+        <Box className="login-wrapper">
+          <Box>
+            <TextWrapper label="login.haveAnAccount" />
+            <Link to="/register">
+              <TextWrapper label="login.register" />
+            </Link>
+          </Box>
+          <Box className="">
+            <TextWrapper label="login.rememberPassword" />
+            <Link to="/identify">
+              <TextWrapper label="login.remindPassword" />
+            </Link>
+          </Box>
+        </Box>
 
-      <div className="label-wrapper-register">
-        <TextWrapper label="login.haveAnAccount"/>
-        <Link to="/register">
-        <TextWrapper label="login.register"/>
-        </Link>
-      </div>
-      <div className="label-wrapper-register">
-      <TextWrapper label="login.rememberPassword"/>
-        <Link to="/identify">
-        <TextWrapper label="login.remindPassword"/>
-        </Link>
-      </div>
+        <DevTool control={control} />
+      </Box>
     </Box>
   );
 };
 
-export default Login;
+export default NewLogin;

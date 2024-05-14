@@ -56,7 +56,7 @@ const columns = [
   },
 ];
 
-const ContainerTable = ({ accountNumberSelector }) => {
+const TableWrapper = ({ accountNumberSelector }) => {
   // https://www.youtube.com/watch?v=NZKUirTtxcg
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -66,10 +66,8 @@ const ContainerTable = ({ accountNumberSelector }) => {
   );
 
   const data = TableData(transfers, accountNumberSelector) || [];
-  console.log('data :>> ', data);
   const observer = useRef();
   const lastBookElementRef = useCallback((node) => {
-    console.log("end :>> ", end);
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
@@ -79,8 +77,6 @@ const ContainerTable = ({ accountNumberSelector }) => {
     if (node) observer.current.observe(node);
   }, []);
 
-  console.log("loading :>> ", loading);
-  console.log("transfers :>> ", transfers);
   const recExp = useMemo(() => {
     const data = transfers?.map((transfer) => {
       return transfer.fromUser.bankAccountNumber === accountNumberSelector
@@ -302,4 +298,4 @@ const StyledOperation = styled.div`
   }
 `;
 
-export default ContainerTable;
+export default TableWrapper;

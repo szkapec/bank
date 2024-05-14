@@ -11,5 +11,10 @@
   "onlyTrustedRecipients": "Tylko zaufani odbiorcy",
   "noRecipientsAdded": "Brak dodanych odbiorców",
   "delete": "Usuń",
-  "edit": "Edytuj"
+  "edit": "Edytuj",
+  "somethingWentWrong": "Coś poszło nie tak",
+  "addedNewRecipient": "Dodany nowy odbiorca",
+  "editingWentFine": "Edycja przebiegła prawidłowo",
+  "recipientDeleted": "Odbiorca usunięty",
+  "nameRecipient": "Nazwa odbiorcy"
 }

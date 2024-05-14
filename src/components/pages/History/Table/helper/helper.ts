@@ -46,7 +46,7 @@ export const TableData = (
       accountNumberSelector
     );
   }
-  console.log(`newTransfers`, newTransfers)
+
   try {
     return newTransfers?.map(
       ({ fromUser, toUser, body, howMuchMoney, createdAt, _id }: IColumn) => ({

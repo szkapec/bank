@@ -15,10 +15,29 @@ import {
 import Loader from "components/Loader/Loader";
 import Error from "components/Error/Error";
 import { useAppDispatch } from "store/hooks";
-import { useQuery } from "react-query";
+import { QueryClient, useMutation, useQuery } from "react-query";
 import { userRecipients } from "store/Recipient/recipientThunk";
 import TextWrapper from "components/Contents/TextWrapper";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import { API } from "api/dev-api";
+import { globalConfig } from "helpers/globalConfig";
+
+function useAuthorisQuery(authors: any) {
+  console.log("authors", authors);
+  return useQuery({
+    queryKey: ["authors"],
+    queryFn: async () => {
+      const token = localStorage.getItem("jwtToken");
+      const { config, userId } = globalConfig(token);
+      const response = await axios.get<{ userId: any }>(
+        API.GET_USER_RECIPIENTS + userId,
+        config
+      );
+      return response.data.userId;
+    },
+  });
+}
 
 const Recipients = () => {
   const loginErrorSelector = useSelector(selectorLoaderRecipient);
@@ -27,9 +46,8 @@ const Recipients = () => {
   const [search, setSearch] = useState<IAddRecipient[]>([]);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const { isLoading, error } = useQuery("recipients", () =>
-    dispatch(userRecipients())
-  );
+  const { isLoading, error } = useQuery("recipients", () => dispatch(userRecipients()));
+
 
   const handleClose = () => {
     setOpen(false);
@@ -60,11 +78,11 @@ const Recipients = () => {
 
   return (
     <>
-      <TextWrapper label="recipients.definedRecipients" Selector="h3"/>
+      <TextWrapper label="recipients.definedRecipients" Selector="h3" />
       <Box>
         <Button onClick={handleOpen}>
           <AddCircleOutlineIcon />
-          <TextWrapper label="recipients.addRecipient"/>
+          <TextWrapper label="recipients.addRecipient" />
         </Button>
         <Modal
           open={open}
@@ -72,21 +90,21 @@ const Recipients = () => {
           aria-labelledby="parent-modal-title"
           aria-describedby="parent-modal-description"
         >
-          <RecipientModal />
+          <RecipientModal handleClose={handleClose} />
         </Modal>
       </Box>
       <Box className="box-search">
         <TextField
           size="small"
           id="outlined-basic"
-          label={t('recipients.search')}
+          label={t("recipients.search")}
           variant="outlined"
           onChange={debouncedChangeHandler}
         />
         <Box className="saved">
           <FormControlLabel
             control={<Switch defaultChecked />}
-            label={t('recipients.onlyTrustedRecipients')}
+            label={t("recipients.nameRecipient")}
           />
           <LockIcon color="primary" />
         </Box>
