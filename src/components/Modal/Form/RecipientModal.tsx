@@ -43,6 +43,8 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
 
   const [errorForm, setErrorForm] = useState<IInitialError>(initialError);
 
+
+  console.log('initialValue', initialValue)
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const onSubmit = (values: IAddRecipient) => {

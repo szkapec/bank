@@ -18,6 +18,16 @@ export const subAccountSlice = createSlice({
   name: "SUB_ACCOUNT",
   initialState,
   reducers: {
+    logOutSubAccount: (state) => {
+      state.accounts = initialState.accounts;
+      state.newAccount = {
+        accountId: '',
+        accountName: ''
+      };
+      state.message = initialState.message;
+      state.loading = initialState.loading;
+      state.error = initialState.error;
+    },
     refreshAccount: (state) => {
       state.newAccount = {
         accountId: '',
@@ -50,7 +60,7 @@ export const subAccountSlice = createSlice({
       state.loading = true;
     },
     [getConnectAccount.fulfilled.toString()]: (state, { payload }: PayloadAction<any> ) => {
-      state.accounts = payload.connectAccount || []
+      state.accounts = payload?.connectAccount || []
       state.loading = false;
     },
     [getConnectAccount.rejected.toString()]: (state) => {
@@ -59,5 +69,5 @@ export const subAccountSlice = createSlice({
   }
 })
 
-export const { refreshAccount } = subAccountSlice.actions;
+export const { refreshAccount, logOutSubAccount } = subAccountSlice.actions;
 export default subAccountSlice.reducer;

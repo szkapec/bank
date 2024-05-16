@@ -78,6 +78,7 @@ export const TableData = (
                 : toUser.bankAccountNumber,
           },
         ],
+        settings: ":"
       })
     );
   } catch (error) {

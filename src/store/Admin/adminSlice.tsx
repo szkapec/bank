@@ -10,7 +10,12 @@ const initialState: IAdminUsersInitialState = {
 export const adminSlice = createSlice({
   name: "LOGIN",
   initialState,
-  reducers: {},
+  reducers: {
+    logOutAdmin: (state) => {
+      state.users = initialState.users;
+      state.loadingUsers = false;
+    },
+  },
   extraReducers: {
     [GetUsersAdmin.pending.toString()]: (state) => {
       state.loadingUsers = true;
@@ -25,5 +30,5 @@ export const adminSlice = createSlice({
   },
 });
 
-export const {} = adminSlice.actions;
+export const { logOutAdmin } = adminSlice.actions;
 export default adminSlice.reducer;

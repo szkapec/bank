@@ -13,6 +13,10 @@ export const recipientSlice = createSlice({
   name: "LOGIN",
   initialState,
   reducers: {
+    logOutRecipient: (state) => {
+      state.saved = initialState.saved;
+      state.loading = initialState.loading;
+    },
     getRecipientTest: (state, { payload }: PayloadAction<IAddRecipient[]>) => {
       // console.log('payload :>> ', payload);
       // state.saved = payload;
@@ -45,5 +49,5 @@ export const recipientSlice = createSlice({
   },
 });
 
-export const { getRecipientTest } = recipientSlice.actions;
+export const { getRecipientTest, logOutRecipient } = recipientSlice.actions;
 export default recipientSlice.reducer;

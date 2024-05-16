@@ -126,8 +126,8 @@ export const loginSlice = createSlice({
       state,
       { payload }: PayloadAction<any>
     ) => {
-      state.user = payload.connectAccount;
-      state.user.id = payload.connectAccount._id;
+      state.user = payload?.connectAccount;
+      state.user.id = payload?.connectAccount?._id;
       state.loading = false;
     },
     [loginSwitchAccount.rejected.toString()]: (state) => {
