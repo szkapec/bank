@@ -1,9 +1,6 @@
 import { jsPDF } from "jspdf";
 
 export const configPdf = ({ original, originalSubRows }: any) => {
-  console.log("original :>> ", original);
-  console.log("originalSubRows :>> ", originalSubRows);
-  console.log(`originalS`, original.confirmation.split("&&"));
   const doc = new jsPDF();
 
   doc.setFont("", "bold");

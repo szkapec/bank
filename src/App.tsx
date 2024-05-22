@@ -38,67 +38,6 @@ const App = () => {
     },
   });
 
-  const connectAccounts = [
-    {
-      accountId: "6644aaf9cb4c16a63cc76dda",
-      accountName: "general",
-      accountEmail: "account@o2.pl",
-      _id: "6644ab11cb4c16a63cc76de1", //
-    },
-    {
-      accountId: "663d1f78cb8308abcb79a8c7",
-      accountName: "general",
-      accountEmail: "mateusz211@o2.pl",
-      _id: "66449c00cb4c16a63cc76cf8", //
-    },
-    {
-      accountId: "663c90987ea71bcea6700b4d",
-      accountName: "general",
-      accountEmail: "mati@o2.pl",
-      _id: "6644612a1827c32da2b3c368", //
-    },
-    {
-      accountId: "664461091827c32da2b3c359",
-      accountName: "general",
-      accountEmail: "mati2@o2.pl",
-      _id: "6644612a1827c32da2b3c369", //
-    },
-  ];
-
-  const connectAccounts2 = [
-    {
-      accountId: "664461091827c32da2b3c359",
-      accountName: "general",
-      accountEmail: "mati2@o2.pl",
-      _id: "6644612a1827c32da2b3c369",
-    },
-    {
-      accountId: "663d1f78cb8308abcb79a8c7",
-      accountName: "general",
-      accountEmail: "mati2@o2.pl",
-      _id: "6644612a1827c32da2b3c361", //
-    },
-    {
-      accountId: "663c90987ea71bcea6700b4d",
-      accountName: "general",
-      accountEmail: "mati@o2.pl",
-      _id: "6644612a1827c32da2b3c368",
-    },
-  ];
-
-  const newTable = [...connectAccounts, ...connectAccounts2];
-
-  console.log("newTable", newTable);
-  console.log("connectAccounts2", connectAccounts2);
-
-
-  const mapFromColors: any = new Map(newTable.map((c:any) => {
-    console.log('ccccc', c)
-    return [c._id, c]
-  }));
-  console.log('mapFromColors', mapFromColors)
-  const uniqueColors = [...mapFromColors.values()];
-  console.log('uniqueColors', uniqueColors);
   return (
     <>
       <BrowserRouter>

@@ -15,7 +15,6 @@ export const initialFormData = {
 };
 
 const Transfer = () => {
-  console.log('Transfer', )
   const userDataSelector = useSelector(selectorAuthLoginUser);
   const dispatch = useAppDispatch();
   const { bankAccountNumber, id, email, money } = userDataSelector || {};

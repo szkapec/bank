@@ -2,96 +2,27 @@ import React, { useMemo, useRef, useState, useCallback } from "react";
 import styled from "styled-components";
 import { TableData } from "./helper/helper";
 import Table from "./Table";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import useSearch from "../Hook/useSearch";
 import Loader from "components/Loader/Loader";
 import { Box } from "@mui/material";
-import { configPdf } from "./helper/configPdf";
-
-const columns = [
-  {
-    Header: "Imię i nazwisko",
-    accessor: "firstName",
-  },
-  {
-    Header: "Tytuł przelewu",
-    accessor: "body",
-  },
-  {
-    Header: "Numer konta",
-    accessor: "account",
-  },
-  {
-    Header: "Cena",
-    accessor: "price",
-  },
-  {
-    Header: "Data",
-    accessor: "date",
-  },
-  {
-    Header: "Potwierdzenie",
-    id: "confirmation",
-    Cell: ({ row }) =>
-      row.canExpand ? (
-        <button className="btn-pdf" onClick={() => configPdf(row)}>
-          Potwierdzenie
-        </button>
-      ) : null,
-  },
-  {
-    id: "expander",
-    Cell: ({ row }) =>
-      row.canExpand ? (
-        <span
-          {...row.getToggleRowExpandedProps({
-            style: {
-              paddingLeft: `${row.depth * 2}rem`,
-            },
-          })}
-        >
-          {row.isExpanded ? <ArrowDropDownIcon /> : <ArrowLeftIcon />}
-        </span>
-      ) : null,
-  },
-  // {
-  //   Header: "Ustawienia",
-  //   id: "settings",
-  //   Cell: ({ row }) => {
-  //     // original, originalSubRows
-  //     console.log('original', row.original)
-  //     console.log('originalSubRows', row.originalSubRows)
-  //     return row.canExpand ? (
-  //       <div>test</div>
-  //       // <TableSaveOrRemoveRecipientsModal recipient={parse(row.original)} />
-  //     ) : null
-  //   }
-      
-  // },
-];
-
-// const parse = (data) => {
-//   return {
-//     recipientsAccount: data.account,
-//     title: data.body,
-//     sum: data.price.slice(0, data.price.length - 3),
-//     toRecipient: data.firstName
-//   }
-// }
+import { columnsForHistory } from "./helper/Columns";
 
 const TableWrapper = ({ accountNumberSelector }) => {
-  // https://www.youtube.com/watch?v=NZKUirTtxcg
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { transfers, hasMore, loading, end, error } = useSearch(
+  const { transfers, loading, end, error } = useSearch(
     accountNumberSelector,
     pageNumber
   );
 
-  const data = TableData(transfers, accountNumberSelector) || [];
+  const dataTable = TableData(transfers, accountNumberSelector) || [];
+
+  const data = useMemo(() => {
+    return dataTable;
+  }, [dataTable.length]);
+
   const observer = useRef();
   const lastBookElementRef = useCallback((node) => {
     if (observer.current) observer.current.disconnect();
@@ -113,6 +44,7 @@ const TableWrapper = ({ accountNumberSelector }) => {
             expenses: transfer.howMuchMoney,
           };
     });
+
     return {
       receipts: data
         ?.filter((rec) => rec.receipts)
@@ -125,26 +57,21 @@ const TableWrapper = ({ accountNumberSelector }) => {
     };
   }, [transfers?.length]);
 
-  const countPrecent = () => {
-    const rec = recExp.receipts === 0 ? 0 : -recExp.receipts;
-    const count = ((recExp.expenses - rec) / rec === 0 ? 1 : rec) * 100;
-    if (count) {
-      return {
-        expensesPercent: 50 + count + "%",
-        receiptsPercent: 50 - count + "%",
-      };
-    } else
-      return {
-        expensesPercent: "50%",
-        receiptsPercent: "50%",
-      };
-  };
+
+  const newCountPrecent = () => {
+    const revenues = Number(recExp.expenses);
+    const costs = -Number(recExp.receipts);
+    return {
+      rec: (costs / revenues) * 100 + '%',
+      exp: '100%'
+    }
+  }
 
   return (
     <StyledWrapper>
       <StyledRecExp
-        rec={countPrecent().receiptsPercent}
-        exp={countPrecent().expensesPercent}
+        rec={newCountPrecent().rec}
+        exp={newCountPrecent().exp}
       >
         <Box className="balance">
           <div>Bilans wpływy i wydatki</div>
@@ -177,11 +104,13 @@ const TableWrapper = ({ accountNumberSelector }) => {
         <Box>Exportuj historię operacji</Box>
       </StyledOperation>
       <StyledTable>
-        <Table
-          columns={columns}
-          data={data}
-          lastBookElementRef={lastBookElementRef}
-        />
+        {data && (
+          <Table
+            columns={columnsForHistory}
+            data={data}
+            lastBookElementRef={lastBookElementRef}
+          />
+        )}
         <Box>{end && <StyledRecord>Nie ma więcej rekordów</StyledRecord>}</Box>
         <Box style={{ padding: "20px 0" }}>
           {loading && <Loader text={"Ładuje dane"} />}

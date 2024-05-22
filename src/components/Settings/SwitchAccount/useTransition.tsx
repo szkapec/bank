@@ -42,8 +42,6 @@ const useTransitionTest = () => {
 
   const loadData = async () => {
     const info = await api();
-    console.log(`info`, info)
-   
   };
 
   return (

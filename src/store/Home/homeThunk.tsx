@@ -19,7 +19,6 @@ import { toast } from "react-toastify";
         return null;
      
       } catch (error) {
-        console.log(`error`, error);
         toast.error("recipients.somethingWentWrong", error);
         return {
           message: error.response.data,

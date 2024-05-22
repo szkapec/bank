@@ -23,10 +23,10 @@
       background-color: white;
       padding: 8px 10px;
       border: 1px solid grey;
-      color: red;
+      color: var(--global-color-button);
     }
     .active {
-      border: 1px solid red;
+      border: 1px solid var(--global-color);
     }
     button:first-child {
       border-top-left-radius: 5px;

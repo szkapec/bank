@@ -1,7 +1,6 @@
 import axios from "axios";
-import { getRecipientTest } from './recipientSlice';
 
-export const getRecipients = async() => {
+export const getRecipients = async () => {
   const token = localStorage.getItem("jwtToken");
   const config = {
     headers: {
@@ -11,9 +10,9 @@ export const getRecipients = async() => {
     },
   };
 
-  // const res = await axios.get(`http://localhost:5005/api/recipient/63503f3f4093e59d0eaf3c9c`, config);
-  const res = await axios.get(`${process.env.REACT_APP_HOST}/api/recipient/63503f3f4093e59d0eaf3c9c`, config);
-  console.log(`response`, res.data)
-  // getRecipientTest(res.data)
+  const res = await axios.get(
+    `${process.env.REACT_APP_HOST}/api/recipient/63503f3f4093e59d0eaf3c9c`,
+    config
+  );
   return res.data;
 };

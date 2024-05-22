@@ -26,7 +26,6 @@ const ChangeColor = lazy(
 const renderLoader = () => <Loader />;
 
 const Offers = () => {
-  console.log('Offers', )
 
   const [password, setPassword] = useState(false);
   const [language, setLanguage] = useState(false);

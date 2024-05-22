@@ -46,7 +46,6 @@ const NewLogin = () => {
   } = form;
 
   const onSubmit = (data: FormValues) => {
-    console.log("data", data);
     dispatch(login(data));
     setUser(initialFormData);
   };

@@ -60,7 +60,6 @@ export const editUserRecipients = createAsyncThunk(
       const res = await axios.patch(API.PATCH_EDIT_RECIPIENTS, body, config);
       if (res.status === 200) {
         toast.success("recipients.editingWentFine");
-        console.log('res.data', res.data)
         return res.data;
       }
       return null;

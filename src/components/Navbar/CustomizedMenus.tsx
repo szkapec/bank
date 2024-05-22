@@ -38,10 +38,8 @@ export const CustomizedMenus = ({ user }: PropsType) => {
   const subAccountsSelector = useSelector(selectorSubAccounts);
   const loaderSelector = useSelector(selectorAuthLoading);
   const navigate = useNavigate();
-  console.log("subAccountsSelector", subAccountsSelector);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("first", event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
 
@@ -50,7 +48,6 @@ export const CustomizedMenus = ({ user }: PropsType) => {
   );
 
   const handleClickSubmenu = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("first2", event.currentTarget);
     if (anchorElSubmenu) {
       setAnchorElSubmenu(null);
     } else {
@@ -81,7 +78,6 @@ export const CustomizedMenus = ({ user }: PropsType) => {
     handleClose();
     navigate("/offers");
   };
-  console.log("subAccountsSelector.length", !!subAccountsSelector.length);
   return (
     <div>
       <Button

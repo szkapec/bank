@@ -19,7 +19,6 @@ export const newConnectAccount = createAsyncThunk(
     };
     
     const body = JSON.stringify({ email: login, password });
-    console.log('config :>> ', config);
     try {
       
       const res = await axios.post(

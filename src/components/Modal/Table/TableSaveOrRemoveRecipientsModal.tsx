@@ -8,25 +8,34 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/hooks";
 import { deleteUserRecipients } from "store/Recipient/recipientThunk";
 import { IAddRecipient } from "store/Recipient/recipientInterface";
+import { selectorAuthLoginUserNumberAccount } from "store/Login/loginSelector";
 
 interface IPropsRecipient {
   recipient: IAddRecipient;
+  historyTable?: boolean;
+  numberAccount?: string;
 }
 
-const TableSaveOrRemoveRecipientsModal = ({ recipient }: IPropsRecipient) => {
-  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  // const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  // const open = Boolean(anchorEl);
+const TableSaveOrRemoveRecipientsModal = ({
+  recipient,
+  historyTable,
+  numberAccount,
+}: IPropsRecipient) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const open = Boolean(anchorEl);
   const dispatch = useAppDispatch();
   const loginErrorSelector = useSelector(selectorLoaderRecipient);
-
+  const myNumberAccountSelector = useSelector(
+    selectorAuthLoginUserNumberAccount
+  );
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
-    // setAnchorEl(null);
-    // setIsOpenModal(false);
+    setAnchorEl(null);
+    setIsOpenModal(false);
   };
 
   useEffect(() => {
@@ -35,47 +44,53 @@ const TableSaveOrRemoveRecipientsModal = ({ recipient }: IPropsRecipient) => {
 
   const deleteRecipient = () => {
     dispatch(deleteUserRecipients(recipient._id));
-    // setAnchorEl(null);
-    // setIsOpenModal(false);
+    setAnchorEl(null);
+    setIsOpenModal(false);
   };
   const openModal = () => {
-    // setIsOpenModal(true);
+    setIsOpenModal(true);
   };
 
   return (
     <Box className="menu">
       <div>
         <Button
+          disabled={numberAccount === myNumberAccountSelector}
           id="basic-button"
-          // aria-controls={open ? "basic-menu" : undefined}
-          // aria-expanded={open ? "true" : undefined}
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
         >
           <MoreVertIcon />
         </Button>
         <Menu
           id="basic-menu"
-          // anchorEl={anchorEl}
-          open={false}
+          anchorEl={anchorEl}
+          open={open}
           onClose={handleClose}
           MenuListProps={{
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={deleteRecipient}>
-            <TextWrapper label="recipients.delete" />
-          </MenuItem>
+          {!historyTable && (
+            <MenuItem onClick={deleteRecipient}>
+              <TextWrapper label="recipients.delete" />
+            </MenuItem>
+          )}
           <MenuItem onClick={openModal}>
-            <TextWrapper label="recipients.edit" />
+            {historyTable ? (
+              <TextWrapper label="Zapisz odbiorce" />
+            ) : (
+              <TextWrapper label="recipients.edit" />
+            )}
           </MenuItem>
           <Modal
-            open={false}
+            open={isOpenModal}
             onClose={handleClose}
             aria-labelledby="parent-modal-title"
             aria-describedby="parent-modal-description"
           >
             <RecipientModal
-              edit={true}
               initialValue={recipient}
               handleClose={handleClose}
             />

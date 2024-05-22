@@ -14,10 +14,8 @@ const setAuthenticationToken = () => {
     const now = new Date().getTime() / 1000;
 
     if (now > decodedToken.exp) {
-      console.log(`Token wygasł`);
       return false;
     } else {
-      console.log(`Prawidłowy token`, decodedToken);
       return decodedToken?.id;
     }
   } else {

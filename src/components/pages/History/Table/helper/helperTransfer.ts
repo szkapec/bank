@@ -62,7 +62,6 @@ export const filterName = (
   transfers: IColumn[],
   searchNameSelector: string
 ) => {
-  console.log(`transfers`, transfers)
   const newTransfersFromUser = transfers.filter(
     (transfer) => transfer.fromUser.lastName.search(searchNameSelector) === 0
   );
