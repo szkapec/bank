@@ -13,5 +13,6 @@
   "transferMoney": "Kwota przelewu",
   "send": "Wyślij",
   "nameRecipient": "Wpisz nazwę odbiorcy",
-  "recipientAccountNumber": "Wpisz numer rachunku odbiorcy"
+  "recipientAccountNumber": "Wpisz numer rachunku odbiorcy",
+  "fromTheBill": "Z rachunku"
 }

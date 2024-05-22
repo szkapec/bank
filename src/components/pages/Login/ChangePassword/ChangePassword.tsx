@@ -112,7 +112,7 @@ const ChangePassword = () => {
             {errorSelector && (
               <Box className="login-box">
                 <div className="error">
-                  <TextWrapper label={errorSelector} />
+                  <span>{errorSelector}</span>
                 </div>
               </Box>
             )}

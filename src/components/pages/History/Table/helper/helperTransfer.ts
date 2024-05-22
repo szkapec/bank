@@ -5,12 +5,11 @@ export const CountDay = (day: string) => {
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
-
   const newData = new Date(day).getDate();
   if (newData === today.getDate()) {
-    return "Dzisiaj";
+    return "history.toDay";
   } else if (newData === yesterday.getDate()) {
-    return "Wczoraj";
+    return "history.yesterday";
   }
   return day?.substr(0, 10);
 };

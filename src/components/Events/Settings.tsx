@@ -9,6 +9,7 @@ import {
 } from "store/Login/loginSelector";
 import { useSelector } from "react-redux";
 import { initTranslation } from "util/initTranslation";
+import { getConnectAccount } from "store/SubAccount/subAccountThunk";
 
 const Settings = () => {
   const languageSelector = useSelector(selectorLanguage);
@@ -21,6 +22,8 @@ const Settings = () => {
 
   useEffect(() => {
     userIdSelector && ServerSendEvent(dispatch, userIdSelector);
+    userIdSelector && dispatch(getConnectAccount())
+    //
   }, [userIdSelector]);
 
   return <></>;

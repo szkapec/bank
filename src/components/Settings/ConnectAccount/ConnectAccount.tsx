@@ -80,7 +80,7 @@ const ConnectAccount = ({ setOffer }: IProps) => {
       {subAccountsSelector?.accountId ? (
         <Box sx={{ textAlign: "center" }}>
           <TextWrapper label="Dodano nowe konto" Selector="div"/>
-          <TextWrapper Selector="div">Nr: {subAccountsSelector.accountId}</TextWrapper>
+          <TextWrapper Selector="div" label={`Nr: ${subAccountsSelector.accountId}`}></TextWrapper>
           <Button
             className="btn-change"
             variant="contained"

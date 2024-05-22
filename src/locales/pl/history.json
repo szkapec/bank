@@ -1,0 +1,17 @@
+{
+  "balance": "Bilans wpływy i wydatki",
+  "listOperation": "Lista operacji",
+  "exportHistory": "Exportuj historię operacji",
+  "endRecords": "Nie ma więcej rekordów",
+  "errorWentWrong": "Coś poszło nie tak, przepraszamy",
+  "noData": "Brak danych",
+  "toDay": "Dzisiaj",
+  "yesterday": "Wczoraj",
+  "firstAndLastName": "Imię i nazwisko",
+  "titleTransfer": "Tytuł przelewu",
+  "accountNumber": "Numer konta",
+  "price": "Cena",
+  "date": "Data",
+  "confirmation": "Potwierdzenie",
+  "settings": "Ustawienia"
+}

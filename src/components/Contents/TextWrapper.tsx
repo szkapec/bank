@@ -1,13 +1,14 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-const TextWrapper = ({ label, Selector = 'span' }: any) => {
-  const { t } = useTranslation();
-  return (
-    <Selector>
-      {t(label)}
-    </Selector>
-  )
+interface propsType {
+  label?: string;
+  Selector?: any;
 }
 
-export default TextWrapper
+const TextWrapper = ({ label = '', Selector = 'span' }: propsType) => {
+  const { t } = useTranslation();
+  return <Selector>{t(label || '')}</Selector>;
+};
+
+export default TextWrapper;

@@ -1,3 +1,4 @@
+import TextWrapper from "components/Contents/TextWrapper";
 import React from "react";
 import { useTable, useExpanded } from "react-table";
 
@@ -31,7 +32,11 @@ const TableSearch = ({ columns, data, lastBookElementRef }) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {data.length === 0 && <div className="no-data">Brak danych</div>}
+          {data.length === 0 && (
+            <div className="no-data">
+              <TextWrapper label="history.noData" />
+            </div>
+          )}
           {rows.map((row, index) => {
             prepareRow(row);
             return (

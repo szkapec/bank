@@ -22,6 +22,7 @@ import { useQuery } from "react-query";
 import { getConnectAccount } from "store/SubAccount/subAccountThunk";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Badge } from "@mui/material";
+import TextWrapper from "components/Contents/TextWrapper";
 
 interface PropsType {
   user: ILoginUser;
@@ -43,9 +44,9 @@ export const CustomizedMenus = ({ user }: PropsType) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const { isLoading } = useQuery("getConnectAccount", () =>
-    dispatch(getConnectAccount())
-  );
+  // const { isLoading } = useQuery("getConnectAccount", () =>
+  //   dispatch(getConnectAccount())
+  // );
 
   const handleClickSubmenu = (event: React.MouseEvent<HTMLElement>) => {
     if (anchorElSubmenu) {
@@ -107,7 +108,7 @@ export const CustomizedMenus = ({ user }: PropsType) => {
           disableRipple
         >
           <EditIcon />
-          Połączone konta
+          <TextWrapper label="navbar.linkedAccounts" />
           <Badge
             style={{
               margin: '4px 4px 0 0'
@@ -150,7 +151,7 @@ export const CustomizedMenus = ({ user }: PropsType) => {
         </MenuItem>
         <MenuItem onClick={handleCloseAndTransferSetting} disableRipple>
           <SettingsIcon />
-          Ustawienia
+          <TextWrapper label="history.settings" />
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleClose} disableRipple>

@@ -10,7 +10,6 @@ const HighchartsHome = () => {
   let fromClient: Array<number | null> = [];
   let toClient: Array<number | null> = [];
   let categories = [];
-
   const { isLoading, error, data } = useQuery("HOME_HIGH_CHARTS", () =>
     dispatch(homeHighChartsThunk())
   );

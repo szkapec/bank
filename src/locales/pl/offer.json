@@ -33,5 +33,7 @@
   "personalAccounts": "Konta osobiste",
   "savingsAccount": "K. Oszczędnościowe",
   "switchAccount": "Przełącz konto",
-  "noAssociatedAccounts": "Brak powiązanych kont"
+  "noAssociatedAccounts": "Brak powiązanych kont",
+  "changeColor": "Zmiana koloru strony",
+  "connectAccounts": "Połącz konta"
 }

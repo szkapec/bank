@@ -1,0 +1,17 @@
+{
+  "balance": "Balance of receipts and expenses",
+  "listOperation": "Operation list",
+  "exportHistory": "Export operation history",
+  "endRecords": "There are no more records",
+  "errorWentWrong": "Something went wrong, we're sorry",
+  "noData": "No data",
+  "toDay": "Today",
+  "yesterday": "Yesterday",
+  "firstAndLastName": "First and last name",
+  "titleTransfer": "Transfer title",
+  "accountNumber": "Account number",
+  "price": "Price",
+  "date": "Date",
+  "confirmation": "Confirmation",
+  "settings": "Settings"
+}

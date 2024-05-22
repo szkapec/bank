@@ -7,5 +7,6 @@
   "adminPanel": "Admin Panel",
   "logout": "Logout",
   "login": "Login",
-  "register": "Register"
+  "register": "Register",
+  "linkedAccounts": "Linked accounts"
 }

@@ -1,11 +1,13 @@
 import modal from "./modal.json";
 import navbar from "./navbar.json";
 import recipients from "./recipients.json";
-import offer from './offer.json';
-import global from './global.json';
-import admin from './admin.json';
-import login from './login.json';
-import transfer from './transfer.json'
+import offer from "./offer.json";
+import global from "./global.json";
+import admin from "./admin.json";
+import login from "./login.json";
+import transfer from "./transfer.json";
+import search from "./search.json";
+import history from "./history.json";
 
 const pl = {
   translation: {
@@ -16,7 +18,9 @@ const pl = {
     global,
     admin,
     login,
-    transfer
+    transfer,
+    search,
+    history,
   },
 };
 

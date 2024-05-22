@@ -4,11 +4,12 @@ import { useAppDispatch } from "store/hooks";
 import {
   filterTransferHistory,
   filterRecExp,
-  filterSumAbove, 
+  filterSumAbove,
   filterSumUpTo,
 } from "store/Search/searchSlice";
 import "./Search.scss";
-import { RecExp } from 'store/Search/searchInterface';
+import { RecExp } from "store/Search/searchInterface";
+import TextWrapper from "components/Contents/TextWrapper";
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -21,17 +22,17 @@ const Search = () => {
 
   const debouncedChangeName = useCallback(
     debounce((e) => {
-      return setSearchName(e.target.value || new String(''))
+      return setSearchName(e.target.value || new String(""));
     }, 1000),
     []
   );
 
   const debouncedChangeSumAbove = debounce((e) => {
-    dispatch(filterSumAbove(e.target.value))
+    dispatch(filterSumAbove(e.target.value));
   }, 1200);
 
   const debouncedChangeSumUpTo = debounce((e) => {
-    dispatch(filterSumUpTo(e.target.value))
+    dispatch(filterSumUpTo(e.target.value));
   }, 1200);
 
   const handleClick = ({ target: { name } }: any): void => {
@@ -43,42 +44,53 @@ const Search = () => {
   return (
     <section className="search">
       <div className="search__name">
-        <label>Wyszukaj po nazwisku</label>
+        <TextWrapper label="search.searchByName" Selector="label" />
         <input
           name="firstName"
           placeholder="Wyszukaj"
           onChange={debouncedChangeName}
         />
       </div>
-      <label>Filtry</label>
+      <TextWrapper label="search.filter" Selector="label" />
       <div className="search__filters">
         <button
           onClick={handleClick}
           name="All"
           className={searchRecExp === RecExp[0] ? "active" : "filter"}
         >
-          Wszystko
+          <TextWrapper label="search.all" Selector="label" />
         </button>
         <button
           onClick={handleClick}
           name="Receipts"
           className={searchRecExp === RecExp[1] ? "active" : "filter"}
         >
-          Wpływy
+          <TextWrapper label="search.inflows" Selector="label" />
         </button>
         <button
           onClick={handleClick}
           name="Expenses"
           className={searchRecExp === RecExp[2] ? "active" : "filter"}
         >
-          Wydatki
+          <TextWrapper label="search.outflows" Selector="label" />
         </button>
       </div>
       <div className="search__sum">
-        <label>Kwota</label>
+        <TextWrapper label="search.sum" Selector="label" />
         <div>
-          <input autoFocus onChange={debouncedChangeSumAbove} name="above" placeholder="0,00" type="text" />
-          <input onChange={debouncedChangeSumUpTo} name="upTo" placeholder="0,00" type="text" />
+          <input
+            autoFocus
+            onChange={debouncedChangeSumAbove}
+            name="above"
+            placeholder="0,00"
+            type="text"
+          />
+          <input
+            onChange={debouncedChangeSumUpTo}
+            name="upTo"
+            placeholder="0,00"
+            type="text"
+          />
         </div>
       </div>
     </section>

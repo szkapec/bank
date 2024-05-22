@@ -24,7 +24,7 @@ const Users = () => {
           ({ _id, firstName, email, ban, premium }, index) => (
             <Box key={_id}>
               <StyledAdminList premium={premium}>
-                <TextWrapper className="index" label={index} />
+                <span className="index">{index}</span>
                 <Box>
                   <TextWrapper label="ID:" Selector="b" />
                   <TextWrapper label={_id} />

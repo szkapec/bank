@@ -3,6 +3,7 @@ import axios from "axios";
 import { sleep } from "helpers/sleep";
 import { toast } from "react-toastify";
 import { IConnectAccount } from "./subAccountInterface";
+import i18n from "util/initTranslation";
 
 const host = process.env.REACT_APP_HOST;
 
@@ -28,13 +29,15 @@ export const newConnectAccount = createAsyncThunk(
       );
       
       if (res.status === 200) {
+        const message = i18n.t("global.accountHasBeenLinked")
         await sleep();
-        await toast.success("Konto zostało połączone!");
+        await toast.success(message);
         return await res.data;
       }
       return;
     } catch (error) {
-      toast.error("Coś poszło nie tak");
+      const message = i18n.t("global.somethingWentWrong")
+      toast.success(message);
       console.log(`error`, error);
       return {
         message: error.response.data,
@@ -63,7 +66,8 @@ export const getConnectAccount = createAsyncThunk(
       }
       return;
     } catch (error) {
-      toast.error("Coś poszło nie tak");
+      const message = i18n.t("global.somethingWentWrong")
+      toast.success(message);
       console.log(`error`, error);
       return {
         message: error.response.data,

@@ -8,10 +8,12 @@ import useSearch from "../Hook/useSearch";
 import Loader from "components/Loader/Loader";
 import { Box } from "@mui/material";
 import { columnsForHistory } from "./helper/Columns";
+import TextWrapper from "components/Contents/TextWrapper";
+import { useTranslation } from "react-i18next";
 
 const TableWrapper = ({ accountNumberSelector }) => {
   const [pageNumber, setPageNumber] = useState(1);
-
+  const { t } = useTranslation();
   const { transfers, loading, end, error } = useSearch(
     accountNumberSelector,
     pageNumber
@@ -33,6 +35,11 @@ const TableWrapper = ({ accountNumberSelector }) => {
     });
     if (node) observer.current.observe(node);
   }, []);
+
+  useMemo(
+    () => columnsForHistory.forEach((it) => (it.Header = t(it.Header))),
+    []
+  );
 
   const recExp = useMemo(() => {
     const data = transfers?.map((transfer) => {
@@ -57,24 +64,20 @@ const TableWrapper = ({ accountNumberSelector }) => {
     };
   }, [transfers?.length]);
 
-
-  const newCountPrecent = () => {
+  const countPrecent = () => {
     const revenues = Number(recExp.expenses);
     const costs = -Number(recExp.receipts);
     return {
-      rec: (costs / revenues) * 100 + '%',
-      exp: '100%'
-    }
-  }
+      rec: (costs / revenues) * 100 + "%",
+      exp: "100%",
+    };
+  };
 
   return (
     <StyledWrapper>
-      <StyledRecExp
-        rec={newCountPrecent().rec}
-        exp={newCountPrecent().exp}
-      >
+      <StyledRecExp rec={countPrecent().rec} exp={countPrecent().exp}>
         <Box className="balance">
-          <div>Bilans wpływy i wydatki</div>
+          <TextWrapper label="history.balance" Selector="div" />
           <div className="money">
             {(recExp.expenses - -recExp.receipts).toFixed(2)} PLN
           </div>
@@ -82,13 +85,15 @@ const TableWrapper = ({ accountNumberSelector }) => {
         <Box className="line">
           <span className="expenses">
             <b>
-              <KeyboardReturnIcon /> Wpływy
+              <KeyboardReturnIcon />
+              <TextWrapper label="search.inflows" />
             </b>
           </span>
           <span className="receipts">
             <b>
               {" "}
-              <KeyboardTabIcon /> Wydatki
+              <KeyboardTabIcon />
+              <TextWrapper label="search.outflows" />
             </b>
           </span>
         </Box>
@@ -99,9 +104,12 @@ const TableWrapper = ({ accountNumberSelector }) => {
       </StyledRecExp>
       <StyledOperation>
         <Box>
-          Lista operacji: <span>{transfers?.length}</span>{" "}
+          <TextWrapper label="history.listOperation" />{" "}
+          <span>{transfers?.length}</span>{" "}
         </Box>
-        <Box>Exportuj historię operacji</Box>
+        <Box>
+          <TextWrapper label="history.exportHistory" />
+        </Box>
       </StyledOperation>
       <StyledTable>
         {data && (
@@ -111,13 +119,21 @@ const TableWrapper = ({ accountNumberSelector }) => {
             lastBookElementRef={lastBookElementRef}
           />
         )}
-        <Box>{end && <StyledRecord>Nie ma więcej rekordów</StyledRecord>}</Box>
+        <Box>
+          {end && (
+            <StyledRecord>
+              <TextWrapper label="history.endRecords" />
+            </StyledRecord>
+          )}
+        </Box>
         <Box style={{ padding: "20px 0" }}>
           {loading && <Loader text={"Ładuje dane"} />}
         </Box>
         <Box>
           {error && (
-            <StyledRecord>Coś poszło nie tak, przepraszamy ;( </StyledRecord>
+            <StyledRecord>
+              <TextWrapper label="history.errorWentWrong" />
+            </StyledRecord>
           )}
         </Box>
       </StyledTable>

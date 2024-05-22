@@ -7,5 +7,6 @@
   "adminPanel": "Panel Admina",
   "logout": "Wyloguj",
   "login": "Zaloguj",
-  "register": "Zarejestruj"
+  "register": "Zarejestruj",
+  "linkedAccounts": "Połączone konta"
 }

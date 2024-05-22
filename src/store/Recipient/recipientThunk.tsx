@@ -3,8 +3,8 @@ import axios from "axios";
 import { IAddRecipient } from "./recipientInterface";
 import { toast } from "react-toastify";
 import { API } from "api/dev-api";
-// import { useTranslation } from "react-i18next";
 import { globalConfig } from "helpers/globalConfig";
+import i18n from "util/initTranslation";
 
 export const userRecipients = createAsyncThunk("RECIPIENTS_GET", async () => {
   try {
@@ -16,8 +16,9 @@ export const userRecipients = createAsyncThunk("RECIPIENTS_GET", async () => {
     }
     return null;
   } catch (error) {
-    // const { t } = useTranslation();
-    toast.error("recipients.somethingWentWrong", error);
+    const message = i18n.t("global.somethingWentWrong")
+    toast.error(message);
+    console.log('error', error)
     return {
       message: error.response.data,
       error: true,
@@ -34,13 +35,15 @@ export const addUserRecipients = createAsyncThunk(
       const body = JSON.stringify({ ...data, id: userId });
       const res = await axios.put(API.PUT_ADD_RECIPIENTS, body, config);
       if (res.status === 200) {
-        toast.success("recipients.addedNewRecipient");
+        const message = i18n.t("recipients.addedNewRecipient")
+        toast.success(message);
         return res.data;
       }
       return null;
     } catch (error) {
+      const message = i18n.t("global.somethingWentWrong")
+      toast.error(message);
       console.log(`error`, error);
-      toast.error("recipients.somethingWentWrong", error);
       return {
         message: error.response.data,
         error: true,
@@ -52,20 +55,22 @@ export const addUserRecipients = createAsyncThunk(
 export const editUserRecipients = createAsyncThunk(
   "EDIT_USER_RECIPIENTS",
   async (data: IAddRecipient) => {
-    // const { t } = useTranslation();
     try {
       const token = localStorage.getItem("jwtToken");
       const { config, userId } = globalConfig(token);
       const body = JSON.stringify({ ...data, id: userId });
       const res = await axios.patch(API.PATCH_EDIT_RECIPIENTS, body, config);
       if (res.status === 200) {
-        toast.success("recipients.editingWentFine");
+        const message = i18n.t("recipients.editingWentFine")
+        toast.success(message);
         return res.data;
       }
       return null;
     } catch (error) {
+      const message = i18n.t("global.somethingWentWrong")
+      toast.error(message);
       console.log(`error`, error);
-      toast.error("recipients.somethingWentWrong", error);
+  
       return {
         message: error.response.data,
         error: true,
@@ -77,7 +82,6 @@ export const editUserRecipients = createAsyncThunk(
 export const deleteUserRecipients = createAsyncThunk(
   "DELETE_USER_RECIPIENTS",
   async (recipientId: string) => {
-    // const { t } = useTranslation();
     try {
       const token = localStorage.getItem("jwtToken");
       const { config } = globalConfig(token);
@@ -86,14 +90,17 @@ export const deleteUserRecipients = createAsyncThunk(
         config
       );
       if (res.status === 200) {
-        toast.success("recipients.recipientDeleted");
+        const message = i18n.t("recipients.recipientDeleted")
+        toast.success(message);
         return res.data;
       }
-      toast.error("recipients.somethingWentWrong");
+      const messageError = i18n.t("global.somethingWentWrong")
+      toast.error(messageError);
       return null;
     } catch (error) {
+      const messageError = i18n.t("global.somethingWentWrong")
+      toast.error(messageError);
       console.log(`error`, error);
-      toast.error("recipients.somethingWentWrong", error);
       return {
         message: error.response.data,
         error: true,

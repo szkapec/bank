@@ -10,6 +10,7 @@ import {
 import { toast } from "react-toastify";
 import { sleep } from "helpers/sleep";
 import { API } from "api/dev-api";
+import i18n from "i18next";
 
 const host = process.env.REACT_APP_HOST;
 
@@ -124,6 +125,8 @@ export const loginRemindPassword = createAsyncThunk(
       }
       return;
     } catch (error) {
+      const message = i18n.t("global.somethingWentWrong")
+      toast.success(message);
       console.log(`error`, error);
       return {
         message: error.response.data,
@@ -154,7 +157,8 @@ export const loginRemindCode = createAsyncThunk(
       }
       return;
     } catch (error) {
-      toast.error("Nie prawidłowy kod");
+      const message = i18n.t("global.incorrectCode")
+      toast.error(message);
       return {
         message: error.response.data,
         error: true,
@@ -178,11 +182,14 @@ export const loginChangePassword = createAsyncThunk(
       const res = await axios.post(API.POST_USER_CHANGE_PASSWORD, body, config);
       if (res.status === 200) {
         res.data.password && navigate?.("/login");
-        toast.success("Hasło zostało zmienione!");
+        const message = i18n.t("global.passwordChanged")
+        toast.success(message);
         return res.data;
       }
       return;
     } catch (error) {
+      const message = i18n.t("global.somethingWentWrong")
+      toast.success(message);
       console.log(`error`, error);
       return {
         message: error.response.data,
@@ -194,7 +201,7 @@ export const loginChangePassword = createAsyncThunk(
 
 export const loginCheckPassword = createAsyncThunk(
   "CHANGE_PASSWORD_ACCOUNT",
-  async ({ email, password }: {email: string; password: string}) => {
+  async ({ email, password }: { email: string; password: string }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -210,6 +217,8 @@ export const loginCheckPassword = createAsyncThunk(
       }
       return;
     } catch (error) {
+      const message = i18n.t("global.languageChanged")
+      toast.success(message);
       return {
         message: error.response.data,
         error: true,
@@ -249,6 +258,8 @@ export const loginSetNewPassword = createAsyncThunk(
       }
       return;
     } catch (error) {
+      const message = i18n.t("global.languageChanged")
+      toast.success(message);
       return {
         message: error.response.data,
         error: true,
@@ -271,11 +282,14 @@ export const loginChangeMyAccountPassword = createAsyncThunk(
     try {
       const res = await axios.post(API.POST_USER_CHANGE_PASSWORD, body, config);
       if (res.status === 200) {
-        toast.success("Hasło zostało zmienione!");
+        const message = i18n.t("global.passwordChanged")
+        toast.success(message);
         return res.data;
       }
       return;
     } catch (error) {
+      const message = i18n.t("global.languageChanged")
+      toast.success(message);
       console.log(`error`, error);
       return {
         message: error.response.data,
@@ -299,12 +313,14 @@ export const loginChangeUserLanguage = createAsyncThunk(
     try {
       const res = await axios.post(API.POST_USER_CHANGE_LANGUAGE, body, config);
       if (res.status === 200) {
-        toast.success("Język został zmieniony!");
+        const message = i18n.t("global.languageChanged")
+        toast.success(message);
         return res.data;
       }
       return;
     } catch (error) {
-      toast.error("Coś poszło nie tak");
+      const message = i18n.t("global.somethingWentWrong")
+      toast.error(message);
       console.log(`error`, error);
       return {
         message: error.response.data,
@@ -328,12 +344,14 @@ export const loginChangeLanguage = createAsyncThunk(
     try {
       const res = await axios.post(API.POST_USER_CHANGE_LIMIT, body, config);
       if (res.status === 200) {
-        toast.success("Limity zostały zmienione!");
+        const message = i18n.t("global.limitsChanged")
+        toast.success(message);
         return res.data;
       }
       return;
     } catch (error) {
-      toast.error("Coś poszło nie tak");
+      const message = i18n.t("global.somethingWentWrong")
+      toast.error(message);
       console.log(`error`, error);
       return {
         message: error.response.data,
@@ -366,13 +384,15 @@ export const loginSwitchAccount = createAsyncThunk(
       const res = await axios.post(API.POST_USER_SWITCH_ACCOUNT, body, config);
       if (res.status === 200) {
         await sleep(6000);
-        await toast.success("Zostałeś przelogowany");
+        const message = i18n.t("global.reblogged")
+        await toast.success(message);
         useToken(res.data.token);
         return await res.data;
       }
       return;
     } catch (error) {
-      toast.error("Coś poszło nie tak");
+      const message = i18n.t("global.somethingWentWrong")
+      toast.error(message);
       console.log(`error`, error);
       return {
         message: error.response.data,

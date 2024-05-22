@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import i18n from "util/initTranslation";
 
 export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
   const host = process.env.REACT_APP_HOST;
@@ -16,18 +17,19 @@ export const sendTransfer = createAsyncThunk("TRANSFER", async (text: any) => {
   try {
     const res = await axios.post(`${host}/api/transfer`, body, config);
     if (res.status === 200) {
-      toast.success("Przelew został zrealizowany!");
+      const message = i18n.t("global.transferHasBeenCompleted")
+      toast.success(message);
       return res.data;
     } else if (res.status >= 500) {
-      toast.success("Przelew nie został zrealizowany!");
+      const message = i18n.t("global.transferWasNotCompleted")
+      toast.info(message);
       return res.data;
     }
     return;
   } catch (error) {
     console.log(`error`, error.response.data.message);
-    toast.info(
-      error.response.data.message || "Przelew nie został zrealizowany!"
-    );
+    const message = i18n.t("global.transferWasNotCompleted")
+    toast.error(message);
     return {
       message: error.response.data,
       error: true,

@@ -90,7 +90,7 @@ const FormControlComponent = ({ errorModal }: IProps) => {
             className={errorModal.sum ? "input-error" : ""}
             name="sum"
             component="input"
-            type="text"
+            type="number"
             placeholder={t("modal.sum")}
           />
           {errorModal.sum && (

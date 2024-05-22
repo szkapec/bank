@@ -3,12 +3,14 @@ import { API } from "api/dev-api";
 import axios from "axios";
 import { globalConfig } from "helpers/globalConfig";
 import { toast } from "react-toastify";
+import i18n from "util/initTranslation";
 
 
   export const homeHighChartsThunk = createAsyncThunk(
     "HOME_HIGH_CHARTS",
     async () => {
       try {
+       
         const token = localStorage.getItem("jwtToken");
         const { config, userId } = globalConfig(token);
         const body = JSON.stringify({  id: userId });
@@ -19,7 +21,9 @@ import { toast } from "react-toastify";
         return null;
      
       } catch (error) {
-        toast.error("recipients.somethingWentWrong", error);
+        const message = i18n.t("global.somethingWentWrong")
+        toast.error(message);
+        console.log('error', error)
         return {
           message: error.response.data,
           error: true,

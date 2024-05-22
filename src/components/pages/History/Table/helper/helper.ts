@@ -12,6 +12,7 @@ import {
   filterName,
   filterRecExp,
 } from "./helperTransfer";
+import { useTranslation } from "react-i18next";
 
 export const TableData = (
   transfersSelector: IColumn[],
@@ -22,6 +23,7 @@ export const TableData = (
   const searchUpToSelector: string = useSelector(selectorSearchUpTo);
   const searchRecExpSelector: string = useSelector(selectorSearchRecExp);
 
+  const { t } = useTranslation();
   let newTransfers = filterRecExp(
     transfersSelector,
     searchRecExpSelector,
@@ -63,7 +65,7 @@ export const TableData = (
           accountNumberSelector === toUser.bankAccountNumber
             ? `${howMuchMoney}PLN`
             : `${-howMuchMoney}PLN`,
-        date: CountDay(createdAt),
+        date: t(CountDay(createdAt)),
         confirmation: _id + "&&" + createdAt,
         subRows: [
           {

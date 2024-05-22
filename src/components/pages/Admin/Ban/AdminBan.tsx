@@ -59,7 +59,7 @@ const AdminBan = () => {
 
       {dataBanned._id && (
         <Box className="banned">
-          <TextWrapper label="admin.wantToBan" Selected="h3" />
+          <TextWrapper label="admin.wantToBan" Selector="h3" />
           <Box>
             <Box>
               <TextWrapper label="id" />

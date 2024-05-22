@@ -1,3 +1,12 @@
 {
-  "checkData": "Sprawdzam dane..."
+  "checkData": "Sprawdzam dane...",
+  "languageChanged": "Język został zmieniony!",
+  "somethingWentWrong": "Coś poszło nie tak!",
+  "limitsChanged": "Limity zostały zmienione!",
+  "reblogged": "Zostałeś przelogowany!",
+  "passwordChanged": "Hasło zostało zmienione!",
+  "incorrectCode": "Nie prawidłowy kod!",
+  "accountHasBeenLinked": "Konto zostało połączone!",
+  "transferHasBeenCompleted": "Przelew został zrealizowany!",
+  "transferWasNotCompleted": "Przelew nie został zrealizowany!"
 }

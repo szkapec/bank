@@ -6,6 +6,7 @@ import { sendTransfer } from "store/Transfer/transferThunk";
 import { subtractMoney } from "store/Login/loginSlice";
 import FormTransfer from "./Form/FormTransfer";
 import "./Transfer.scss";
+import TextWrapper from "components/Contents/TextWrapper";
 
 export const initialFormData = {
   body: "Przelew środków",
@@ -72,7 +73,7 @@ const Transfer = () => {
     <section>
       <header className="my-account">
         <div className="container">
-          <div>Z Rachunku</div>
+          <TextWrapper label="transfer.fromTheBill" Selector="div"/>
           <div className="container__account">
             <div>EUROKONTO INTRO</div>
             <div>

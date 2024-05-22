@@ -91,6 +91,7 @@ const TableSaveOrRemoveRecipientsModal = ({
             aria-describedby="parent-modal-description"
           >
             <RecipientModal
+              edit
               initialValue={recipient}
               handleClose={handleClose}
             />
