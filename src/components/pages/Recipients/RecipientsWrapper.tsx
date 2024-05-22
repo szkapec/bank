@@ -5,7 +5,6 @@ import Recipients from "./Recipients";
 import "./Recipients.scss";
 
 const RecipientsWrapper = () => {
-  console.log('RecipientsWrapper')
   return (
     <Box className="box">
       <Box className="box__recipients">

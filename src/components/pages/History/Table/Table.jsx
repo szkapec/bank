@@ -1,3 +1,4 @@
+import React from "react";
 import { useTable, useExpanded } from "react-table";
 
 const TableSearch = ({ columns, data, lastBookElementRef }) => {
@@ -59,4 +60,4 @@ const TableSearch = ({ columns, data, lastBookElementRef }) => {
   );
 };
 
-export default TableSearch;
+export default React.memo(TableSearch);

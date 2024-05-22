@@ -15,6 +15,9 @@ export interface ILoginUser {
   language: string;
   permission: [EUserPermission];
   limit: IUserLimit;
+  lastName: string;
+  firstName: string;
+  account: string;
   color: string;
 }
 

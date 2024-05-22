@@ -24,7 +24,6 @@ import { API } from "api/dev-api";
 import { globalConfig } from "helpers/globalConfig";
 
 function useAuthorisQuery(authors: any) {
-  console.log("authors", authors);
   return useQuery({
     queryKey: ["authors"],
     queryFn: async () => {

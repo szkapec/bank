@@ -19,6 +19,7 @@ import NewLogin from "components/pages/Login/Login";
 import EmailIdentify from "components/pages/Login/ChangePassword/EmailIdentify";
 import RemindPassword from "components/pages/Login/ChangePassword/RemindPassword";
 import ChangePassword from "components/pages/Login/ChangePassword/ChangePassword";
+import TopNavbar from "components/Navbar/TopNavbar";
 
 const App = () => {
   const [load, setLoad] = useState(true);
@@ -43,6 +44,7 @@ const App = () => {
         <React.StrictMode>
           <QueryClientProvider client={queryClient}>
             {load ? <GlobalLoader /> : null}
+            <TopNavbar />
             <Navbar />
             <AuthRouteLogin exact path="/" component={HomeWrapper} />
             <AuthRoute exact path="/Login" component={NewLogin} />

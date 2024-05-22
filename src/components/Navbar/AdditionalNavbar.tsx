@@ -18,7 +18,6 @@ const AdditionalNavbar = ({
   label,
   path = "/",
 }: IPropsAdditionalNavbar) => {
-  console.log(`route`, route);
 
   if (!useRoutes?.length) return <></>;
   return (

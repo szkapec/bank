@@ -33,7 +33,6 @@ const EmailIdentify = () => {
   } = form;
 
   const onSubmit = (value: FormValues) => {
-    console.log("value", value);
     dispatch(loginRemindPassword({ value, navigate }));
   };
 

@@ -18,7 +18,6 @@ const useToken = (token: string) => {
     localStorage.removeItem("jwtToken");
     localStorage.setItem("jwtToken", token);
   } else {
-    console.log("Brak tokena :>> ");
     localStorage.removeItem("jwtToken");
   }
 };
@@ -296,7 +295,6 @@ export const loginChangeUserLanguage = createAsyncThunk(
         Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
       },
     };
-    console.log("language :>> ", language);
     const body = JSON.stringify({ language });
     try {
       const res = await axios.post(API.POST_USER_CHANGE_LANGUAGE, body, config);
@@ -353,7 +351,6 @@ export const loginSwitchAccount = createAsyncThunk(
         localStorage.removeItem("jwtToken");
         localStorage.setItem("jwtToken", token);
       } else {
-        console.log("Brak tokena :>> ");
         localStorage.removeItem("jwtToken");
       }
     };

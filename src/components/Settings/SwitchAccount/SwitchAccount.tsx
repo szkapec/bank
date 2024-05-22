@@ -49,10 +49,10 @@ const SwitchAccount = ({ setOffer }: IProps) => {
 
   const accountOption = () => {
     generals = accountsSelector.filter(
-      (account: any) => account.accountName === "general"
+      (account) => account.accountName === "general"
     );
     savings = accountsSelector.filter(
-      (account: any) => account.accountName === "saving"
+      (account) => account.accountName === "saving"
     );
   };
   accountOption();
@@ -115,7 +115,7 @@ const SwitchAccount = ({ setOffer }: IProps) => {
         </Box>
       )}
       {loaderSelector && (
-        <GlobalLoader noBackground={true} messages={testData} />
+        <GlobalLoader noBackground={true} messages={dataMessage} />
       )}
     </Box>
   );
@@ -123,7 +123,7 @@ const SwitchAccount = ({ setOffer }: IProps) => {
 
 export default SwitchAccount;
 
-const testData = [
+const dataMessage = [
   "Sprawdzam dane...",
   "Weryfikuje dane...",
   "Pobieram dane...",

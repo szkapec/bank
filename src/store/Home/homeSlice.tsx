@@ -4,16 +4,19 @@ import { homeHighChartsThunk } from "./homeThunk";
 const initialState = {
   highCharts: {
     fromClient: [],
-    toClient: []
+    toClient: [],
   },
   loading: false,
-  
 };
 
 export const homeSlice = createSlice({
   name: "HOME",
   initialState,
   reducers: {
+    logOutHome: (state) => {
+      state.highCharts = initialState.highCharts;
+      state.loading = false;
+    },
     filterTransferHistory2: (state, action) => {
       // state.homeName = action.payload.searchName;
     },
@@ -29,10 +32,8 @@ export const homeSlice = createSlice({
     [homeHighChartsThunk.rejected.toString()]: (state) => {
       state.loading = false;
     },
-  }
+  },
 });
 
-export const {
-  filterTransferHistory2,
-} = homeSlice.actions;
+export const { filterTransferHistory2, logOutHome } = homeSlice.actions;
 export default homeSlice.reducer;

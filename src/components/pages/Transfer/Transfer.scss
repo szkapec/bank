@@ -11,7 +11,7 @@
     }
 
     &__address {
-      color: red;
+      color: var(--global-color-button);
       font-weight: bold;
       cursor: pointer;
       margin: 5px 0 0 0;
@@ -30,8 +30,8 @@
     
     button {
       color: white;
-      background-color: red;
-      border: 1px solid red;
+      background-color: var(--global-color-button);;
+      border: 1px solid var(--global-color-button);;
       border-radius: 20px;
       padding: 7px 22px;
       margin-top: 20px;
@@ -41,7 +41,7 @@
       font-size: 16px;
     }
     button:hover {
-      background-color: rgb(163, 1, 1);
+      background-color: var(--global-color-top-nav);
     }
    
   }

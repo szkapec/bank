@@ -77,7 +77,7 @@ const Search = () => {
       <div className="search__sum">
         <label>Kwota</label>
         <div>
-          <input onChange={debouncedChangeSumAbove} name="above" placeholder="0,00" type="text" />
+          <input autoFocus onChange={debouncedChangeSumAbove} name="above" placeholder="0,00" type="text" />
           <input onChange={debouncedChangeSumUpTo} name="upTo" placeholder="0,00" type="text" />
         </div>
       </div>

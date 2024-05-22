@@ -10,7 +10,6 @@ const History = () => {
   
   const accountNumberSelector = useSelector(selectorAuthLoginUserNumberAccount);
   const loaderSelector = useSelector(selectorLoaderTransfer);
-  console.log('history', accountNumberSelector, loaderSelector)
   return (
     <div className="history">
       <Search />

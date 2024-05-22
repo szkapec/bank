@@ -42,7 +42,7 @@ const ChangePassword = () => {
     if (password !== repeatPassword) {
       setError(true);
     } else if (localStorage.getItem("emailCode") === null) {
-      console.log("brak code");
+      console.log("code error");
     } else {
       setError(false);
       const submit = {

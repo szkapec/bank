@@ -12,7 +12,6 @@ export enum RoutesHome {
 
 const HomeWrapper = () => {
   const [route, setRoute] = useState<RoutesHome>(RoutesHome.Diagram);
-  console.log('homeWrapper1')
   const generateRoute = (route: string) => {
     switch (route) {
       case RoutesHome.Diagram:

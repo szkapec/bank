@@ -73,7 +73,6 @@ const RecipientModal = ({ initialValue, edit, handleClose }: IProps) => {
       !errorRecipientsAccount
     ) {
       setErrorForm(initialError);
-      console.log(`values`, values);
       if (!edit) {
         dispatch(addUserRecipients(values));
       } else {

@@ -4,7 +4,6 @@ import { optionsHighCharts } from "./optionsHighCharts";
 import { useAppDispatch } from "store/hooks";
 import { homeHighChartsThunk } from "store/Home/homeThunk";
 import { useQuery } from "react-query";
-import { useEffect } from "react";
 
 const HighchartsHome = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +37,7 @@ const HighchartsHome = () => {
       if(!dateToClient) toClient.push(null)
     })
   }
-  console.log('fromClient :>> ', fromClient);
+
   return (
     <div>
       Highcharts
