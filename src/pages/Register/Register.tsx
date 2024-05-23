@@ -3,10 +3,10 @@ import { Form, Field } from "react-final-form";
 import { register } from "store/Login/loginThunk";
 import { useAppDispatch } from "store/hooks";
 import "./Register.scss";
-import Logo from "../../../assets/Logo";
 import { Box } from "@mui/material";
 import { IRegisterUser, IErrorFormRegister } from "store/Login/loginInterface";
 import TextWrapper from "components/Contents/TextWrapper";
+import Logo from "assets/Logo";
 
 const initialError: IErrorFormRegister = {
   firstName: false,

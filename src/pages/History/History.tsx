@@ -3,8 +3,8 @@ import { selectorAuthLoginUserNumberAccount } from "store/Login/loginSelector";
 import { selectorLoaderTransfer } from "store/Transfer/transferSelector";
 import TableWrapper from "./Table/TableWrapper";
 import Search from "./Search/Search";
-import Loader from "../../Loader/Loader";
 import "./History.scss";
+import Loader from "components/Loader/Loader";
 
 const History = () => {
   

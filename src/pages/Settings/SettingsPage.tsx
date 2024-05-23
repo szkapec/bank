@@ -11,17 +11,17 @@ import SwitchAccount from "components/Settings/SwitchAccount/SwitchAccount";
 import SeparateAccount from "components/Settings/SeparateAccount/SeparateAccount";
 
 const ChangePassword = lazy(() =>
-  import("../../Settings/ChangePassword/ChangePassword")
+  import("components/Settings/ChangePassword/ChangePassword")
 );
 const ChangeLanguage = lazy(() =>
-  import("../../Settings/ChangeLanguage/ChangeLanguage")
+  import("components/Settings/ChangeLanguage/ChangeLanguage")
 );
 const ChangeLimit = lazy(() =>
-  import("../../Settings/ChangeLimit/ChangeLimit")
+  import("components/Settings/ChangeLimit/ChangeLimit")
 );
 
 const ChangeColor = lazy(() =>
-  import("../../Settings/ChangeColor/ChangeColor")
+  import("components/Settings/ChangeColor/ChangeColor")
 );
 
 const renderLoader = () => <Loader />;
@@ -111,7 +111,7 @@ const SettingsPage = () => {
           onClick={() => setSeparateAccount(!separateAccount)}
         >
           <AccountBalanceIcon />
-          <TextWrapper label="settings.separateAccount" />
+          <TextWrapper label="offer.separateAccount" />
         </Button>
         <Suspense fallback={renderLoader()}>
           {separateAccount && <SeparateAccount setOffer={setSeparateAccount} />}

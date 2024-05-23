@@ -1,6 +1,6 @@
 import TextWrapper from "components/Contents/TextWrapper";
-import { RoutesAdmin } from "components/pages/Admin/Navbar/AdminNavbar";
-import { RoutesHome } from "components/pages/Home/HomeWrapper";
+import { RoutesAdmin } from "pages/Admin/Navbar/AdminNavbar";
+import { RoutesHome } from "pages/Home/HomeWrapper";
 import { Link } from "react-router-dom";
 
 interface IPropsAdditionalNavbar {
