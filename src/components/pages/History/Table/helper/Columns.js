@@ -57,6 +57,7 @@ export const columnsForHistory = [
     Cell: ({ row }) => {
       return row.canExpand ? (
         <TableSaveOrRemoveRecipientsModal
+          edit={false}
           historyTable
           numberAccount={row.original.account}
           recipient={parseData(row.original)}

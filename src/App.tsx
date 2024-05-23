@@ -20,6 +20,9 @@ import EmailIdentify from "components/pages/Login/ChangePassword/EmailIdentify";
 import RemindPassword from "components/pages/Login/ChangePassword/RemindPassword";
 import ChangePassword from "components/pages/Login/ChangePassword/ChangePassword";
 import TopNavbar from "components/Navbar/TopNavbar";
+import { useSelector } from "react-redux";
+import { selectorLanguage } from "store/Login/loginSelector";
+import { initTranslation } from "util/initTranslation";
 
 const App = () => {
   const [load, setLoad] = useState(true);
@@ -29,6 +32,9 @@ const App = () => {
     setLoad(false);
     clearInterval(interval);
   };
+
+  const languageSelector = useSelector(selectorLanguage);
+  initTranslation(languageSelector);
 
   const queryClient = new QueryClient({
     defaultOptions: {

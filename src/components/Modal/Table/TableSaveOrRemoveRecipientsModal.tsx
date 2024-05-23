@@ -14,16 +14,18 @@ interface IPropsRecipient {
   recipient: IAddRecipient;
   historyTable?: boolean;
   numberAccount?: string;
+  edit?: boolean;
 }
 
 const TableSaveOrRemoveRecipientsModal = ({
   recipient,
   historyTable,
   numberAccount,
+  edit
 }: IPropsRecipient) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const open = Boolean(anchorEl);
+  const open = !!anchorEl;
   const dispatch = useAppDispatch();
   const loginErrorSelector = useSelector(selectorLoaderRecipient);
   const myNumberAccountSelector = useSelector(
@@ -91,7 +93,7 @@ const TableSaveOrRemoveRecipientsModal = ({
             aria-describedby="parent-modal-description"
           >
             <RecipientModal
-              edit
+              edit={edit}
               initialValue={recipient}
               handleClose={handleClose}
             />

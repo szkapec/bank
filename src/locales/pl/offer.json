@@ -27,7 +27,7 @@
   "send": "Wyślij",
   "checking": "Sprawdzam",
   "addAgain": "Dodaj ponownie",
-  "enterLogin": "Podaj login",
+  "enterLogin": "Podaj email",
   "password": "Hasło",
   "connect": "Połącz",
   "personalAccounts": "Konta osobiste",
@@ -35,5 +35,9 @@
   "switchAccount": "Przełącz konto",
   "noAssociatedAccounts": "Brak powiązanych kont",
   "changeColor": "Zmiana koloru strony",
-  "connectAccounts": "Połącz konta"
+  "connectAccounts": "Połącz konta",
+  "separateAccount": "Rozdziel konta",
+  "incorrectData": "Nie prawidłowe dane",
+  "accountDisconnected": "Rozłączono konto",
+  "connectDoesntExist": "Połączenie nie istnieje"
 }

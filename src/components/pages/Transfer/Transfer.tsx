@@ -52,14 +52,14 @@ const Transfer = () => {
     });
 
     if (!errorBody && !errorMoney && !errorAccount) {
-      const form = {
+      const form =  JSON.stringify({
         body: formData.body,
         howMuchMoney: formData.howMuchMoney,
         numberReceived: formData.numberReceived,
         myIdUser: id,
         email: email,
         numberSend: bankAccountNumber,
-      };
+      });
      
       const sendTransferData = await dispatch(sendTransfer(form));
       if (!sendTransferData.payload.error) {

@@ -8,5 +8,9 @@
   "incorrectCode": "Nie prawidłowy kod!",
   "accountHasBeenLinked": "Konto zostało połączone!",
   "transferHasBeenCompleted": "Przelew został zrealizowany!",
-  "transferWasNotCompleted": "Przelew nie został zrealizowany!"
+  "transferWasNotCompleted": "Przelew nie został zrealizowany!",
+  "passwordDoesntMatch": "Hasło nie pasuje",
+  "noUser": "Nie ma takiego użytkownika o takim e-mail",
+  "bannedAccount": "Twoje konto zostało zbanowane",
+  "noAuthorization": "Brak autoryzacji"
 }

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ISubAccount } from "./subAccountInterface";
-import { getConnectAccount, newConnectAccount } from "./subAccountThunk";
+import { ISubAccount, PayloadAccount } from "./subAccountInterface";
+import { getConnectAccount, newConnectAccount, separateAccount } from "./subAccountThunk";
+
 
 const initialState: ISubAccount = {
   accounts: [],
@@ -47,7 +48,7 @@ export const subAccountSlice = createSlice({
         state.error = payload?.error;
         state.loading = false;
       } else {
-        state.accounts = [...state.accounts, payload.newAccount];
+        state.accounts = payload.newAccount.connectAccount
         state.newAccount = payload.newAccount
         state.loading = false;
         state.error = payload?.error;
@@ -59,11 +60,21 @@ export const subAccountSlice = createSlice({
     [getConnectAccount.pending.toString()]: (state) => {
       state.loading = true;
     },
-    [getConnectAccount.fulfilled.toString()]: (state, { payload }: PayloadAction<any> ) => {
+    [getConnectAccount.fulfilled.toString()]: (state, { payload }: PayloadAction<PayloadAccount> ) => {
       state.accounts = payload?.connectAccount || []
       state.loading = false;
     },
     [getConnectAccount.rejected.toString()]: (state) => {
+      state.loading = true;
+    },
+    [separateAccount.pending.toString()]: (state) => {
+      state.loading = true;
+    },
+    [separateAccount.fulfilled.toString()]: (state, { payload }: PayloadAction<PayloadAccount> ) => {
+      state.accounts = payload?.connectAccount || []
+      state.loading = false;
+    },
+    [separateAccount.rejected.toString()]: (state) => {
       state.loading = true;
     },
   }

@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface propsType {
-  label?: string;
+  label: string;
   Selector?: any;
 }
 

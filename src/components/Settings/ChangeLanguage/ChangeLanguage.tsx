@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import TextWrapper from "components/Contents/TextWrapper";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "store/hooks";
 import { selectorLanguage } from "store/Login/loginSelector";
@@ -29,16 +28,11 @@ interface IProps {
 const ChangeLanguage = ({ setOffer }: IProps) => {
   const [language, setLanguage] = React.useState("");
   const languageSelector = useSelector(selectorLanguage);
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const handleChange = (event: SelectChangeEvent) => {
     setLanguage(event.target.value as languageEnum);
   };
   const onSubmit = () => {
-    const test = {
-      language,
-      t: 'test'
-    }
     dispatch(loginChangeUserLanguage(language));
     setOffer(false)
   };

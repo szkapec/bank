@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import debounce from "lodash.debounce";
 import { useAppDispatch } from "store/hooks";
 import {
@@ -10,11 +10,13 @@ import {
 import "./Search.scss";
 import { RecExp } from "store/Search/searchInterface";
 import TextWrapper from "components/Contents/TextWrapper";
+import { useTranslation } from "react-i18next";
 
 const Search = () => {
   const dispatch = useAppDispatch();
   const [searchName, setSearchName] = useState("");
   const [searchRecExp, setSearchRecExp] = useState<string>(RecExp[0]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     searchName && dispatch(filterTransferHistory({ searchName }));
@@ -58,21 +60,21 @@ const Search = () => {
           name="All"
           className={searchRecExp === RecExp[0] ? "active" : "filter"}
         >
-          <TextWrapper label="search.all" Selector="label" />
+          {t('search.all')}
         </button>
         <button
           onClick={handleClick}
           name="Receipts"
           className={searchRecExp === RecExp[1] ? "active" : "filter"}
         >
-          <TextWrapper label="search.inflows" Selector="label" />
+          {t('search.inflows')}
         </button>
         <button
           onClick={handleClick}
           name="Expenses"
           className={searchRecExp === RecExp[2] ? "active" : "filter"}
         >
-          <TextWrapper label="search.outflows" Selector="label" />
+          {t('search.outflows')}
         </button>
       </div>
       <div className="search__sum">

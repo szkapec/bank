@@ -59,10 +59,22 @@
 }
 
 .error-transfer {
-  font-size: 18px;
+  font-size: var(--global-s-size-nav);
   color: red;
   font-weight: bold;
   margin-top: 5px;
+}
+
+@media(min-width: 500px){
+  .error-transfer {
+    font-size: var(--global-l-size-nav);
+  }
+}
+
+@media(min-width: 1000px) {
+  .error-transfer {
+    font-size: var(--global-xl-size-nav);
+  }
 }
 
 .error-input {

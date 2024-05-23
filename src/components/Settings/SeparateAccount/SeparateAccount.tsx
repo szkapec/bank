@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { useAppDispatch } from "store/hooks";
 import TextWrapper from "components/Contents/TextWrapper";
-import "./ConnectAccount.scss";
 import { IConnectAccount } from "store/SubAccount/subAccountInterface";
-import { newConnectAccount } from "store/SubAccount/subAccountThunk";
+import {
+  separateAccount,
+} from "store/SubAccount/subAccountThunk";
 import { useSelector } from "react-redux";
 import {
   selectorNewSubAccounts,
@@ -26,8 +27,9 @@ interface IProps {
   setOffer: Function;
 }
 
-const ConnectAccount = ({ setOffer }: IProps) => {
+const SeparateAccount = ({ setOffer }: IProps) => {
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(initialValues);
   const [account, setAccount] = useState<IConnectAccount>(initialValues);
   const loadingSelector = useSelector(selectorSubAccountsLoading);
   const subAccountsSelector = useSelector(selectorNewSubAccounts);
@@ -39,12 +41,29 @@ const ConnectAccount = ({ setOffer }: IProps) => {
 
   const onSubmit = async ({ login, password }: IConnectAccount) => {
     setError(false);
-    if (login && password) {
-      dispatch(newConnectAccount({ login, password }));
-      setAccount(initialValues);
+    setErrorMessage(initialValues);
+    const errors = {
+      login: "",
+      password: "",
+    };
+
+    if (login.length <= 10) {
+      setError(true);
+      errors.login = "offer.incorrectData";
+    }
+    if (password.length <= 3) {
+      setError(true);
+      errors.password = "offer.incorrectData";
+    }
+    setErrorMessage(errors);
+
+    if (!errors.login && !errors.password) {
+      dispatch(separateAccount({ login, password }));
+      setErrorMessage(initialValues);
+      setError(false);
     }
   };
-
+  console.log("errorMessage3", errorMessage);
   const handleChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -79,8 +98,11 @@ const ConnectAccount = ({ setOffer }: IProps) => {
     <Box className="connect-account">
       {subAccountsSelector?.accountId ? (
         <Box sx={{ textAlign: "center" }}>
-          <TextWrapper label="Dodano nowe konto" Selector="div"/>
-          <TextWrapper Selector="div" label={`Nr: ${subAccountsSelector.accountId}`}></TextWrapper>
+          <TextWrapper label="Dodano nowe konto" Selector="div" />
+          <TextWrapper
+            Selector="div"
+            label={`Nr: ${subAccountsSelector.accountId}`}
+          ></TextWrapper>
           <Button
             className="btn-change"
             variant="contained"
@@ -95,18 +117,31 @@ const ConnectAccount = ({ setOffer }: IProps) => {
           initialValues={account}
           render={({ handleSubmit }): JSX.Element => (
             <form onSubmit={handleSubmit}>
-              <Box className="box">
+              <Box
+                className={`box ${
+                  errorMessage.login && error ? "errorMessage" : ""
+                }`}
+              >
                 <TextWrapper label="offer.enterLogin" Selector="label" />
                 <Field
                   className={error ? "input-error" : "new-limit"}
                   name="login"
                   onChange={(e: any) => handleChange(e)}
                   component="input"
-                  type="text"
+                  type="email"
                   placeholder="Login"
                 />
               </Box>
-              <Box className="box">
+              {error && errorMessage.login && (
+                <Box className="error" style={{ marginBottom: "8px" }}>
+                  <TextWrapper label={errorMessage.login} />
+                </Box>
+              )}
+              <Box
+                className={`box ${
+                  errorMessage.password && error ? "errorMessage" : ""
+                }`}
+              >
                 <TextWrapper label="offer.enterPassword" Selector="label" />
                 <Field
                   className={error ? "input-error" : "new-limit"}
@@ -114,12 +149,12 @@ const ConnectAccount = ({ setOffer }: IProps) => {
                   onChange={(e: any) => handleChange(e)}
                   component="input"
                   type="password"
-                  placeholder={t('offer.password')}
+                  placeholder={t("offer.password")}
                 />
               </Box>
-              {error && (
-                <Box className="error">
-                  <TextWrapper label="offer.invalidLimit" />
+              {error && errorMessage.password && (
+                <Box className="error" style={{ marginBottom: "5px" }}>
+                  <TextWrapper label={errorMessage.password} />
                 </Box>
               )}
               <Button className="btn-change" type="submit" variant="contained">
@@ -133,4 +168,4 @@ const ConnectAccount = ({ setOffer }: IProps) => {
   );
 };
 
-export default ConnectAccount;
+export default SeparateAccount;

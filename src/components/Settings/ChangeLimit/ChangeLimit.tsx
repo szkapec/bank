@@ -73,7 +73,6 @@ const ChangeLimit = ({ setOffer }: IProps) => {
               <TextWrapper label="offer.dailyLimit" Selector="label" />
               <Field
                 className={error ? "input-error" : "new-limit"}
-                isVisible="false"
                 name="limitDay"
                 disabled={checkPermissions(
                   permissionSelector,

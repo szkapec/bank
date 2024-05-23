@@ -8,5 +8,9 @@
   "incorrectCode": "Incorrect code!",
   "accountHasBeenLinked": "The account has been linked!",
   "transferHasBeenCompleted": "The transfer has been completed!",
-  "transferWasNotCompleted": "The transfer was not completed!"
+  "transferWasNotCompleted": "The transfer was not completed!",
+  "passwordDoesntMatch": "The password does not match",
+  "noUser": "There is no such user with such e-mail",
+  "bannedAccount": "Your account has been banned",
+  "noAuthorization": "No authorization"
 }

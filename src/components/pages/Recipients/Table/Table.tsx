@@ -24,7 +24,7 @@ const Table = ({ recipient }: IPropsRecipient) => {
           {recipient.title}
         </Box>
       </Box>
-      <TableSaveOrRemoveRecipientsModal recipient={recipient} />
+      <TableSaveOrRemoveRecipientsModal edit={true} recipient={recipient} />
     </Box>
   );
 };

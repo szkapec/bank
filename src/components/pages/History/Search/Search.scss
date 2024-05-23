@@ -26,7 +26,8 @@
       color: var(--global-color-button);
     }
     .active {
-      border: 1px solid var(--global-color);
+      border: 1px solid var(--global-color-top-nav);
+      color: 1px solid var(--global-color-button);
     }
     button:first-child {
       border-top-left-radius: 5px;
@@ -35,6 +36,11 @@
     button:last-child {
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
+    }
+  }
+  &__filters:hover {
+    button {
+      cursor: pointer;
     }
   }
 

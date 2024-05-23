@@ -8,6 +8,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import ConnectAccount from "components/Settings/ConnectAccount/ConnectAccount";
 import SwitchAccount from "components/Settings/SwitchAccount/SwitchAccount";
+import SeparateAccount from "components/Settings/SeparateAccount/SeparateAccount";
 
 const ChangePassword = lazy(() =>
   import("../../Settings/ChangePassword/ChangePassword")
@@ -32,6 +33,7 @@ const Offers = () => {
   const [connectAccount, setConnectAccount] = useState(false);
   const [limit, setlimit] = useState(false);
   const [switchAccount, setSwitchAccount] = useState(false);
+  const [separateAccount, setSeparateAccount] = useState(false)
 
   return (
     <Box className="offers-profil">
@@ -100,6 +102,19 @@ const Offers = () => {
         </Button>
         <Suspense fallback={renderLoader()}>
           {switchAccount && <SwitchAccount setOffer={setSwitchAccount} />}
+        </Suspense>
+      </section>
+
+      <section>
+        <Button
+          className="btn-info"
+          onClick={() => setSeparateAccount(!separateAccount)}
+        >
+          <AccountBalanceIcon />
+          <TextWrapper label="offer.separateAccount" />
+        </Button>
+        <Suspense fallback={renderLoader()}>
+          {separateAccount && <SeparateAccount setOffer={setSeparateAccount} />}
         </Suspense>
       </section>
 

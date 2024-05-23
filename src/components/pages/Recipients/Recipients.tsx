@@ -15,28 +15,10 @@ import {
 import Loader from "components/Loader/Loader";
 import Error from "components/Error/Error";
 import { useAppDispatch } from "store/hooks";
-import { QueryClient, useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { userRecipients } from "store/Recipient/recipientThunk";
 import TextWrapper from "components/Contents/TextWrapper";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
-import { API } from "api/dev-api";
-import { globalConfig } from "helpers/globalConfig";
-
-function useAuthorisQuery(authors: any) {
-  return useQuery({
-    queryKey: ["authors"],
-    queryFn: async () => {
-      const token = localStorage.getItem("jwtToken");
-      const { config, userId } = globalConfig(token);
-      const response = await axios.get<{ userId: any }>(
-        API.GET_USER_RECIPIENTS + userId,
-        config
-      );
-      return response.data.userId;
-    },
-  });
-}
 
 const Recipients = () => {
   const loginErrorSelector = useSelector(selectorLoaderRecipient);
@@ -46,7 +28,6 @@ const Recipients = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { isLoading, error } = useQuery("recipients", () => dispatch(userRecipients()));
-
 
   const handleClose = () => {
     setOpen(false);

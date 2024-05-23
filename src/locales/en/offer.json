@@ -27,7 +27,7 @@
   "send": "Send",
   "checking": "Checking",
   "addAgain": "Add again",
-  "enterLogin": "Enter your login",
+  "enterLogin": "Enter your email",
   "password": "Password",
   "connect": "Connect",
   "personalAccounts": "Personal accounts",
@@ -35,5 +35,9 @@
   "switchAccount": "Switch account",
   "noAssociatedAccounts": "No associated accounts",
   "changeColor": "Changing the page color",
-  "connectAccounts": "Connect your accounts"
+  "connectAccounts": "Connect your accounts",
+  "separateAccount": "Separate account",
+  "incorrectData": "Incorrect data",
+  "accountDisconnected": "Account disconnected",
+  "connectDoesntExist": "The connection does not exist"
 }

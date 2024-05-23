@@ -13,6 +13,10 @@ export interface ISubAccount {
   error: boolean;
 }
 
+export interface PayloadAccount {
+  message: string;
+  connectAccount: IAccounts[]
+}
 export interface IAccounts {
   _id: string;
   accountEmail: string;

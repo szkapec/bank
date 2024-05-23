@@ -5,8 +5,6 @@ import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ILoginUser } from "store/Login/loginInterface";
@@ -18,8 +16,6 @@ import { useAppDispatch } from "store/hooks";
 import GlobalLoader from "components/Loader/GlobalLoader";
 import { selectorAuthLoading } from "store/Login/loginSelector";
 import { useNavigate } from "react-router";
-import { useQuery } from "react-query";
-import { getConnectAccount } from "store/SubAccount/subAccountThunk";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Badge } from "@mui/material";
 import TextWrapper from "components/Contents/TextWrapper";
@@ -140,6 +136,7 @@ export const CustomizedMenus = ({ user }: PropsType) => {
           >
             {subAccountsSelector.map((account) => (
               <MenuItem
+                key={account._id}
                 onClick={() => handleSwichAndCloseAll(account.accountId)}
                 disableRipple
               >
