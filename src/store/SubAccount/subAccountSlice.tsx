@@ -61,7 +61,7 @@ export const subAccountSlice = createSlice({
       state.loading = true;
     },
     [getConnectAccount.fulfilled.toString()]: (state, { payload }: PayloadAction<PayloadAccount> ) => {
-      state.accounts = payload?.connectAccount || []
+      state.accounts = payload?.connectAccount || state.accounts
       state.loading = false;
     },
     [getConnectAccount.rejected.toString()]: (state) => {
@@ -71,7 +71,7 @@ export const subAccountSlice = createSlice({
       state.loading = true;
     },
     [separateAccount.fulfilled.toString()]: (state, { payload }: PayloadAction<PayloadAccount> ) => {
-      state.accounts = payload?.connectAccount || []
+      state.accounts = payload?.connectAccount || state.accounts
       state.loading = false;
     },
     [separateAccount.rejected.toString()]: (state) => {

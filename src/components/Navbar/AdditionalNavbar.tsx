@@ -21,7 +21,7 @@ const AdditionalNavbar = ({
 
   if (!useRoutes?.length) return <></>;
   return (
-    <nav className="navbar-additional">
+    <nav className="navbar-bottom">
       {useRoutes?.map((useRoute: string, index: number) => (
         <Link
           key={useRoute}

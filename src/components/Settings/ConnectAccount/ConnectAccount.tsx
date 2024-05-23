@@ -72,7 +72,7 @@ const ConnectAccount = ({ setOffer }: IProps) => {
   }
 
   if (loadingSelector) {
-    return <Loader text="offer.checking"></Loader>;
+    return <Loader text="settings.checking"></Loader>;
   }
 
   return (
@@ -86,7 +86,7 @@ const ConnectAccount = ({ setOffer }: IProps) => {
             variant="contained"
             onClick={() => refresh()}
           >
-            <TextWrapper label="offer.addAgain" />
+            <TextWrapper label="settings.addAgain" />
           </Button>
         </Box>
       ) : (
@@ -96,7 +96,7 @@ const ConnectAccount = ({ setOffer }: IProps) => {
           render={({ handleSubmit }): JSX.Element => (
             <form onSubmit={handleSubmit}>
               <Box className="box">
-                <TextWrapper label="offer.enterLogin" Selector="label" />
+                <TextWrapper label="settings.enterLogin" Selector="label" />
                 <Field
                   className={error ? "input-error" : "new-limit"}
                   name="login"
@@ -107,23 +107,23 @@ const ConnectAccount = ({ setOffer }: IProps) => {
                 />
               </Box>
               <Box className="box">
-                <TextWrapper label="offer.enterPassword" Selector="label" />
+                <TextWrapper label="settings.enterPassword" Selector="label" />
                 <Field
                   className={error ? "input-error" : "new-limit"}
                   name="password"
                   onChange={(e: any) => handleChange(e)}
                   component="input"
                   type="password"
-                  placeholder={t('offer.password')}
+                  placeholder={t('settings.password')}
                 />
               </Box>
               {error && (
                 <Box className="error">
-                  <TextWrapper label="offer.invalidLimit" />
+                  <TextWrapper label="settings.invalidLimit" />
                 </Box>
               )}
               <Button className="btn-change" type="submit" variant="contained">
-                <TextWrapper label="offer.connect" />
+                <TextWrapper label="settings.connect" />
               </Button>
             </form>
           )}

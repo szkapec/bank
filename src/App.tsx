@@ -13,7 +13,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Settings from "components/Events/Settings";
 import AdminWrapper from "components/pages/Admin/AdminWrapper";
-import Offers from "components/pages/Offers/Offers";
 import HomeWrapper from "components/pages/Home/HomeWrapper";
 import NewLogin from "components/pages/Login/Login";
 import EmailIdentify from "components/pages/Login/ChangePassword/EmailIdentify";
@@ -23,6 +22,7 @@ import TopNavbar from "components/Navbar/TopNavbar";
 import { useSelector } from "react-redux";
 import { selectorLanguage } from "store/Login/loginSelector";
 import { initTranslation } from "util/initTranslation";
+import SettingsPage from "components/pages/Settings/SettingsPage";
 
 const App = () => {
   const [load, setLoad] = useState(true);
@@ -69,7 +69,7 @@ const App = () => {
             <AuthRouteLogin exact path="/history" component={History} />
             <AuthRouteLogin exact path="/transfer" component={Transfer} />
             <AuthRouteLogin exact path="/recipients" component={Recipients} />
-            <AuthRouteLogin exact path="/offers" component={Offers} />
+            <AuthRouteLogin exact path="/settings" component={SettingsPage} />
             <AuthRouteAdmin exact path="/admin" component={AdminWrapper} />
             <Settings />
           </QueryClientProvider>

@@ -39,5 +39,6 @@
   "separateAccount": "Rozdziel konta",
   "incorrectData": "Nie prawidłowe dane",
   "accountDisconnected": "Rozłączono konto",
-  "connectDoesntExist": "Połączenie nie istnieje"
+  "connectDoesntExist": "Połączenie nie istnieje",
+  "disconnect": "Rozłącz"
 }

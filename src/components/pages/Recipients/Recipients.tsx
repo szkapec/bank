@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormControlLabel, Switch, Modal, Button, Box } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import RecipientModal from "components/Modal/Form/RecipientModal";
@@ -24,10 +24,13 @@ const Recipients = () => {
   const loginErrorSelector = useSelector(selectorLoaderRecipient);
   const dataSelector = useSelector(selectorDataRecipient);
   const [open, setOpen] = useState(false);
+  const [valueSearch, setValueSearch] = useState("");
   const [search, setSearch] = useState<IAddRecipient[]>([]);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const { isLoading, error } = useQuery("recipients", () => dispatch(userRecipients()));
+  const { isLoading, error } = useQuery("recipients", () =>
+    dispatch(userRecipients())
+  );
 
   const handleClose = () => {
     setOpen(false);
@@ -38,15 +41,20 @@ const Recipients = () => {
   }, [loginErrorSelector]);
 
   const changeHandler = (e: any) => {
+    setValueSearch(e.target.value);
     const newTargetValue = dataSelector?.filter(
-      (data) => data.recipientsName.search(e.target.value) === 0
+      (data) =>
+        data.recipientsName
+          .toLowerCase()
+          .search(e.target.value.toLowerCase()) === 0
     );
+    console.log("newTargetValue", newTargetValue);
     if (e.target.value.length >= 2) {
       setSearch(newTargetValue);
     } else setSearch([]);
   };
 
-  const debouncedChangeHandler = useCallback(debounce(changeHandler, 300), []);
+  const debouncedChangeHandler = debounce(changeHandler, 300);
 
   const handleOpen = () => {
     setOpen(true);
@@ -89,8 +97,16 @@ const Recipients = () => {
           <LockIcon color="primary" />
         </Box>
       </Box>
+      <Box className="search-user">
+        {!search.length && valueSearch.length >= 2 && (
+          <Box>Nie ma takiej nazwy użytkownika, zmień kryteria wyszukiwania</Box>
+        )}
+      </Box>
       <Box>
         <TableWrapper recipients={search.length > 0 ? search : dataSelector} />
+      </Box>
+      <Box>
+        testowe karty
       </Box>
     </>
   );

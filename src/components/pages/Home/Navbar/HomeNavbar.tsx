@@ -1,5 +1,6 @@
 import AdditionalNavbar from "components/Navbar/AdditionalNavbar";
 import { RoutesHome } from "../HomeWrapper";
+import { Box } from "@mui/material";
 
 interface IPropsAdminNavbar {
   setRoute: Function;
@@ -8,12 +9,18 @@ interface IPropsAdminNavbar {
 
 const HomeNavbar = ({ setRoute, route }: IPropsAdminNavbar) => {
   return (
-    <AdditionalNavbar
-      setRoute={setRoute}
-      useRoutes={[RoutesHome.Diagram, RoutesHome.Highcharts]}
-      route={route}
-      label={["diagrams", "highcharts"]}
-    />
+    <Box className="navbar-container additional">
+      <AdditionalNavbar
+        setRoute={setRoute}
+        useRoutes={[
+          RoutesHome.Diagram,
+          RoutesHome.Highcharts,
+          RoutesHome.Graph,
+        ]}
+        route={route}
+        label={["diagrams", "highcharts", "graph"]}
+      />
+    </Box>
   );
 };
 

@@ -25,8 +25,8 @@ const Navbar = () => {
         <NavLink to="/recipients" className="navbar-recipients">
           <TextWrapper label="navbar.recipients" />
         </NavLink>
-        <NavLink to="/offers" className="navbar-offers">
-          <TextWrapper label="navbar.offerAndRequests" />
+        <NavLink to="/settings" className="navbar-settings">
+          <TextWrapper label="navbar.settings" />
         </NavLink>
         {user.premium && (
           <NavLink to="/admin" className="navbar-admin">

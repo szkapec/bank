@@ -50,6 +50,20 @@
   }
 }
 
+.navbar-container.additional {
+    background-color: var(--global-color-bottom-nav);
+
+    .navbar-bottom {
+      background-color: var(--global-color-bottom-nav);
+    }
+
+    .additional-active {
+      background-color: var(--global-color);
+      margin-bottom: 4px;
+      padding: 0 40px;
+    }
+}
+
 .navbar-top-container {
   background-color: var(--global-color-top-nav);
   display: flex;

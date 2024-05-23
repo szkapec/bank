@@ -49,11 +49,11 @@ const SeparateAccount = ({ setOffer }: IProps) => {
 
     if (login.length <= 10) {
       setError(true);
-      errors.login = "offer.incorrectData";
+      errors.login = "settings.incorrectData";
     }
     if (password.length <= 3) {
       setError(true);
-      errors.password = "offer.incorrectData";
+      errors.password = "settings.incorrectData";
     }
     setErrorMessage(errors);
 
@@ -61,9 +61,9 @@ const SeparateAccount = ({ setOffer }: IProps) => {
       dispatch(separateAccount({ login, password }));
       setErrorMessage(initialValues);
       setError(false);
+      setOffer(false)
     }
   };
-  console.log("errorMessage3", errorMessage);
   const handleChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -91,7 +91,7 @@ const SeparateAccount = ({ setOffer }: IProps) => {
   }
 
   if (loadingSelector) {
-    return <Loader text="offer.checking"></Loader>;
+    return <Loader text="settings.checking"></Loader>;
   }
 
   return (
@@ -108,7 +108,7 @@ const SeparateAccount = ({ setOffer }: IProps) => {
             variant="contained"
             onClick={() => refresh()}
           >
-            <TextWrapper label="offer.addAgain" />
+            <TextWrapper label="settings.addAgain" />
           </Button>
         </Box>
       ) : (
@@ -122,7 +122,7 @@ const SeparateAccount = ({ setOffer }: IProps) => {
                   errorMessage.login && error ? "errorMessage" : ""
                 }`}
               >
-                <TextWrapper label="offer.enterLogin" Selector="label" />
+                <TextWrapper label="settings.enterLogin" Selector="label" />
                 <Field
                   className={error ? "input-error" : "new-limit"}
                   name="login"
@@ -142,14 +142,14 @@ const SeparateAccount = ({ setOffer }: IProps) => {
                   errorMessage.password && error ? "errorMessage" : ""
                 }`}
               >
-                <TextWrapper label="offer.enterPassword" Selector="label" />
+                <TextWrapper label="settings.enterPassword" Selector="label" />
                 <Field
                   className={error ? "input-error" : "new-limit"}
                   name="password"
                   onChange={(e: any) => handleChange(e)}
                   component="input"
                   type="password"
-                  placeholder={t("offer.password")}
+                  placeholder={t("settings.password")}
                 />
               </Box>
               {error && errorMessage.password && (
@@ -158,7 +158,7 @@ const SeparateAccount = ({ setOffer }: IProps) => {
                 </Box>
               )}
               <Button className="btn-change" type="submit" variant="contained">
-                <TextWrapper label="offer.connect" />
+                <TextWrapper label="settings.disconnect" />
               </Button>
             </form>
           )}

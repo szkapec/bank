@@ -40,11 +40,11 @@ const ChangeLanguage = ({ setOffer }: IProps) => {
   return (
     <Box sx={styleLanguage}>
       <Box sx={{ padding: "0px 0 15px" }}>
-        <TextWrapper label="offer.changeLanguage" />
+        <TextWrapper label="settings.changeLanguage" />
       </Box>
       <FormControl>
         <InputLabel id="language">
-          <TextWrapper label="offer.language" />
+          <TextWrapper label="settings.language" />
         </InputLabel>
         <Select
           sx={{ width: "180px", margin: "10px 0 20px" }}
@@ -54,16 +54,16 @@ const ChangeLanguage = ({ setOffer }: IProps) => {
           onChange={handleChange}
         >
           <MenuItem value={languageEnum.PL}>
-            <TextWrapper label="offer.poland" />
+            <TextWrapper label="settings.poland" />
           </MenuItem>
           <MenuItem value={languageEnum.EN}>
-            <TextWrapper label="offer.england" />
+            <TextWrapper label="settings.england" />
           </MenuItem>
-          <MenuItem value={languageEnum.SP}>
-            <TextWrapper label="offer.spain" />
+          <MenuItem disabled value={languageEnum.SP}>
+            <TextWrapper label="settings.spain" />
           </MenuItem>
-          <MenuItem value={languageEnum.GR}>
-            <TextWrapper label="offer.germany" />
+          <MenuItem disabled value={languageEnum.GR}>
+            <TextWrapper label="settings.germany" />
           </MenuItem>
         </Select>
         <Button
@@ -72,7 +72,7 @@ const ChangeLanguage = ({ setOffer }: IProps) => {
           type="submit"
           variant="contained"
         >
-          <TextWrapper label="offer.changeLanguageName" />
+          <TextWrapper label="settings.changeLanguageName" />
         </Button>
       </FormControl>
     </Box>

@@ -77,7 +77,7 @@ const ChangePassword = ({ setOffer }: IProps) => {
             {changePassword ? (
               <>
                 <Box className="box">
-                  <TextWrapper label="offer.newPassword" Selector="label" />
+                  <TextWrapper label="settings.newPassword" Selector="label" />
                   <Field
                     className={error ? "input-error" : "newPassword"}
                     name="newPassword"
@@ -88,7 +88,7 @@ const ChangePassword = ({ setOffer }: IProps) => {
                   />
                 </Box>
                 <Box className="box">
-                  <TextWrapper label="offer.repeatPassword" Selector="label" />
+                  <TextWrapper label="settings.repeatPassword" Selector="label" />
                   <Field
                     className={error ? "input-error" : "repeatNewPassword"}
                     name="repeatNewPassword"
@@ -100,13 +100,13 @@ const ChangePassword = ({ setOffer }: IProps) => {
                 </Box>
                 {error && (
                   <Box className="error">
-                    <TextWrapper label="offer.errorPasswordRepeat" />
+                    <TextWrapper label="settings.errorPasswordRepeat" />
                   </Box>
                 )}
               </>
             ) : (
               <Box className="box">
-                <TextWrapper label="offer.enterPassword" Selector="label" />
+                <TextWrapper label="settings.enterPassword" Selector="label" />
                 <Field
                   className={error ? "input-error" : "password"}
                   name="password"
@@ -117,13 +117,13 @@ const ChangePassword = ({ setOffer }: IProps) => {
                 />
                 {error && (
                   <Box className="error">
-                    <TextWrapper label="offer.errorPassword" />
+                    <TextWrapper label="settings.errorPassword" />
                   </Box>
                 )}
               </Box>
             )}
             <Button className="btn-change" type="submit" variant="contained">
-              <TextWrapper label="offer.button" />
+              <TextWrapper label="settings.button" />
             </Button>
           </form>
         )}

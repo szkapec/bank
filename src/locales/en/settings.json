@@ -39,5 +39,6 @@
   "separateAccount": "Separate account",
   "incorrectData": "Incorrect data",
   "accountDisconnected": "Account disconnected",
-  "connectDoesntExist": "The connection does not exist"
+  "connectDoesntExist": "The connection does not exist",
+  "disconnect": "Disconnect"
 }

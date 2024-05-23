@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { lazy, Suspense, useState } from "react";
-import "./Offers.scss";
+import "./SettingsPage.scss";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import Loader from "components/Loader/Loader";
 import TextWrapper from "components/Contents/TextWrapper";
@@ -26,7 +26,7 @@ const ChangeColor = lazy(() =>
 
 const renderLoader = () => <Loader />;
 
-const Offers = () => {
+const SettingsPage = () => {
   const [password, setPassword] = useState(false);
   const [language, setLanguage] = useState(false);
   const [colorPage, setColorPage] = useState(false);
@@ -38,12 +38,12 @@ const Offers = () => {
   return (
     <Box className="offers-profil">
       <Box style={{margin: '10px 0 0'}}>
-        <TextWrapper label="offer.editProfil" Selector="h3" />
+        <TextWrapper label="settings.editProfil" Selector="h3" />
       </Box>
       <section>
         <Button className="btn-info" onClick={() => setPassword(!password)}>
           <LockResetIcon />
-          <TextWrapper label="offer.changePassword"></TextWrapper>
+          <TextWrapper label="settings.changePassword"></TextWrapper>
         </Button>
         <Suspense fallback={renderLoader()}>
           {password && <ChangePassword setOffer={setPassword} />}
@@ -52,7 +52,7 @@ const Offers = () => {
       <section>
         <Button className="btn-info" onClick={() => setLanguage(!language)}>
           <LanguageIcon />
-          <TextWrapper label="offer.changeLanguage" />
+          <TextWrapper label="settings.changeLanguage" />
         </Button>
 
         <Suspense fallback={renderLoader()}>
@@ -62,7 +62,7 @@ const Offers = () => {
       <section>
         <Button className="btn-info" onClick={() => setlimit(!limit)}>
           <AccountBalanceIcon />
-          <TextWrapper label="offer.changeLimitTransaction" />
+          <TextWrapper label="settings.changeLimitTransaction" />
         </Button>
         <Suspense fallback={renderLoader()}>
           {limit && <ChangeLimit setOffer={setlimit} />}
@@ -72,7 +72,7 @@ const Offers = () => {
       <section>
         <Button className="btn-info" onClick={() => setColorPage(!colorPage)}>
           <AccountBalanceIcon />
-          <TextWrapper label="offer.changeColor" />
+          <TextWrapper label="settings.changeColor" />
         </Button>
         <Suspense fallback={renderLoader()}>
           {colorPage && <ChangeColor setOffer={setColorPage} />}
@@ -85,7 +85,7 @@ const Offers = () => {
           onClick={() => setConnectAccount(!connectAccount)}
         >
           <AccountBalanceIcon />
-          <TextWrapper label="offer.connectAccounts" />
+          <TextWrapper label="settings.connectAccounts" />
         </Button>
         <Suspense fallback={renderLoader()}>
           {connectAccount && <ConnectAccount setOffer={setConnectAccount} />}
@@ -98,7 +98,7 @@ const Offers = () => {
           onClick={() => setSwitchAccount(!switchAccount)}
         >
           <AccountBalanceIcon />
-          <TextWrapper label="offer.switchAccount" />
+          <TextWrapper label="settings.switchAccount" />
         </Button>
         <Suspense fallback={renderLoader()}>
           {switchAccount && <SwitchAccount setOffer={setSwitchAccount} />}
@@ -111,7 +111,7 @@ const Offers = () => {
           onClick={() => setSeparateAccount(!separateAccount)}
         >
           <AccountBalanceIcon />
-          <TextWrapper label="offer.separateAccount" />
+          <TextWrapper label="settings.separateAccount" />
         </Button>
         <Suspense fallback={renderLoader()}>
           {separateAccount && <SeparateAccount setOffer={setSeparateAccount} />}
@@ -133,4 +133,4 @@ const Offers = () => {
   );
 };
 
-export default Offers;
+export default SettingsPage;

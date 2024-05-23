@@ -77,7 +77,7 @@ const SwitchAccount = ({ setOffer }: IProps) => {
           <InputLabel htmlFor="grouped-select">Konta</InputLabel>
           <Select id="grouped-select" label="Grouping" onChange={onChange}>
             <ListSubheader>
-              <TextWrapper label="offer.personalAccounts" />
+              <TextWrapper label="settings.personalAccounts" />
             </ListSubheader>
             {generals?.map((general) => (
               <MenuItem key={general.accountId} value={general.accountId}>
@@ -86,7 +86,7 @@ const SwitchAccount = ({ setOffer }: IProps) => {
             ))}
             {savings.length && (
               <ListSubheader>
-                <TextWrapper label="offer.savingsAccount" />
+                <TextWrapper label="settings.savingsAccount" />
               </ListSubheader>
             )}
             {savings?.map((savigs) => (
@@ -103,7 +103,7 @@ const SwitchAccount = ({ setOffer }: IProps) => {
             {loaderSelector ? (
               <MiniLoader />
             ) : (
-              <TextWrapper label="offer.switchAccount" />
+              <TextWrapper label="settings.switchAccount" />
             )}
           </Button>
         </FormControl>
@@ -111,7 +111,7 @@ const SwitchAccount = ({ setOffer }: IProps) => {
         <Loader></Loader>
       ) : (
         <Box>
-          <TextWrapper label="offer.noAssociatedAccounts" />
+          <TextWrapper label="settings.noAssociatedAccounts" />
         </Box>
       )}
       {loaderSelector && (

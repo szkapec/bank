@@ -70,7 +70,7 @@ const ChangeLimit = ({ setOffer }: IProps) => {
         render={({ handleSubmit }): JSX.Element => (
           <form onSubmit={handleSubmit}>
             <Box className="box">
-              <TextWrapper label="offer.dailyLimit" Selector="label" />
+              <TextWrapper label="settings.dailyLimit" Selector="label" />
               <Field
                 className={error ? "input-error" : "new-limit"}
                 name="limitDay"
@@ -86,7 +86,7 @@ const ChangeLimit = ({ setOffer }: IProps) => {
             </Box>
             <Box className="box">
               <label htmlFor="fors"></label>
-              <TextWrapper label="offer.monthLimit" Selector="label" />
+              <TextWrapper label="settings.monthLimit" Selector="label" />
               <Field
                 className={error ? "input-error" : "new-limit"}
                 name="limitMouth"
@@ -101,7 +101,7 @@ const ChangeLimit = ({ setOffer }: IProps) => {
               />
             </Box>
             <Box className="box">
-              <TextWrapper label="offer.maxTransferValue" Selector="label" />
+              <TextWrapper label="settings.maxTransferValue" Selector="label" />
               <Field
                 className={error ? "input-error" : "new-limit"}
                 name="limitFull"
@@ -117,16 +117,16 @@ const ChangeLimit = ({ setOffer }: IProps) => {
             </Box>
             {error && (
               <Box className="error">
-                <TextWrapper label="offer.invalidLimit" />
+                <TextWrapper label="settings.invalidLimit" />
               </Box>
             )}
             {errorLimit && (
               <Box className="error">
-                <TextWrapper label="offer.invalidAuthorizedLimit" />
+                <TextWrapper label="settings.invalidAuthorizedLimit" />
               </Box>
             )}
             <Button className="btn-change" type="submit" variant="contained">
-              <TextWrapper label="offer.send" />
+              <TextWrapper label="settings.send" />
             </Button>
           </form>
         )}
