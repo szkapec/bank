@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.10",
     "@mui/styled-engine-sc": "^5.10.6",
@@ -21,6 +22,7 @@
     "babel-loader": "^8.2.5",
     "classnames": "^2.3.2",
     "cypress": "^12.3.0",
+    "d3": "^5.16.0",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
     "express-sse": "^0.5.3",
@@ -91,6 +93,7 @@
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
+    "@types/d3": "^7.4.3",
     "@types/lodash.debounce": "^4.0.7",
     "@types/styled-components": "^5.1.26"
   }

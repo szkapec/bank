@@ -3,7 +3,7 @@ import { useState } from "react";
 import Diagrams from "./Diagrams/Diagrams";
 import Highcharts from "./Highcharts/Highcharts";
 import HomeNavbar from "./Navbar/HomeNavbar";
-import Graph from "./Graph/Graph";
+import GraphContainer from "./Graph/GraphContainer";
 
 export enum RoutesHome {
   Home = "home",
@@ -19,7 +19,7 @@ const HomeWrapper = () => {
       case RoutesHome.Diagram:
         return <Diagrams />;
       case RoutesHome.Graph:
-        return <Graph />;
+        return <GraphContainer />;
       case RoutesHome.Highcharts:
         return <Highcharts />;
       default:

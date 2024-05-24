@@ -47,7 +47,6 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <React.StrictMode>
           <QueryClientProvider client={queryClient}>
             {load ? <GlobalLoader /> : null}
             <TopNavbar />
@@ -74,7 +73,6 @@ const App = () => {
             <Settings />
           </QueryClientProvider>
           <ToastContainer autoClose={2000} />
-        </React.StrictMode>
       </BrowserRouter>
     </>
   );

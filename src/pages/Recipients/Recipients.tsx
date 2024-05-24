@@ -105,9 +105,6 @@ const Recipients = () => {
       <Box>
         <TableWrapper recipients={search.length > 0 ? search : dataSelector} />
       </Box>
-      <Box>
-        testowe karty
-      </Box>
     </>
   );
 };

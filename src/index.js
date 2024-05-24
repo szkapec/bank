@@ -10,10 +10,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 initTranslation();
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      {/* themeProvider add theme={theme} */}
-      <App />
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    {/* themeProvider add theme={theme} */}
+    <App />
+  </Provider>
+  // </React.StrictMode>
 );
